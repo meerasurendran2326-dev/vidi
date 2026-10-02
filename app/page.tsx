@@ -3,16 +3,19 @@
 import { useEffect, useState, useRef } from "react";
 import { SiteHeader } from "@/app/components/ui/SiteHeader";
 import { FooterColumn } from "@/app/components/ui/FooterColumn";
-import GlbRingScene from "@/app/three/scenes/GlbRingScene";
 import dynamic from "next/dynamic";
+
+import VideoEntryIntro from "@/components/ui/VideoEntryIntro";
+import HeroMotionVisual from "@/components/ui/HeroMotionVisual";
+import MotionMarquee from "@/components/ui/MotionMarquee";
+import AmbientMotionLight from "@/components/ui/AmbientMotionLight";
 
 import CarouselStacked from "@/components/ui/carousel-07";
 const InfiniteGallery = dynamic(() => import("@/components/ui/3d-gallery-photography"), { ssr: false });
-import { ShaderBackground } from "@/components/ui/adisyon-shader";
 import KineticGrid from "@/components/ui/kinetic-grid";
 import { setupLenis } from "@/app/animations/scroll/lenis";
 import { gsap } from "gsap";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Film, Play } from "lucide-react";
 
 const galleryImages = [
   { src: "/images/custom/img1.jpeg", alt: "Vici Obsidian Signet Ring" },
@@ -39,6 +42,7 @@ const galleryImages = [
 
 export default function HomePage() {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [showEntryVideo, setShowEntryVideo] = useState(true);
   const heroSectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -58,7 +62,7 @@ export default function HomePage() {
       const vini = document.querySelector(".brand-group-vini");
       const vici = document.querySelector(".brand-group-vici");
       const vidi = document.querySelector(".brand-group-vidi");
-      const heroRing = document.querySelector(".hero-ring-container");
+      const heroVisual = document.querySelector(".hero-motion-visual-container");
       const heroCta = document.querySelector(".hero-cta-container");
 
       if (vini) {
@@ -94,10 +98,10 @@ export default function HomePage() {
         });
       }
 
-      if (heroRing) {
-        gsap.to(heroRing, {
+      if (heroVisual) {
+        gsap.to(heroVisual, {
           y: scrollY * 0.16,
-          scale: Math.max(0.92, 1 - (scrollY / windowHeight) * 0.12),
+          scale: Math.max(0.88, 1 - (scrollY / windowHeight) * 0.14),
           duration: 0.18,
           ease: "none",
           overwrite: "auto",
@@ -135,7 +139,16 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className="luxury-page bg-gradient-to-b from-[#01140E] via-[#042E22] to-[#01120D] text-[#F8F7F4]">
+    <main className="luxury-page bg-gradient-to-b from-[#01140E] via-[#042E22] to-[#01120D] text-[#F8F7F4] relative">
+      {/* MP4 Cinematic Video Entry Reveal Overlay */}
+      <VideoEntryIntro
+        isOpen={showEntryVideo}
+        onComplete={() => setShowEntryVideo(false)}
+      />
+
+      {/* Interactive Cursor Ambient Motion Glow */}
+      <AmbientMotionLight />
+
       {/* Sleek Luminous Scroll Progress Indicator */}
       <div 
         aria-hidden="true" 
@@ -170,6 +183,7 @@ export default function HomePage() {
             {/* Glowing Pulsating Emerald & Silver Ambient Flares */}
             <div className="absolute -top-32 -left-32 w-[550px] h-[550px] rounded-full bg-gradient-to-br from-[#1fe0bb]/20 via-[#0B4A3B]/20 to-transparent blur-[110px] pointer-events-none" />
             <div className="absolute -bottom-40 -right-32 w-[600px] h-[600px] rounded-full bg-gradient-to-tl from-[#021811] via-[#0B4A3B]/35 to-[#2fe4b6]/15 blur-[120px] pointer-events-none" />
+
             {/* High-Definition Royal Diamond Lattice Filigree Pattern */}
             <svg
               className="absolute inset-0 w-full h-full opacity-25 pointer-events-none mix-blend-screen"
@@ -182,7 +196,6 @@ export default function HomePage() {
                   height="72"
                   patternUnits="userSpaceOnUse"
                 >
-                  {/* Outer Diamond Rhombus */}
                   <polygon
                     points="36,2 70,36 36,70 2,36"
                     fill="none"
@@ -190,7 +203,6 @@ export default function HomePage() {
                     strokeWidth="1.1"
                     opacity="0.45"
                   />
-                  {/* Inner Facet Rhombus */}
                   <polygon
                     points="36,14 58,36 36,58 14,36"
                     fill="none"
@@ -198,13 +210,10 @@ export default function HomePage() {
                     strokeWidth="0.8"
                     opacity="0.35"
                   />
-                  {/* Diagonal Axis Rays */}
                   <line x1="0" y1="0" x2="72" y2="72" stroke="#34D399" strokeWidth="0.5" opacity="0.25" />
                   <line x1="72" y1="0" x2="0" y2="72" stroke="#34D399" strokeWidth="0.5" opacity="0.25" />
-                  {/* Center Star Cross */}
                   <line x1="36" y1="24" x2="36" y2="48" stroke="#FFFFFF" strokeWidth="1.2" opacity="0.5" />
                   <line x1="24" y1="36" x2="48" y2="36" stroke="#FFFFFF" strokeWidth="1.2" opacity="0.5" />
-                  {/* Apex Micro Diamond Glints */}
                   <circle cx="36" cy="36" r="2.2" fill="#FFFFFF" opacity="0.75" />
                   <circle cx="0" cy="0" r="1.5" fill="#34D399" opacity="0.5" />
                   <circle cx="72" cy="0" r="1.5" fill="#34D399" opacity="0.5" />
@@ -222,43 +231,63 @@ export default function HomePage() {
           </div>
 
           <div className="relative w-full max-w-[1700px] min-h-[90vh] flex items-start justify-center pt-4 pointer-events-none">
-            {/* Pure VINI VICI VIDI Branding - 925 Sterling Silver Gradient Finish */}
+            {/* Floating Luxury High Jewellery Badge */}
+            <div className="absolute top-[12%] sm:top-[16%] left-1/2 -translate-x-1/2 z-10 flex items-center gap-2.5 px-6 py-2 rounded-full bg-[#01140E]/85 border border-[#1fe0bb]/40 backdrop-blur-md shadow-[0_0_30px_rgba(31,224,187,0.25)] animate-float-slow pointer-events-auto">
+              <Sparkles className="w-3.5 h-3.5 text-[#1fe0bb] animate-spin" style={{ animationDuration: "7s" }} />
+              <span className="text-[0.6rem] sm:text-[0.66rem] tracking-[0.32em] text-[#E6F2EA] uppercase font-bold">
+                Pure 925 Silver Atelier • High Jewellery Motion
+              </span>
+            </div>
+
+            {/* Pure VINI VICI VIDI Branding - 925 Sterling Silver Gradient Finish with Motion Shimmer */}
             <div className="absolute inset-0 z-2 w-full h-full uppercase pointer-events-none font-display">
               {/* VINI (Top Left) */}
-              <div className="brand-group-vini absolute top-[4%] left-[4%] flex items-center z-1 text-[clamp(6rem,14vw,20rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E2E8F0] to-[#94A3B8] bg-clip-text text-transparent drop-shadow-[0_12px_28px_rgba(0,0,0,0.65)] select-none">
-                VINI
+              <div className="brand-group-vini animate-float-slow absolute top-[4%] left-[4%] flex items-center z-1 text-[clamp(6rem,14vw,20rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E2E8F0] to-[#94A3B8] bg-clip-text text-transparent drop-shadow-[0_12px_28px_rgba(0,0,0,0.65)] select-none">
+                <span className="animate-silver-shimmer">VINI</span>
               </div>
 
-              {/* VICI (Centerpiece) */}
+              {/* VICI (Centerpiece with Radiant Pulsing Aura) */}
               <div className="brand-group-vici absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-1 text-[clamp(10rem,24vw,36rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E6F2EA] to-[#8FA69B] bg-clip-text text-transparent drop-shadow-[0_15px_38px_rgba(0,0,0,0.75)] select-none">
-                VICI
-                <div className="absolute w-[150%] h-[150%] rounded-full bg-radial from-[#2FE4B6]/25 via-[#0B4A3B]/15 to-transparent blur-[75px] pointer-events-none -z-1" />
+                <span className="animate-silver-shimmer">VICI</span>
+                <div className="absolute w-[160%] h-[160%] rounded-full bg-radial from-[#2FE4B6]/25 via-[#0B4A3B]/15 to-transparent blur-[85px] pointer-events-none -z-1 animate-pulse-glow" />
               </div>
 
               {/* VIDI (Bottom Right) */}
-              <div className="brand-group-vidi absolute bottom-[6%] right-[4%] flex items-center z-1 text-[clamp(6rem,14vw,20rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E2E8F0] to-[#94A3B8] bg-clip-text text-transparent drop-shadow-[0_12px_28px_rgba(0,0,0,0.65)] select-none">
-                VIDI
+              <div className="brand-group-vidi animate-float-reverse absolute bottom-[6%] right-[4%] flex items-center z-1 text-[clamp(6rem,14vw,20rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E2E8F0] to-[#94A3B8] bg-clip-text text-transparent drop-shadow-[0_12px_28px_rgba(0,0,0,0.65)] select-none">
+                <span className="animate-silver-shimmer">VIDI</span>
               </div>
             </div>
 
-            {/* 3D Ring Hero Model - Interactive & Centered */}
-            <div className="hero-ring-container absolute top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[clamp(65rem,90vw,120rem)] h-[clamp(40rem,65vh,70rem)] flex items-center justify-center z-20 pointer-events-none will-change-transform">
-              <GlbRingScene />
+            {/* High Jewellery Center Motion Visual (Replaces the 3D ring with dynamic 3D kinetic orbital motion) */}
+            <div className="hero-motion-visual-container absolute top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[850px] h-[580px] flex items-center justify-center z-20 pointer-events-none will-change-transform">
+              <HeroMotionVisual />
             </div>
 
-            {/* Deep Emerald CTA Button in Hero */}
-            <div className="hero-cta-container absolute bottom-10 left-1/2 -translate-x-1/2 z-30 pointer-events-auto">
+            {/* Deep Emerald Dual CTA Button Group in Hero */}
+            <div className="hero-cta-container absolute bottom-10 left-1/2 -translate-x-1/2 z-30 pointer-events-auto flex items-center gap-4 flex-wrap justify-center">
               <a
                 href="#showcase"
-                className="group relative inline-flex items-center gap-3 px-9 py-4 rounded-full bg-[#0B4A3B] text-white font-semibold text-xs tracking-[0.22em] uppercase shadow-2xl shadow-[#0B4A3B]/45 hover:bg-[#1F7A5C] hover:scale-105 transition-all duration-300 border border-[#E6F2EA]/30"
+                className="group relative inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-[#0B4A3B] text-white font-semibold text-xs tracking-[0.22em] uppercase shadow-2xl shadow-[#0B4A3B]/45 hover:bg-[#1F7A5C] hover:scale-105 transition-all duration-300 border border-[#E6F2EA]/30"
               >
                 <Sparkles className="w-4 h-4 text-[#1fe0bb] animate-pulse" />
                 <span>Explore Showcase</span>
                 <ArrowRight className="w-4 h-4 text-[#E6F2EA] group-hover:translate-x-1 transition-transform" />
               </a>
+
+              <button
+                type="button"
+                onClick={() => setShowEntryVideo(true)}
+                className="group relative inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-[#E6F2EA] hover:text-white font-semibold text-xs tracking-[0.2em] uppercase backdrop-blur-md transition-all duration-300 border border-[#1fe0bb]/35 shadow-lg shadow-black/20"
+              >
+                <Film className="w-4 h-4 text-[#1fe0bb] group-hover:scale-110 transition-transform" />
+                <span>Watch Reveal</span>
+              </button>
             </div>
           </div>
         </section>
+
+        {/* Continuous Kinetic Motion Marquee Animation */}
+        <MotionMarquee speed={28} />
 
         {/* 3D Stacked Card Carousel Section */}
         <section id="showcase" className="relative w-full overflow-hidden bg-gradient-to-b from-[#021F17]/90 via-[#053729]/80 to-[#021E16]/90 border-t border-b border-[#1fe0bb]/20">
@@ -311,6 +340,17 @@ export default function HomePage() {
         {/* 4-Column Footer in Green-White Combo */}
         <FooterColumn />
       </div>
+
+      {/* Floating Quick Replay Trigger (Bottom Left) */}
+      <button
+        type="button"
+        onClick={() => setShowEntryVideo(true)}
+        aria-label="Replay intro film"
+        className="fixed bottom-6 left-6 z-40 hidden sm:flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#01140E]/90 hover:bg-[#0B4A3B] border border-[#1fe0bb]/40 text-[#E6F2EA] hover:text-white backdrop-blur-md shadow-xl shadow-black/40 text-[0.62rem] tracking-[0.2em] uppercase font-semibold transition-all hover:scale-105 group"
+      >
+        <Play className="w-3 h-3 text-[#1fe0bb] fill-[#1fe0bb] group-hover:scale-110 transition-transform" />
+        <span>Replay Reveal</span>
+      </button>
     </main>
   );
 }

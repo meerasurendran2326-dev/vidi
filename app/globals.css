@@ -103,3 +103,71 @@ button {
   background-color: #1F7A5C;
   box-shadow: 0 15px 30px -5px rgba(31, 122, 92, 0.4);
 }
+
+/* Motion Animation System */
+@keyframes silverShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.4deg);
+  }
+}
+
+@keyframes gentleFloatReverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(-0.4deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.08);
+  }
+}
+
+.animate-silver-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(226, 232, 240, 0.95) 25%,
+    rgba(31, 224, 187, 0.85) 50%,
+    rgba(226, 232, 240, 0.95) 75%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: silverShimmer 7s infinite linear;
+}
+
+.animate-float-slow {
+  animation: gentleFloat 6s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: gentleFloatReverse 7s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
