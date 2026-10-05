@@ -176,7 +176,7 @@ export default function HomePage() {
         {/* Hero Section */}
         <section
           ref={heroSectionRef}
-          className="relative isolate flex items-start justify-center min-h-[85vh] sm:min-h-[96vh] px-2 sm:px-[3vw] pt-2 overflow-hidden bg-[#0B6B4D]"
+          className="relative isolate flex items-start justify-center min-h-[85dvh] sm:min-h-[96vh] px-2 sm:px-[3vw] pt-2 overflow-hidden bg-[#0B6B4D]"
         >
           <div
             aria-hidden="true"
@@ -187,7 +187,7 @@ export default function HomePage() {
 
           <div className="relative z-10 w-full max-w-[1700px] min-h-[80vh] sm:min-h-[90vh] flex items-start justify-center pt-4 pointer-events-none">
             {/* Floating Luxury High Jewellery Badge */}
-            <div className="absolute top-[10%] sm:top-[16%] left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-6 py-1.5 sm:py-2 rounded-full bg-[#01140E]/85 border border-[#1fe0bb]/40 backdrop-blur-md shadow-[0_0_30px_rgba(31,224,187,0.25)] animate-float-slow pointer-events-auto max-w-[92vw]">
+            <div className="absolute top-[8%] sm:top-[16%] left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-6 py-1.5 sm:py-2 rounded-full bg-[#01140E]/85 border border-[#1fe0bb]/40 backdrop-blur-md shadow-[0_0_30px_rgba(31,224,187,0.25)] animate-float-slow pointer-events-auto max-w-[92vw]">
               <Sparkles
                 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#1fe0bb] animate-spin shrink-0"
                 style={{ animationDuration: "7s" }}
@@ -200,7 +200,7 @@ export default function HomePage() {
             {/* Pure VINI VICI VIDI Branding - 925 Sterling Silver Gradient Finish with Motion Shimmer */}
             <div className="absolute inset-0 z-2 w-full h-full uppercase pointer-events-none font-display">
               {/* VINI (Top Left) */}
-              <div className="brand-group-vini animate-float-slow absolute top-[6%] sm:top-[4%] left-[4%] flex items-center z-1 text-[clamp(3.5rem,11vw,20rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E2E8F0] to-[#94A3B8] bg-clip-text text-transparent drop-shadow-[0_12px_28px_rgba(0,0,0,0.65)] select-none">
+              <div className="brand-group-vini animate-float-slow absolute top-[13%] sm:top-[4%] left-[4%] flex items-center z-1 text-[clamp(3.5rem,11vw,20rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E2E8F0] to-[#94A3B8] bg-clip-text text-transparent drop-shadow-[0_12px_28px_rgba(0,0,0,0.65)] select-none">
                 <span className="animate-silver-shimmer">VINI</span>
               </div>
 
@@ -211,18 +211,18 @@ export default function HomePage() {
               </div>
 
               {/* VIDI (Bottom Right) */}
-              <div className="brand-group-vidi animate-float-reverse absolute bottom-[8%] sm:bottom-[6%] right-[4%] flex items-center z-1 text-[clamp(3.5rem,11vw,20rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E2E8F0] to-[#94A3B8] bg-clip-text text-transparent drop-shadow-[0_12px_28px_rgba(0,0,0,0.65)] select-none">
+              <div className="brand-group-vidi animate-float-reverse absolute bottom-[14%] sm:bottom-[6%] right-[4%] flex items-center z-1 text-[clamp(3.5rem,11vw,20rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E2E8F0] to-[#94A3B8] bg-clip-text text-transparent drop-shadow-[0_12px_28px_rgba(0,0,0,0.65)] select-none">
                 <span className="animate-silver-shimmer">VIDI</span>
               </div>
             </div>
 
             {/* High Jewellery Center Motion Visual */}
-            <div className="hero-motion-visual-container absolute top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[850px] h-[360px] sm:h-[480px] lg:h-[580px] flex items-center justify-center z-20 pointer-events-none will-change-transform">
+            <div className="hero-motion-visual-container absolute top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[850px] h-[280px] sm:h-[480px] lg:h-[580px] flex items-center justify-center z-20 pointer-events-none will-change-transform">
               <HeroMotionVisual />
             </div>
 
             {/* Deep Emerald Dual CTA Button Group in Hero */}
-            <div className="hero-cta-container absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-30 pointer-events-auto flex items-center gap-4 flex-wrap justify-center w-full px-4">
+            <div className="hero-cta-container absolute bottom-4 sm:bottom-10 left-1/2 -translate-x-1/2 z-30 pointer-events-auto flex items-center gap-4 flex-wrap justify-center w-full px-4">
               <a
                 href="#showcase"
                 className="group relative inline-flex items-center gap-2.5 sm:gap-3 px-6 py-3 sm:px-8 sm:py-3.5 rounded-full bg-[#0B4A3B] text-white font-semibold text-[0.68rem] sm:text-xs tracking-[0.16em] sm:tracking-[0.22em] uppercase shadow-2xl shadow-[#0B4A3B]/45 hover:bg-[#1F7A5C] hover:scale-105 transition-all duration-300 border border-[#E6F2EA]/30 max-w-[90vw]"
