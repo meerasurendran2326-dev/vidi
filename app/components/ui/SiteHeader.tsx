@@ -131,7 +131,7 @@ export function SiteHeader() {
           href="/"
           className="relative z-10 flex items-center gap-2 sm:gap-3.5 group shrink min-w-0"
         >
-          <div className="relative p-0.5 sm:p-1 bg-white rounded-lg shadow-md border border-[#E6F2EA]/40 group-hover:scale-105 transition-transform shrink-0">
+          <div className="relative group-hover:scale-105 transition-transform shrink-0">
             <Image
               src="/logo.jpg"
               alt="VINI VICI VIDI"

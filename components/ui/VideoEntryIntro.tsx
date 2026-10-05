@@ -87,7 +87,7 @@ export default function VideoEntryIntro({
         muted
         preload="auto"
         onEnded={handleExit}
-        className="w-full h-full object-cover bg-black pointer-events-none"
+        className="w-full h-full object-contain sm:object-cover bg-black pointer-events-none"
       />
 
       {/* Discrete subtle skip hint in the corner */}
