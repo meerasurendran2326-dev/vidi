@@ -14,7 +14,6 @@ export default function VideoEntryIntro({
 }: VideoEntryIntroProps) {
   const [isExiting, setIsExiting] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const ambientVideoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   // Smooth cinematic exit transition
@@ -25,8 +24,8 @@ export default function VideoEntryIntro({
     if (containerRef.current) {
       gsap.to(containerRef.current, {
         opacity: 0,
-        scale: 1.03,
-        duration: 0.8,
+        scale: 1.02,
+        duration: 0.55,
         ease: "power2.inOut",
         onComplete: () => {
           onComplete();
@@ -49,29 +48,26 @@ export default function VideoEntryIntro({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleExit]);
 
-  // Autoplay video immediately on mount (both main and ambient backdrop)
+  // Autoplay video immediately on mount
   useEffect(() => {
     if (!isOpen) return;
 
-    const playVideo = (video: HTMLVideoElement | null) => {
-      if (!video) return;
+    const video = videoRef.current;
+    if (video) {
       video.muted = true;
       video.defaultMuted = true;
       video.playsInline = true;
       video.setAttribute("muted", "");
       video.setAttribute("playsinline", "");
       video.currentTime = 0;
-      video.playbackRate = 2.5;
+      video.playbackRate = 2.0;
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch((err) => {
           console.warn("Autoplay attempt:", err);
         });
       }
-    };
-
-    playVideo(videoRef.current);
-    playVideo(ambientVideoRef.current);
+    }
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -80,21 +76,15 @@ export default function VideoEntryIntro({
     <div
       ref={containerRef}
       onClick={handleExit}
-      className="fixed inset-0 z-[120] w-full h-full bg-[#01140E] overflow-hidden flex items-center justify-center cursor-pointer select-none"
+      style={{ backgroundColor: "#000000", zIndex: 99999 }}
+      className="fixed inset-0 w-full h-full bg-black overflow-hidden flex items-center justify-center cursor-pointer select-none"
     >
-      {/* Ambient background video that dynamically mirrors the video colors and lighting to fill outer bars on mobile */}
-      <video
-        ref={ambientVideoRef}
-        src="/vvv-logo-reveal.mp4"
-        playsInline
-        autoPlay
-        muted
-        preload="auto"
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover scale-125 blur-3xl opacity-80 pointer-events-none sm:hidden"
-      />
-
-      {/* Crisp foreground video */}
+      {/* 
+        Full-viewport Seamless Luxury Intro Video:
+        Both the video element and the container are pitch black (#000000).
+        On mobile: object-contain with scale-105 ensures the silver VVV emblem is beautifully proportioned without any horizontal clipping, while the background blends 100% seamlessly into the screen with zero cutoff lines or color mismatch.
+        On desktop: object-cover fills widescreen cinema displays.
+      */}
       <video
         ref={videoRef}
         src="/vvv-logo-reveal.mp4"
@@ -103,12 +93,13 @@ export default function VideoEntryIntro({
         muted
         preload="auto"
         onEnded={handleExit}
-        className="relative z-10 w-full h-full object-contain sm:object-cover pointer-events-none"
+        style={{ backgroundColor: "#000000" }}
+        className="w-full h-full object-contain sm:object-cover scale-105 sm:scale-100 pointer-events-none"
       />
 
       {/* Discrete subtle skip hint in the corner */}
-      <div className="absolute z-20 bottom-4 right-4 sm:bottom-6 sm:right-8 pointer-events-none opacity-50 hover:opacity-100 transition-opacity">
-        <span className="text-[0.58rem] sm:text-[0.62rem] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-white/80 font-light drop-shadow-md">
+      <div className="absolute z-20 bottom-4 right-4 sm:bottom-6 sm:right-8 pointer-events-none opacity-40 hover:opacity-100 transition-opacity">
+        <span className="text-[0.58rem] sm:text-[0.62rem] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-white/70 font-light drop-shadow-md">
           Click anywhere to skip
         </span>
       </div>
