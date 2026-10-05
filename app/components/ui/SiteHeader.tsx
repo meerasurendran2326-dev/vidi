@@ -12,6 +12,9 @@ import {
   MessageCircle,
   ShoppingBag,
   User,
+  Package,
+  LogIn,
+  UserPlus,
 } from "lucide-react";
 import { useWishlist } from "@/app/context/WishlistContext";
 import { useCart } from "@/app/context/CartStore";
@@ -102,6 +105,7 @@ function HeaderJewelryPattern({ patternId }: { patternId: string }) {
 export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileShopOpen, setMobileShopOpen] = useState(false);
+  const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [shopDropdownOpen, setShopDropdownOpen] = useState(false);
   const [hoveredTab, setHoveredTab] = useState<string | null>(null);
@@ -271,13 +275,68 @@ export function SiteHeader() {
             >
               <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
-            <Link
-              href="/account"
-              aria-label="Atelier Client Account"
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] hover:scale-110 shadow-md transition-all duration-200"
-            >
-              <User className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-            </Link>
+            {/* Desktop Account Icon with Dropdown List */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => {
+                  setAccountMenuOpen(!accountMenuOpen);
+                  setShopDropdownOpen(false);
+                }}
+                aria-label="Atelier Client Account"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] hover:scale-110 active:scale-95 shadow-md transition-all duration-200"
+              >
+                <User className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              </button>
+
+              {accountMenuOpen && (
+                <>
+                  <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setAccountMenuOpen(false)}
+                  />
+                  <div className="absolute top-full right-0 mt-2 w-52 bg-[#0B4A3B] border border-[#E6F2EA]/20 shadow-2xl rounded-xl py-2 flex flex-col gap-1 z-50 overflow-hidden">
+                    <HeaderJewelryPattern patternId="header-desktop-account-pattern" />
+                    <div className="relative z-10 px-4 py-1.5 border-b border-[#E6F2EA]/15 text-[0.6rem] tracking-widest uppercase text-[#E6F2EA]/60 font-bold">
+                      Client Account
+                    </div>
+                    <Link
+                      href="/account"
+                      onClick={() => setAccountMenuOpen(false)}
+                      className="relative z-10 px-4 py-2 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2.5 text-xs tracking-wider text-[#E6F2EA]/90 font-medium"
+                    >
+                      <User className="w-3.5 h-3.5 text-[#1fe0bb]" />
+                      <span>My Profile</span>
+                    </Link>
+                    <Link
+                      href="/account/orders"
+                      onClick={() => setAccountMenuOpen(false)}
+                      className="relative z-10 px-4 py-2 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2.5 text-xs tracking-wider text-[#E6F2EA]/90 font-medium"
+                    >
+                      <Package className="w-3.5 h-3.5 text-[#1fe0bb]" />
+                      <span>My Orders</span>
+                    </Link>
+                    <div className="relative z-10 my-1 border-t border-[#E6F2EA]/15" />
+                    <Link
+                      href="/login"
+                      onClick={() => setAccountMenuOpen(false)}
+                      className="relative z-10 px-4 py-2 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2.5 text-xs tracking-wider text-[#E6F2EA]/90 font-medium"
+                    >
+                      <LogIn className="w-3.5 h-3.5 text-[#1fe0bb]" />
+                      <span>Sign In</span>
+                    </Link>
+                    <Link
+                      href="/register"
+                      onClick={() => setAccountMenuOpen(false)}
+                      className="relative z-10 px-4 py-2 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2.5 text-xs tracking-wider text-[#E6F2EA]/90 font-medium"
+                    >
+                      <UserPlus className="w-3.5 h-3.5 text-[#1fe0bb]" />
+                      <span>Register</span>
+                    </Link>
+                  </div>
+                </>
+              )}
+            </div>
             <button
               aria-label="Wishlist"
               onClick={() => setIsDrawerOpen(true)}
@@ -358,13 +417,69 @@ export function SiteHeader() {
             )}
           </div>
 
-          <Link
-            href="/account"
-            aria-label="Client Account"
-            className="sm:hidden relative w-8 h-8 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center shadow-md shrink-0"
-          >
-            <User className="w-3.5 h-3.5" />
-          </Link>
+          {/* Mobile Account Icon with Dropdown List */}
+          <div className="relative sm:hidden shrink-0">
+            <button
+              type="button"
+              onClick={() => {
+                setAccountMenuOpen(!accountMenuOpen);
+                setMobileShopOpen(false);
+                setMobileMenuOpen(false);
+              }}
+              aria-label="Client Account"
+              className="relative w-8 h-8 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center shadow-md active:scale-95 transition-all"
+            >
+              <User className="w-3.5 h-3.5" />
+            </button>
+
+            {accountMenuOpen && (
+              <>
+                <div
+                  className="fixed inset-0 z-40"
+                  onClick={() => setAccountMenuOpen(false)}
+                />
+                <div className="absolute top-full right-0 mt-2 w-48 bg-[#0B4A3B] border border-[#E6F2EA]/20 shadow-2xl rounded-xl py-2 flex flex-col gap-1 z-50 overflow-hidden">
+                  <HeaderJewelryPattern patternId="header-mobile-account-pattern" />
+                  <div className="relative z-10 px-4 py-1.5 border-b border-[#E6F2EA]/15 text-[0.58rem] tracking-widest uppercase text-[#E6F2EA]/60 font-bold">
+                    Client Account
+                  </div>
+                  <Link
+                    href="/account"
+                    onClick={() => setAccountMenuOpen(false)}
+                    className="relative z-10 px-4 py-2 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2 text-xs tracking-wider text-[#E6F2EA]/90 font-medium"
+                  >
+                    <User className="w-3.5 h-3.5 text-[#1fe0bb]" />
+                    <span>My Profile</span>
+                  </Link>
+                  <Link
+                    href="/account/orders"
+                    onClick={() => setAccountMenuOpen(false)}
+                    className="relative z-10 px-4 py-2 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2 text-xs tracking-wider text-[#E6F2EA]/90 font-medium"
+                  >
+                    <Package className="w-3.5 h-3.5 text-[#1fe0bb]" />
+                    <span>My Orders</span>
+                  </Link>
+                  <div className="relative z-10 my-1 border-t border-[#E6F2EA]/15" />
+                  <Link
+                    href="/login"
+                    onClick={() => setAccountMenuOpen(false)}
+                    className="relative z-10 px-4 py-2 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2 text-xs tracking-wider text-[#E6F2EA]/90 font-medium"
+                  >
+                    <LogIn className="w-3.5 h-3.5 text-[#1fe0bb]" />
+                    <span>Sign In</span>
+                  </Link>
+                  <Link
+                    href="/register"
+                    onClick={() => setAccountMenuOpen(false)}
+                    className="relative z-10 px-4 py-2 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2 text-xs tracking-wider text-[#E6F2EA]/90 font-medium"
+                  >
+                    <UserPlus className="w-3.5 h-3.5 text-[#1fe0bb]" />
+                    <span>Register</span>
+                  </Link>
+                </div>
+              </>
+            )}
+          </div>
 
           <button
             type="button"
@@ -396,6 +511,7 @@ export function SiteHeader() {
             onClick={() => {
               setMobileMenuOpen(!mobileMenuOpen);
               setMobileShopOpen(false);
+              setAccountMenuOpen(false);
             }}
             aria-label="Toggle Menu"
           >
