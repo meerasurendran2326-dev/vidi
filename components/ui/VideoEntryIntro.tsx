@@ -60,6 +60,7 @@ export default function VideoEntryIntro({
       video.setAttribute("muted", "");
       video.setAttribute("playsinline", "");
       video.currentTime = 0;
+      video.playbackRate = 2.5;
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch((err) => {

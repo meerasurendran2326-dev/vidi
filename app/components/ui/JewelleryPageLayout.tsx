@@ -2,20 +2,12 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import { SiteHeader } from "@/app/components/ui/SiteHeader";
 import { FooterColumn } from "@/app/components/ui/FooterColumn";
 import { ShaderBackground } from "@/components/ui/adisyon-shader";
 import { useWishlist } from "@/app/context/WishlistContext";
-
-export interface JewelleryProduct {
-  id: string;
-  name: string;
-  subtitle: string;
-  price: string;
-  image: string;
-  badge?: string;
-  isNew?: boolean;
-}
+import type { JewelleryProduct } from "@/app/data/jewellery-products";
 
 interface JewelleryPageLayoutProps {
   category: string;
@@ -98,7 +90,11 @@ export function JewelleryPageLayout({
                   key={product.id}
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.55, delay: i * 0.05, ease: "easeOut" }}
+                  transition={{
+                    duration: 0.55,
+                    delay: i * 0.05,
+                    ease: "easeOut",
+                  }}
                   onMouseEnter={() => setHovered(product.id)}
                   onMouseLeave={() => setHovered(null)}
                   className="group relative flex flex-col rounded-2xl overflow-hidden cursor-pointer"
@@ -111,11 +107,18 @@ export function JewelleryPageLayout({
                       hovered === product.id
                         ? "0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1.5px rgba(52, 211, 153, 0.45)"
                         : "0 8px 24px rgba(0, 0, 0, 0.45)",
-                    transition: "box-shadow 0.35s ease, border-color 0.35s ease",
+                    transition:
+                      "box-shadow 0.35s ease, border-color 0.35s ease",
                   }}
                 >
+                  <Link
+                    href={`/product/${product.slug}`}
+                    aria-label={`View ${product.name} details`}
+                    className="absolute inset-0 z-0 rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-300"
+                  />
+
                   {/* Image wrapper */}
-                  <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-emerald-950/70 via-emerald-900/40 to-black">
+                  <div className="relative z-10 aspect-square overflow-hidden bg-gradient-to-br from-emerald-950/70 via-emerald-900/40 to-black pointer-events-none">
                     <motion.img
                       src={product.image}
                       alt={product.name}
@@ -155,7 +158,7 @@ export function JewelleryPageLayout({
                         e.stopPropagation();
                         toggleWishlist(product);
                       }}
-                      className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center shadow-md border border-emerald-500/30 transition-transform hover:scale-110 active:scale-95"
+                      className="pointer-events-auto absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center shadow-md border border-emerald-500/30 transition-transform hover:scale-110 active:scale-95"
                       aria-label="Add to wishlist"
                     >
                       <svg
@@ -177,7 +180,7 @@ export function JewelleryPageLayout({
                   </div>
 
                   {/* Info */}
-                  <div className="p-4 flex flex-col gap-1.5">
+                  <div className="relative z-10 pointer-events-none p-4 flex flex-col gap-1.5">
                     <p className="text-[0.62rem] tracking-[0.18em] uppercase text-emerald-400 font-semibold">
                       {product.subtitle}
                     </p>
@@ -197,7 +200,7 @@ export function JewelleryPageLayout({
                           e.stopPropagation();
                           toggleWishlist(product);
                         }}
-                        className={`text-[0.62rem] tracking-wider uppercase font-semibold px-3.5 py-1.5 rounded-full transition-colors shadow-md border ${
+                        className={`pointer-events-auto text-[0.62rem] tracking-wider uppercase font-semibold px-3.5 py-1.5 rounded-full transition-colors shadow-md border ${
                           isLiked
                             ? "bg-emerald-500 text-black border-emerald-300 font-bold"
                             : "bg-emerald-600 hover:bg-emerald-500 text-white border-emerald-400/30"
