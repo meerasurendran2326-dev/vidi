@@ -101,6 +101,7 @@ function HeaderJewelryPattern({ patternId }: { patternId: string }) {
 
 export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileShopOpen, setMobileShopOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [shopDropdownOpen, setShopDropdownOpen] = useState(false);
   const [hoveredTab, setHoveredTab] = useState<string | null>(null);
@@ -311,6 +312,52 @@ export function SiteHeader() {
             </button>
           </div>
 
+          {/* Mobile Shop Pill with Category Dropdown */}
+          <div className="relative md:hidden shrink-0">
+            <button
+              type="button"
+              onClick={() => {
+                setMobileShopOpen(!mobileShopOpen);
+                if (mobileMenuOpen) setMobileMenuOpen(false);
+              }}
+              className="px-2.5 py-1.5 rounded-full bg-white text-[#0B4A3B] font-bold text-[0.62rem] tracking-wider uppercase shadow-md flex items-center gap-1 hover:bg-[#E6F2EA] active:scale-95 transition-all"
+              aria-label="Shop Menu"
+            >
+              <span>SHOP</span>
+              <span className={`text-[0.45rem] text-[#1fe0bb] transition-transform duration-200 ${mobileShopOpen ? "rotate-180" : ""}`}>
+                ▼
+              </span>
+            </button>
+
+            {mobileShopOpen && (
+              <>
+                <div
+                  className="fixed inset-0 z-40"
+                  onClick={() => setMobileShopOpen(false)}
+                />
+                <div className="absolute top-full right-0 mt-2 w-48 bg-[#0B4A3B] border border-[#E6F2EA]/20 shadow-2xl rounded-xl py-2 flex flex-col gap-1 z-50 overflow-hidden">
+                  <HeaderJewelryPattern patternId="header-mobile-shop-pattern" />
+                  {[
+                    { name: "Ring", href: "/rings" },
+                    { name: "Pendent Set", href: "/pendent-set" },
+                    { name: "Bracelet", href: "/bracelet" },
+                    { name: "Stud", href: "/stud" },
+                    { name: "Explore All", href: "#showcase" },
+                  ].map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => setMobileShopOpen(false)}
+                      className="relative z-10 px-4 py-2 hover:text-white hover:bg-white/10 transition-colors text-left text-xs tracking-wider text-[#E6F2EA]/90 font-medium"
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+
           <Link
             href="/account"
             aria-label="Client Account"
@@ -346,7 +393,10 @@ export function SiteHeader() {
 
           <button
             className="md:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] shadow-md transition-all shrink-0"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={() => {
+              setMobileMenuOpen(!mobileMenuOpen);
+              setMobileShopOpen(false);
+            }}
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? (
