@@ -62,9 +62,9 @@ export default async function AccountOrdersPage() {
       <div className="relative z-10 flex min-h-screen flex-col">
         <SiteHeader />
 
-        <main className="mx-auto w-full max-w-5xl flex-1 px-5 py-8 sm:px-8 sm:py-12 lg:px-12">
+        <main className="mx-auto w-full max-w-5xl flex-1 px-3.5 py-6 sm:px-8 sm:py-12 lg:px-12">
           {/* Breadcrumb / Back button */}
-          <div className="mb-6 flex items-center justify-between">
+          <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
             <Link
               href="/account"
               className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-emerald-200 hover:text-white transition-colors"
@@ -72,7 +72,7 @@ export default async function AccountOrdersPage() {
               <ArrowLeft className="h-3.5 w-3.5" /> Back to Account
             </Link>
 
-            <span className="text-xs text-white/50">
+            <span className="text-xs text-white/50 truncate max-w-full">
               Signed in as <strong className="text-white">{user.email}</strong>
             </span>
           </div>
@@ -96,7 +96,7 @@ export default async function AccountOrdersPage() {
 
           {/* Orders Listing */}
           {orders.length === 0 ? (
-            <div className="rounded-3xl border border-emerald-400/20 bg-[#061812]/80 p-10 text-center shadow-xl backdrop-blur-xl sm:p-14">
+            <div className="rounded-3xl border border-emerald-400/20 bg-[#061812]/80 p-6 text-center shadow-xl backdrop-blur-xl sm:p-10">
               <div className="mx-auto grid h-16 w-16 place-items-center rounded-full border border-emerald-400/30 bg-emerald-950/40 text-emerald-300">
                 <Package className="h-8 w-8 text-[#1fe0bb]" />
               </div>

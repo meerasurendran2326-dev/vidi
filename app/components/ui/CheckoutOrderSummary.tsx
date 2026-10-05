@@ -16,7 +16,7 @@ export function CheckoutOrderSummary({ items }: CheckoutOrderSummaryProps) {
   const subtotal = getCartSubtotal(items);
 
   return (
-    <aside className="rounded-2xl border border-emerald-300/20 bg-[#06130e]/80 p-5 shadow-xl shadow-black/25 backdrop-blur-xl sm:p-6 lg:sticky lg:top-28">
+    <aside className="rounded-2xl border border-emerald-300/20 bg-[#06130e]/80 p-4 shadow-xl shadow-black/25 backdrop-blur-xl sm:p-6 lg:sticky lg:top-28">
       <h2 className="text-sm font-bold uppercase tracking-[0.18em] text-white">
         Order Summary
       </h2>
@@ -26,7 +26,7 @@ export function CheckoutOrderSummary({ items }: CheckoutOrderSummaryProps) {
             key={`${item.productId}-${index}`}
             className="flex gap-3 border-b border-white/10 pb-3 last:border-b-0"
           >
-            <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg border border-emerald-300/15 bg-emerald-950/60">
+            <div className="relative h-14 w-14 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-lg border border-emerald-300/15 bg-emerald-950/60">
               <Image
                 src={item.image}
                 alt={item.name}
@@ -39,7 +39,7 @@ export function CheckoutOrderSummary({ items }: CheckoutOrderSummaryProps) {
               </span>
             </div>
             <div className="min-w-0 flex-1">
-              <h3 className="text-sm font-semibold leading-snug text-white">
+              <h3 className="text-xs sm:text-sm font-semibold leading-snug text-white line-clamp-2">
                 {item.name}
               </h3>
               {Object.entries(item.selectedOptions).length > 0 && (

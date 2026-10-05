@@ -131,7 +131,7 @@ export function OrderSuccessClient({ orderId }: OrderSuccessClientProps) {
       </div>
       <div className="relative z-10 flex min-h-screen flex-col">
         <SiteHeader />
-        <main className="mx-auto w-full max-w-6xl flex-1 px-5 py-8 sm:px-8 sm:py-12 lg:px-12">
+        <main className="mx-auto w-full max-w-6xl flex-1 px-3.5 py-6 sm:px-8 sm:py-12 lg:px-12">
           {loadState === "loading" ? (
             <div
               role="status"
@@ -140,7 +140,7 @@ export function OrderSuccessClient({ orderId }: OrderSuccessClientProps) {
               Loading order details…
             </div>
           ) : loadState === "unavailable" || !order ? (
-            <section className="mx-auto my-12 max-w-xl rounded-2xl border border-emerald-300/20 bg-[#06130e]/80 p-7 text-center shadow-xl backdrop-blur-xl sm:p-10">
+            <section className="mx-auto my-12 max-w-xl rounded-2xl border border-emerald-300/20 bg-[#06130e]/80 p-5 text-center shadow-xl backdrop-blur-xl sm:p-10">
               <CircleAlert className="mx-auto h-9 w-9 text-amber-300" />
               <h1
                 className="mt-4 text-xl font-semibold text-white sm:text-2xl"
@@ -162,7 +162,7 @@ export function OrderSuccessClient({ orderId }: OrderSuccessClientProps) {
             </section>
           ) : (
             <>
-              <section className="rounded-2xl border border-emerald-300/20 bg-[#06130e]/80 p-6 text-center shadow-xl shadow-black/25 backdrop-blur-xl sm:p-9">
+              <section className="rounded-2xl border border-emerald-300/20 bg-[#06130e]/80 p-4 text-center shadow-xl shadow-black/25 backdrop-blur-xl sm:p-9">
                 <span
                   className={`mx-auto grid h-14 w-14 place-items-center rounded-full border ${paid ? "border-emerald-300/45 bg-emerald-500/15 text-emerald-200" : "border-amber-300/40 bg-amber-500/10 text-amber-200"}`}
                 >
@@ -176,7 +176,7 @@ export function OrderSuccessClient({ orderId }: OrderSuccessClientProps) {
                   Vini Vici Vidi · Silver Atelier
                 </p>
                 <h1
-                  className="mt-2 text-3xl font-semibold text-white sm:text-4xl"
+                  className="mt-2 text-2xl font-semibold text-white sm:text-4xl"
                   style={{ fontFamily: "var(--font-editorial), serif" }}
                 >
                   {paid ? "Payment confirmed" : "Order received"}

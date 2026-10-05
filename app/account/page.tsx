@@ -56,9 +56,9 @@ export default async function AccountPage() {
       <div className="relative z-10 flex min-h-screen flex-col">
         <SiteHeader />
 
-        <main className="mx-auto w-full max-w-5xl flex-1 px-5 py-8 sm:px-8 sm:py-12 lg:px-12">
+        <main className="mx-auto w-full max-w-5xl flex-1 px-3.5 py-6 sm:px-8 sm:py-12 lg:px-12">
           {/* Header Card */}
-          <section className="relative overflow-hidden rounded-3xl border border-emerald-400/25 bg-[#061812]/85 p-6 sm:p-10 shadow-2xl backdrop-blur-2xl">
+          <section className="relative overflow-hidden rounded-3xl border border-emerald-400/25 bg-[#061812]/85 p-4 sm:p-10 shadow-2xl backdrop-blur-2xl">
             <div
               aria-hidden="true"
               className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#1fe0bb]/10 blur-3xl pointer-events-none"
@@ -92,7 +92,7 @@ export default async function AccountPage() {
           {/* Account Details & Quick Overview Grid */}
           <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
             {/* Contact & Profile Info */}
-            <div className="rounded-2xl border border-emerald-400/20 bg-[#061812]/80 p-6 shadow-xl backdrop-blur-xl">
+            <div className="rounded-2xl border border-emerald-400/20 bg-[#061812]/80 p-4 sm:p-6 shadow-xl backdrop-blur-xl">
               <div className="flex items-center gap-2 text-[#1fe0bb]">
                 <ShieldCheck className="h-4 w-4" />
                 <h2 className="text-xs font-bold uppercase tracking-[0.16em] text-white">
@@ -111,7 +111,7 @@ export default async function AccountPage() {
                   <dt className="text-white/45 uppercase tracking-wider text-[0.65rem]">
                     Email Address
                   </dt>
-                  <dd className="mt-0.5 font-medium text-white">{user.email}</dd>
+                  <dd className="mt-0.5 font-medium text-white truncate">{user.email}</dd>
                 </div>
                 <div>
                   <dt className="text-white/45 uppercase tracking-wider text-[0.65rem]">
@@ -125,7 +125,7 @@ export default async function AccountPage() {
             </div>
 
             {/* Orders Summary Card */}
-            <div className="md:col-span-2 rounded-2xl border border-emerald-400/20 bg-[#061812]/80 p-6 shadow-xl backdrop-blur-xl flex flex-col justify-between">
+            <div className="md:col-span-2 rounded-2xl border border-emerald-400/20 bg-[#061812]/80 p-4 sm:p-6 shadow-xl backdrop-blur-xl flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between border-b border-white/10 pb-4">
                   <div className="flex items-center gap-2 text-[#1fe0bb]">
@@ -154,7 +154,7 @@ export default async function AccountPage() {
                     {recentOrders.map((ord) => (
                       <div
                         key={ord.id}
-                        className="flex items-center justify-between rounded-xl border border-white/5 bg-black/25 px-4 py-2.5 text-xs"
+                        className="flex flex-col sm:flex-row sm:items-center justify-between rounded-xl border border-white/5 bg-black/25 px-4 py-2.5 text-xs gap-2"
                       >
                         <div>
                           <span className="font-semibold text-white">

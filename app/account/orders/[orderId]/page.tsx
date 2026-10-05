@@ -86,9 +86,9 @@ export default async function AccountOrderDetailPage({
       <div className="relative z-10 flex min-h-screen flex-col">
         <SiteHeader />
 
-        <main className="mx-auto w-full max-w-5xl flex-1 px-5 py-8 sm:px-8 sm:py-12 lg:px-12">
+        <main className="mx-auto w-full max-w-5xl flex-1 px-3.5 py-6 sm:px-8 sm:py-12 lg:px-12">
           {/* Back Navigation */}
-          <div className="mb-6 flex items-center justify-between">
+          <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
             <Link
               href="/account/orders"
               className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-emerald-200 hover:text-white transition-colors"
@@ -96,13 +96,13 @@ export default async function AccountOrderDetailPage({
               <ArrowLeft className="h-3.5 w-3.5" /> Back to All Orders
             </Link>
 
-            <span className="text-xs text-white/50">
+            <span className="text-xs text-white/50 truncate max-w-full">
               Account: <strong className="text-white">{user.email}</strong>
             </span>
           </div>
 
           {/* Order Header Summary Banner */}
-          <section className="rounded-3xl border border-emerald-400/25 bg-[#061812]/85 p-6 sm:p-9 shadow-2xl backdrop-blur-2xl">
+          <section className="rounded-3xl border border-emerald-400/25 bg-[#061812]/85 p-4 sm:p-8 shadow-2xl backdrop-blur-2xl">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-white/10 pb-6">
               <div>
                 <span className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-[#1fe0bb]">
@@ -127,8 +127,8 @@ export default async function AccountOrderDetailPage({
             </div>
 
             {/* Quick Metrics Bar */}
-            <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-              <div className="rounded-xl border border-white/5 bg-black/25 p-3.5">
+            <div className="mt-6 grid grid-cols-2 gap-2.5 sm:gap-4 sm:grid-cols-4">
+              <div className="rounded-xl border border-white/5 bg-black/25 p-3 sm:p-3.5">
                 <span className="text-[0.65rem] uppercase tracking-wider text-white/45">
                   Items
                 </span>
@@ -137,7 +137,7 @@ export default async function AccountOrderDetailPage({
                 </p>
               </div>
 
-              <div className="rounded-xl border border-white/5 bg-black/25 p-3.5">
+              <div className="rounded-xl border border-white/5 bg-black/25 p-3 sm:p-3.5">
                 <span className="text-[0.65rem] uppercase tracking-wider text-white/45">
                   Payment Status
                 </span>
@@ -146,7 +146,7 @@ export default async function AccountOrderDetailPage({
                 </p>
               </div>
 
-              <div className="rounded-xl border border-white/5 bg-black/25 p-3.5">
+              <div className="rounded-xl border border-white/5 bg-black/25 p-3 sm:p-3.5">
                 <span className="text-[0.65rem] uppercase tracking-wider text-white/45">
                   Estimated Delivery
                 </span>
@@ -155,7 +155,7 @@ export default async function AccountOrderDetailPage({
                 </p>
               </div>
 
-              <div className="rounded-xl border border-white/5 bg-black/25 p-3.5">
+              <div className="rounded-xl border border-white/5 bg-black/25 p-3 sm:p-3.5">
                 <span className="text-[0.65rem] uppercase tracking-wider text-white/45">
                   Total Amount
                 </span>
@@ -176,7 +176,7 @@ export default async function AccountOrderDetailPage({
             {/* Left: Purchased Products & Shipping Address */}
             <div className="space-y-8">
               {/* Purchased Pieces */}
-              <section className="rounded-3xl border border-emerald-400/20 bg-[#061812]/80 p-6 sm:p-8 shadow-xl backdrop-blur-xl">
+              <section className="rounded-3xl border border-emerald-400/20 bg-[#061812]/80 p-4 sm:p-7 shadow-xl backdrop-blur-xl">
                 <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-white border-b border-white/10 pb-4">
                   Purchased Pieces
                 </h2>
@@ -241,7 +241,7 @@ export default async function AccountOrderDetailPage({
               </section>
 
               {/* Shipping Address */}
-              <section className="rounded-3xl border border-emerald-400/20 bg-[#061812]/80 p-6 sm:p-8 shadow-xl backdrop-blur-xl">
+              <section className="rounded-3xl border border-emerald-400/20 bg-[#061812]/80 p-4 sm:p-7 shadow-xl backdrop-blur-xl">
                 <div className="flex items-center gap-2 text-[#1fe0bb] border-b border-white/10 pb-4">
                   <MapPin className="h-4 w-4" />
                   <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-white">
@@ -276,7 +276,7 @@ export default async function AccountOrderDetailPage({
             {/* Right Sidebar: Invoicing & Payment Info */}
             <aside className="space-y-6">
               {/* Order Total Breakdown */}
-              <div className="rounded-3xl border border-emerald-400/20 bg-[#061812]/80 p-6 shadow-xl backdrop-blur-xl">
+              <div className="rounded-3xl border border-emerald-400/20 bg-[#061812]/80 p-4 sm:p-6 shadow-xl backdrop-blur-xl">
                 <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-white border-b border-white/10 pb-4">
                   Payment Summary
                 </h3>

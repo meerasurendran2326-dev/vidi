@@ -49,7 +49,7 @@ export function OrderSummaryCard({ order }: OrderSummaryCardProps) {
   const itemCount = order.items.reduce((acc, it) => acc + it.quantity, 0);
 
   return (
-    <article className="group relative overflow-hidden rounded-2xl border border-emerald-400/20 bg-[#061812]/80 p-5 sm:p-7 shadow-xl shadow-black/25 backdrop-blur-xl transition-all duration-300 hover:border-emerald-400/40 hover:bg-[#072018]/90">
+    <article className="group relative overflow-hidden rounded-2xl border border-emerald-400/20 bg-[#061812]/80 p-4 sm:p-7 shadow-xl shadow-black/25 backdrop-blur-xl transition-all duration-300 hover:border-emerald-400/40 hover:bg-[#072018]/90">
       {/* Background radial glow */}
       <div
         aria-hidden="true"

@@ -24,7 +24,7 @@ interface CheckoutFieldProps {
 }
 
 const fieldClasses =
-  "mt-1.5 min-h-11 w-full rounded-lg border bg-[#03100b]/70 px-3.5 py-2.5 text-sm text-white outline-none transition-colors placeholder:text-white/35 focus:border-emerald-300 focus:ring-2 focus:ring-emerald-300/15 disabled:cursor-not-allowed disabled:opacity-60";
+  "mt-1.5 min-h-11 w-full rounded-lg border bg-[#03100b]/70 px-3.5 py-2.5 text-base sm:text-sm text-white outline-none transition-colors placeholder:text-white/35 focus:border-emerald-300 focus:ring-2 focus:ring-emerald-300/15 disabled:cursor-not-allowed disabled:opacity-60";
 
 export function CheckoutField({
   name,

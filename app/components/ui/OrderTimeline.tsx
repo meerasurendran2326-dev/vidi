@@ -70,7 +70,7 @@ export function OrderTimeline({ status, className = "" }: OrderTimelineProps) {
 
   return (
     <div
-      className={`rounded-2xl border border-emerald-400/20 bg-[#061812]/80 p-6 shadow-xl backdrop-blur-xl ${className}`}
+      className={`rounded-2xl border border-emerald-400/20 bg-[#061812]/80 p-4 sm:p-6 shadow-xl backdrop-blur-xl ${className}`}
     >
       <div className="flex items-center justify-between border-b border-white/10 pb-4">
         <div>

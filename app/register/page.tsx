@@ -29,8 +29,8 @@ export default async function RegisterPage() {
       <div className="relative z-10 flex min-h-screen flex-col">
         <SiteHeader />
 
-        <main className="mx-auto w-full max-w-md flex-1 px-5 py-10 sm:px-6 sm:py-14">
-          <section className="relative overflow-hidden rounded-3xl border border-emerald-400/25 bg-[#061812]/90 p-7 sm:p-9 shadow-2xl backdrop-blur-2xl">
+        <main className="mx-auto w-full max-w-md flex-1 px-3.5 py-8 sm:px-6 sm:py-14">
+          <section className="relative overflow-hidden rounded-3xl border border-emerald-400/25 bg-[#061812]/90 p-5 sm:p-9 shadow-2xl backdrop-blur-2xl">
             <div
               aria-hidden="true"
               className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-[#1fe0bb]/10 blur-3xl pointer-events-none"

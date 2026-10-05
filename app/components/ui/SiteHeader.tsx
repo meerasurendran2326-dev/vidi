@@ -114,8 +114,8 @@ export function SiteHeader() {
   const { itemCount } = useCart();
 
   return (
-    <header className="site-header sticky top-0 z-40 px-[3.2vw] pt-5">
-      <nav className="relative flex items-center justify-between gap-4 lg:gap-6 px-5 sm:px-7 py-3.5 border border-[#E6F2EA]/20 bg-[#0B4A3B] text-[#FFFFFF] uppercase text-[0.68rem] shadow-xl shadow-[#0B4A3B]/25 rounded-2xl">
+    <header className="site-header sticky top-0 z-40 px-2 xs:px-3 sm:px-[3.2vw] pt-2.5 sm:pt-5">
+      <nav className="relative flex items-center justify-between gap-2 sm:gap-4 lg:gap-6 px-3 sm:px-7 py-2 sm:py-3.5 border border-[#E6F2EA]/20 bg-[#0B4A3B] text-[#FFFFFF] uppercase text-[0.68rem] shadow-xl shadow-[#0B4A3B]/25 rounded-2xl">
         <HeaderJewelryPattern patternId="header-white-jewelry-pattern" />
         <div
           aria-hidden="true"
@@ -129,26 +129,26 @@ export function SiteHeader() {
         {/* Logo (left) */}
         <Link
           href="/"
-          className="relative z-10 flex items-center gap-3.5 group shrink-0"
+          className="relative z-10 flex items-center gap-2 sm:gap-3.5 group shrink min-w-0"
         >
-          <div className="relative p-1 bg-white rounded-lg shadow-md border border-[#E6F2EA]/40 group-hover:scale-105 transition-transform shrink-0">
+          <div className="relative p-0.5 sm:p-1 bg-white rounded-lg shadow-md border border-[#E6F2EA]/40 group-hover:scale-105 transition-transform shrink-0">
             <Image
               src="/logo.jpg"
               alt="VINI VICI VIDI"
               width={36}
               height={36}
               sizes="36px"
-              className="h-9 w-9 object-contain rounded-md"
+              className="h-7 w-7 sm:h-9 sm:w-9 object-contain rounded-md"
             />
           </div>
           <div className="flex flex-col items-start min-w-0">
             <div
-              className="font-bold tracking-[0.14em] text-sm sm:text-base text-[#FFFFFF] whitespace-nowrap"
-              style={{ wordSpacing: "0.25em" }}
+              className="font-bold tracking-[0.08em] sm:tracking-[0.14em] text-xs sm:text-base text-[#FFFFFF] truncate"
+              style={{ wordSpacing: "0.2em" }}
             >
               VINI VICI VIDI
             </div>
-            <div className="text-[0.52rem] sm:text-[0.56rem] tracking-[0.14em] text-[#E6F2EA]/80 uppercase font-medium whitespace-nowrap">
+            <div className="hidden xs:block text-[0.48rem] sm:text-[0.56rem] tracking-[0.12em] sm:tracking-[0.14em] text-[#E6F2EA]/80 uppercase font-medium truncate">
               Pure 925 Silver Jewellery
             </div>
           </div>
@@ -262,28 +262,28 @@ export function SiteHeader() {
         </div>
 
         {/* Right side actions */}
-        <div className="relative z-10 flex items-center gap-3 sm:gap-4 shrink-0">
+        <div className="relative z-10 flex items-center gap-1.5 xs:gap-2 sm:gap-4 shrink-0">
           <div className="hidden sm:flex items-center gap-2 mr-1">
             <button
               aria-label="Search"
-              className="w-9 h-9 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] hover:scale-110 shadow-md transition-all duration-200"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] hover:scale-110 shadow-md transition-all duration-200"
             >
-              <Search className="w-4 h-4" />
+              <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
             <Link
               href="/account"
               aria-label="Atelier Client Account"
-              className="w-9 h-9 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] hover:scale-110 shadow-md transition-all duration-200"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] hover:scale-110 shadow-md transition-all duration-200"
             >
-              <User className="w-4 h-4" />
+              <User className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </Link>
             <button
               aria-label="Wishlist"
               onClick={() => setIsDrawerOpen(true)}
-              className="relative w-9 h-9 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] hover:scale-110 shadow-md transition-all duration-200"
+              className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] hover:scale-110 shadow-md transition-all duration-200"
             >
               <Heart
-                className={`w-4 h-4 ${wishlistCount > 0 ? "fill-rose-500 stroke-rose-500" : ""}`}
+                className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${wishlistCount > 0 ? "fill-rose-500 stroke-rose-500" : ""}`}
               />
               {wishlistCount > 0 ? (
                 <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-[0.58rem] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-md animate-pulse">
@@ -300,9 +300,9 @@ export function SiteHeader() {
               type="button"
               aria-label={`Shopping bag, ${itemCount} items`}
               onClick={() => setCartOpen(true)}
-              className="relative w-9 h-9 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] hover:scale-110 shadow-md transition-all duration-200"
+              className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] hover:scale-110 shadow-md transition-all duration-200"
             >
-              <ShoppingBag className="w-4 h-4" />
+              <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               {itemCount > 0 && (
                 <span className="absolute -top-1 -right-1 min-w-4 h-4 rounded-full bg-[#1fe0bb] px-1 text-[0.58rem] font-bold text-[#03251c] flex items-center justify-center shadow-md">
                   {itemCount}
@@ -314,20 +314,20 @@ export function SiteHeader() {
           <Link
             href="/account"
             aria-label="Client Account"
-            className="sm:hidden relative w-9 h-9 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center shadow-md"
+            className="sm:hidden relative w-8 h-8 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center shadow-md shrink-0"
           >
-            <User className="w-4 h-4" />
+            <User className="w-3.5 h-3.5" />
           </Link>
 
           <button
             type="button"
             aria-label={`Shopping bag, ${itemCount} items`}
             onClick={() => setCartOpen(true)}
-            className="sm:hidden relative w-9 h-9 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center shadow-md"
+            className="sm:hidden relative w-8 h-8 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center shadow-md shrink-0"
           >
-            <ShoppingBag className="w-4 h-4" />
+            <ShoppingBag className="w-3.5 h-3.5" />
             {itemCount > 0 && (
-              <span className="absolute -top-1 -right-1 min-w-4 h-4 rounded-full bg-[#1fe0bb] px-1 text-[0.58rem] font-bold text-[#03251c] flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 min-w-4 h-4 rounded-full bg-[#1fe0bb] px-1 text-[0.55rem] font-bold text-[#03251c] flex items-center justify-center">
                 {itemCount}
               </span>
             )}
@@ -345,21 +345,21 @@ export function SiteHeader() {
           </button>
 
           <button
-            className="md:hidden w-10 h-10 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] shadow-md transition-all"
+            className="md:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] shadow-md transition-all shrink-0"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? (
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4 sm:w-5 sm:h-5" />
             ) : (
-              <Menu className="w-5 h-5" />
+              <Menu className="w-4 h-4 sm:w-5 sm:h-5" />
             )}
           </button>
         </div>
       </nav>
 
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-[3.2vw] right-[3.2vw] mt-2 bg-[#0B4A3B] border border-[#E6F2EA]/20 rounded-2xl shadow-2xl overflow-hidden flex flex-col uppercase text-[0.7rem] text-[#FFFFFF] z-50">
+        <div className="md:hidden absolute top-full left-2 right-2 xs:left-3 xs:right-3 sm:left-[3.2vw] sm:right-[3.2vw] mt-2 bg-[#0B4A3B] border border-[#E6F2EA]/20 rounded-2xl shadow-2xl overflow-hidden flex flex-col uppercase text-[0.7rem] text-[#FFFFFF] z-50">
           <HeaderJewelryPattern patternId="header-mobile-jewelry-pattern" />
           <div className="relative z-10 p-6 flex flex-col gap-6">
             <div className="flex flex-col gap-3 pb-6 border-b border-[#E6F2EA]/20">

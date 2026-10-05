@@ -328,7 +328,7 @@ export function CheckoutForm({ items }: CheckoutFormProps) {
         </div>
       )}
 
-      <section className="rounded-2xl border border-emerald-300/20 bg-[#06130e]/80 p-5 shadow-xl shadow-black/20 backdrop-blur-xl sm:p-6">
+      <section className="rounded-2xl border border-emerald-300/20 bg-[#06130e]/80 p-4 shadow-xl shadow-black/20 backdrop-blur-xl sm:p-6">
         <div className="mb-5 border-b border-white/10 pb-4">
           <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-emerald-300">
             Step 01
@@ -382,7 +382,7 @@ export function CheckoutForm({ items }: CheckoutFormProps) {
         </div>
       </section>
 
-      <section className="rounded-2xl border border-emerald-300/20 bg-[#06130e]/80 p-5 shadow-xl shadow-black/20 backdrop-blur-xl sm:p-6">
+      <section className="rounded-2xl border border-emerald-300/20 bg-[#06130e]/80 p-4 shadow-xl shadow-black/20 backdrop-blur-xl sm:p-6">
         <div className="mb-5 border-b border-white/10 pb-4">
           <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-emerald-300">
             Step 02

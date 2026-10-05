@@ -54,7 +54,7 @@ export default function HeroMotionVisual() {
           rotateY,
           transformStyle: "preserve-3d",
         }}
-        className="relative w-[340px] h-[340px] sm:w-[460px] sm:h-[460px] lg:w-[560px] lg:h-[560px] flex items-center justify-center"
+        className="relative w-[260px] h-[260px] xs:w-[320px] xs:h-[320px] sm:w-[460px] sm:h-[460px] lg:w-[560px] lg:h-[560px] flex items-center justify-center max-w-[90vw]"
       >
         {/* Deep Radiant Emerald Core Aura */}
         <motion.div

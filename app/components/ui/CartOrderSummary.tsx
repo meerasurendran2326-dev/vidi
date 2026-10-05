@@ -14,7 +14,7 @@ export function CartOrderSummary({ items }: CartOrderSummaryProps) {
   return (
     <section
       aria-labelledby="cart-order-summary-title"
-      className="rounded-2xl border border-emerald-300/20 bg-[#06130e]/80 p-5 shadow-xl shadow-black/25 backdrop-blur-xl sm:p-6"
+      className="rounded-2xl border border-emerald-300/20 bg-[#06130e]/80 p-4 shadow-xl shadow-black/25 backdrop-blur-xl sm:p-6"
     >
       <h2
         id="cart-order-summary-title"

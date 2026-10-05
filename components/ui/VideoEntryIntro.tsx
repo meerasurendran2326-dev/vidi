@@ -76,7 +76,7 @@ export default function VideoEntryIntro({
     <div
       ref={containerRef}
       onClick={handleExit}
-      className="fixed inset-0 z-[120] w-screen h-screen bg-black overflow-hidden flex items-center justify-center cursor-pointer select-none"
+      className="fixed inset-0 z-[120] w-full h-full bg-black overflow-hidden flex items-center justify-center cursor-pointer select-none"
     >
       {/* 100% Fullscreen Video - No icons, pure video filling screen */}
       <video
@@ -91,8 +91,8 @@ export default function VideoEntryIntro({
       />
 
       {/* Discrete subtle skip hint in the corner */}
-      <div className="absolute bottom-6 right-8 pointer-events-none opacity-40 hover:opacity-100 transition-opacity">
-        <span className="text-[0.62rem] uppercase tracking-[0.25em] text-white/60 font-light">
+      <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-8 pointer-events-none opacity-40 hover:opacity-100 transition-opacity">
+        <span className="text-[0.58rem] sm:text-[0.62rem] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-white/60 font-light">
           Click anywhere to skip
         </span>
       </div>

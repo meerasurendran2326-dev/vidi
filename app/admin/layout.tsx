@@ -9,14 +9,14 @@ export default async function AdminLayout({ children }: { children: ReactNode })
   const admin = await requireAdmin();
 
   return (
-    <div className="flex min-h-screen bg-[#020704] text-slate-100">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-[#020704] text-slate-100">
       {/* Sidebar */}
       <AdminSidebar adminEmail={admin.email} adminName={admin.fullName} />
 
       {/* Main content */}
       <div className="flex flex-1 flex-col min-w-0">
         {/* Top bar */}
-        <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-emerald-900/40 bg-[#020704]/90 px-6 backdrop-blur-md">
+        <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-emerald-900/40 bg-[#020704]/90 px-3.5 sm:px-6 backdrop-blur-md">
           <span className="text-[0.6rem] font-bold uppercase tracking-[0.28em] text-[#1fe0bb]/70">
             Admin Console
           </span>
@@ -33,7 +33,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
           </div>
         </header>
 
-        <main className="flex-1 p-6 lg:p-8">{children}</main>
+        <main className="flex-1 p-3.5 sm:p-6 lg:p-8 min-w-0">{children}</main>
       </div>
     </div>
   );

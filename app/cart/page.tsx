@@ -31,7 +31,7 @@ export default function CartPage() {
       </div>
       <div className="relative z-10 flex min-h-screen flex-col">
         <SiteHeader />
-        <main className="mx-auto w-full max-w-7xl flex-1 px-5 py-8 sm:px-8 sm:py-12 lg:px-12">
+        <main className="mx-auto w-full max-w-7xl flex-1 px-3.5 py-6 sm:px-8 sm:py-12 lg:px-12">
           <Link
             href="/rings"
             className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-200/80 transition-colors hover:text-white"
@@ -95,11 +95,11 @@ export default function CartPage() {
                   return (
                     <article
                       key={lineKey}
-                      className="flex gap-4 rounded-2xl border border-emerald-300/15 bg-[#06130e]/75 p-3 shadow-lg shadow-black/20 backdrop-blur-md sm:gap-5 sm:p-4"
+                      className="flex gap-3 xs:gap-4 rounded-2xl border border-emerald-300/15 bg-[#06130e]/75 p-3 shadow-lg shadow-black/20 backdrop-blur-md sm:gap-5 sm:p-4"
                     >
                       <Link
                         href={`/product/${item.slug}`}
-                        className="relative aspect-square w-24 shrink-0 overflow-hidden rounded-xl border border-emerald-300/15 bg-emerald-950/60 sm:w-32"
+                        className="relative aspect-square w-20 xs:w-24 shrink-0 overflow-hidden rounded-xl border border-emerald-300/15 bg-emerald-950/60 sm:w-32"
                       >
                         <Image
                           src={item.image}
@@ -110,27 +110,27 @@ export default function CartPage() {
                         />
                       </Link>
 
-                      <div className="flex min-w-0 flex-1 flex-col justify-between gap-4 py-1 sm:flex-row sm:items-center">
+                      <div className="flex min-w-0 flex-1 flex-col justify-between gap-3 py-0.5 sm:flex-row sm:items-center">
                         <div className="min-w-0">
                           <Link
                             href={`/product/${item.slug}`}
-                            className="text-sm font-semibold leading-relaxed text-white transition-colors hover:text-emerald-200 sm:text-base"
+                            className="text-sm font-semibold leading-snug text-white transition-colors hover:text-emerald-200 sm:text-base line-clamp-2"
                           >
                             {item.name}
                           </Link>
                           {Object.entries(item.selectedOptions).length > 0 && (
-                            <p className="mt-1 text-xs text-emerald-100/60">
+                            <p className="mt-1 text-[0.7rem] text-emerald-100/60 truncate">
                               {Object.entries(item.selectedOptions)
                                 .map(([option, value]) => `${option}: ${value}`)
                                 .join(" · ")}
                             </p>
                           )}
-                          <p className="mt-2 text-sm font-bold text-emerald-200">
+                          <p className="mt-1.5 text-xs sm:text-sm font-bold text-emerald-200">
                             {item.price}
                           </p>
                         </div>
 
-                        <div className="flex items-center justify-between gap-4 sm:justify-end">
+                        <div className="flex flex-wrap items-center justify-between gap-2 sm:justify-end">
                           <div className="inline-flex items-center rounded-full border border-white/20 bg-black/20">
                             <button
                               type="button"
@@ -138,12 +138,12 @@ export default function CartPage() {
                                 setCartItemQuantity(lineKey, item.quantity - 1)
                               }
                               aria-label={`Decrease ${item.name} quantity`}
-                              className="grid h-9 w-9 place-items-center text-white/75 transition-colors hover:text-emerald-200"
+                              className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center text-white/75 transition-colors hover:text-emerald-200"
                             >
                               <Minus className="h-3.5 w-3.5" />
                             </button>
                             <span
-                              className="min-w-8 text-center text-sm font-semibold"
+                              className="min-w-6 sm:min-w-8 text-center text-xs sm:text-sm font-semibold"
                               aria-live="polite"
                             >
                               {item.quantity}
@@ -155,21 +155,21 @@ export default function CartPage() {
                               }
                               disabled={maximumReached}
                               aria-label={`Increase ${item.name} quantity`}
-                              className="grid h-9 w-9 place-items-center text-white/75 transition-colors hover:text-emerald-200 disabled:opacity-40"
+                              className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center text-white/75 transition-colors hover:text-emerald-200 disabled:opacity-40"
                             >
                               <Plus className="h-3.5 w-3.5" />
                             </button>
                           </div>
-                          <span className="min-w-20 text-right text-sm font-semibold text-white">
+                          <span className="text-right text-xs sm:text-sm font-semibold text-white">
                             {formatPrice(getLineAmount(item))}
                           </span>
                           <button
                             type="button"
                             onClick={() => removeCartItem(lineKey)}
                             aria-label={`Remove ${item.name} from cart`}
-                            className="grid h-9 w-9 place-items-center rounded-full text-white/55 transition-colors hover:bg-rose-500/10 hover:text-rose-300"
+                            className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-full text-white/55 transition-colors hover:bg-rose-500/10 hover:text-rose-300"
                           >
-                            <Trash2 className="h-4 w-4" />
+                            <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                           </button>
                         </div>
                       </div>

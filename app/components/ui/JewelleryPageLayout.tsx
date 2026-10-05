@@ -38,7 +38,7 @@ export function JewelleryPageLayout({
         <SiteHeader />
 
         {/* ── Hero Banner ── */}
-        <section className="relative pt-16 pb-14 px-6 sm:px-10 text-center overflow-hidden">
+        <section className="relative pt-10 sm:pt-16 pb-8 sm:pb-14 px-4 sm:px-10 text-center overflow-hidden">
           {/* Decorative emerald ambient glow */}
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-emerald-500/15 blur-3xl" />
@@ -52,52 +52,52 @@ export function JewelleryPageLayout({
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="relative z-10"
           >
-            <p className="text-xs tracking-[0.28em] uppercase font-semibold text-emerald-400 mb-3 drop-shadow-sm">
+            <p className="text-[0.62rem] sm:text-xs tracking-[0.2em] sm:tracking-[0.28em] uppercase font-semibold text-emerald-400 mb-2 sm:mb-3 drop-shadow-sm">
               Vini Vici Vidi · Silver Atelier
             </p>
             <h1
-              className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]"
+              className="text-3xl xs:text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]"
               style={{ fontFamily: "var(--font-editorial), serif" }}
             >
               {category}
             </h1>
             <p
-              className="mt-3 text-lg sm:text-xl text-emerald-200/90 italic drop-shadow-sm"
+              className="mt-2 sm:mt-3 text-base sm:text-xl text-emerald-200/90 italic drop-shadow-sm"
               style={{ fontFamily: "var(--font-editorial), serif" }}
             >
               {tagline}
             </p>
-            <p className="mt-4 max-w-xl mx-auto text-sm text-emerald-100/80 leading-relaxed drop-shadow-sm">
+            <p className="mt-3 sm:mt-4 max-w-xl mx-auto text-xs sm:text-sm text-emerald-100/80 leading-relaxed drop-shadow-sm px-2">
               {description}
             </p>
 
             {/* Decorative rule */}
-            <div className="mt-8 flex items-center justify-center gap-3">
-              <div className="h-px w-20 bg-gradient-to-r from-transparent to-emerald-400/80" />
-              <div className="w-2 h-2 rounded-full bg-emerald-400 ring-4 ring-emerald-500/30" />
-              <div className="h-px w-20 bg-gradient-to-l from-transparent to-emerald-400/80" />
+            <div className="mt-6 sm:mt-8 flex items-center justify-center gap-3">
+              <div className="h-px w-14 sm:w-20 bg-gradient-to-r from-transparent to-emerald-400/80" />
+              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 ring-4 ring-emerald-500/30" />
+              <div className="h-px w-14 sm:w-20 bg-gradient-to-l from-transparent to-emerald-400/80" />
             </div>
           </motion.div>
         </section>
 
         {/* ── Product Grid ── */}
-        <section className="flex-1 px-5 sm:px-8 md:px-12 pb-24">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <section className="flex-1 px-3 xs:px-4 sm:px-8 md:px-12 pb-16 sm:pb-24">
+          <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2.5 xs:gap-3.5 sm:gap-6">
             {products.map((product, i) => {
               const isLiked = isInWishlist(product.id);
               return (
                 <motion.div
                   key={product.id}
-                  initial={{ opacity: 0, y: 40 }}
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
                     duration: 0.55,
-                    delay: i * 0.05,
+                    delay: i * 0.04,
                     ease: "easeOut",
                   }}
                   onMouseEnter={() => setHovered(product.id)}
                   onMouseLeave={() => setHovered(null)}
-                  className="group relative flex flex-col rounded-2xl overflow-hidden cursor-pointer"
+                  className="group relative flex flex-col rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer"
                   style={{
                     background: "rgba(10, 24, 18, 0.72)",
                     backdropFilter: "blur(20px)",
@@ -114,7 +114,7 @@ export function JewelleryPageLayout({
                   <Link
                     href={`/product/${product.slug}`}
                     aria-label={`View ${product.name} details`}
-                    className="absolute inset-0 z-0 rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-300"
+                    className="absolute inset-0 z-0 rounded-xl sm:rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-300"
                   />
 
                   {/* Image wrapper */}
@@ -142,12 +142,12 @@ export function JewelleryPageLayout({
 
                     {/* Badges */}
                     {product.badge && (
-                      <span className="absolute top-3 left-3 bg-emerald-600/90 backdrop-blur-md text-white text-[0.58rem] tracking-[0.12em] uppercase font-semibold px-2.5 py-1 rounded-full shadow-md border border-emerald-400/30">
+                      <span className="absolute top-2 left-2 sm:top-3 sm:left-3 bg-emerald-600/90 backdrop-blur-md text-white text-[0.5rem] sm:text-[0.58rem] tracking-[0.1em] uppercase font-semibold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shadow-md border border-emerald-400/30">
                         {product.badge}
                       </span>
                     )}
                     {product.isNew && (
-                      <span className="absolute top-3 right-12 bg-white/90 text-emerald-950 text-[0.58rem] tracking-[0.12em] uppercase font-bold px-2.5 py-1 rounded-full shadow-sm">
+                      <span className="absolute top-2 right-10 sm:top-3 sm:right-12 bg-white/90 text-emerald-950 text-[0.5rem] sm:text-[0.58rem] tracking-[0.1em] uppercase font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shadow-sm">
                         New
                       </span>
                     )}
@@ -158,11 +158,11 @@ export function JewelleryPageLayout({
                         e.stopPropagation();
                         toggleWishlist(product);
                       }}
-                      className="pointer-events-auto absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center shadow-md border border-emerald-500/30 transition-transform hover:scale-110 active:scale-95"
+                      className="pointer-events-auto absolute top-2 right-2 sm:top-3 sm:right-3 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center shadow-md border border-emerald-500/30 transition-transform hover:scale-110 active:scale-95"
                       aria-label="Add to wishlist"
                     >
                       <svg
-                        className={`w-4 h-4 transition-colors ${
+                        className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-colors ${
                           isLiked
                             ? "fill-rose-500 stroke-rose-500"
                             : "fill-none stroke-white hover:stroke-rose-400"
@@ -180,18 +180,21 @@ export function JewelleryPageLayout({
                   </div>
 
                   {/* Info */}
-                  <div className="relative z-10 pointer-events-none p-4 flex flex-col gap-1.5">
-                    <p className="text-[0.62rem] tracking-[0.18em] uppercase text-emerald-400 font-semibold">
-                      {product.subtitle}
-                    </p>
-                    <h3
-                      className="text-sm font-semibold text-white leading-snug"
-                      style={{ fontFamily: "var(--font-editorial), serif" }}
-                    >
-                      {product.name}
-                    </h3>
-                    <div className="flex items-center justify-between mt-2">
-                      <span className="text-base font-bold text-emerald-300">
+                  <div className="relative z-10 pointer-events-none p-2.5 xs:p-3 sm:p-4 flex flex-col gap-1 sm:gap-1.5 flex-1 justify-between">
+                    <div>
+                      <p className="text-[0.52rem] sm:text-[0.62rem] tracking-[0.12em] sm:tracking-[0.18em] uppercase text-emerald-400 font-semibold truncate">
+                        {product.subtitle}
+                      </p>
+                      <h3
+                        className="text-xs sm:text-sm font-semibold text-white leading-snug line-clamp-2 mt-0.5"
+                        style={{ fontFamily: "var(--font-editorial), serif" }}
+                      >
+                        {product.name}
+                      </h3>
+                    </div>
+
+                    <div className="flex items-center justify-between mt-2 gap-1.5">
+                      <span className="text-xs sm:text-base font-bold text-emerald-300 whitespace-nowrap">
                         {product.price}
                       </span>
                       <motion.button
@@ -200,13 +203,13 @@ export function JewelleryPageLayout({
                           e.stopPropagation();
                           toggleWishlist(product);
                         }}
-                        className={`pointer-events-auto text-[0.62rem] tracking-wider uppercase font-semibold px-3.5 py-1.5 rounded-full transition-colors shadow-md border ${
+                        className={`pointer-events-auto text-[0.55rem] sm:text-[0.62rem] tracking-wider uppercase font-semibold px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full transition-colors shadow-md border shrink-0 ${
                           isLiked
                             ? "bg-emerald-500 text-black border-emerald-300 font-bold"
                             : "bg-emerald-600 hover:bg-emerald-500 text-white border-emerald-400/30"
                         }`}
                       >
-                        {isLiked ? "Saved ♥" : "Add to Favorites"}
+                        {isLiked ? "Saved ♥" : "Save"}
                       </motion.button>
                     </div>
                   </div>

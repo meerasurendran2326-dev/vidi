@@ -90,61 +90,65 @@ export default async function AdminOrdersPage({
 
       {/* Table */}
       <div className="rounded-2xl border border-emerald-900/40 bg-[#010d08]/80 overflow-hidden">
-        <div className="grid grid-cols-[auto_1fr_auto_auto_auto_auto_auto] gap-4 px-5 py-3 border-b border-emerald-900/30">
-          {["#", "Customer", "Items", "Total", "Payment", "Status", ""].map((h) => (
-            <span
-              key={h}
-              className="text-[0.6rem] font-bold uppercase tracking-[0.18em] text-slate-500"
-            >
-              {h}
-            </span>
-          ))}
-        </div>
-
-        {orders.length === 0 && (
-          <p className="py-12 text-center text-xs text-slate-500">
-            No orders match the current filter.
-          </p>
-        )}
-
-        <div className="divide-y divide-emerald-900/20">
-          {orders.map((o) => (
-            <div
-              key={o.id}
-              className="grid grid-cols-[auto_1fr_auto_auto_auto_auto_auto] gap-4 items-center px-5 py-3.5 hover:bg-white/[0.02] transition-colors"
-            >
-              <span className="text-[0.65rem] font-mono text-slate-400">
-                {o.orderNumber}
-              </span>
-
-              <div className="min-w-0">
-                <p className="text-xs font-semibold text-white truncate">
-                  {o.customerFullName}
-                </p>
-                <p className="text-[0.62rem] text-slate-500 truncate">
-                  {o.customerEmail}
-                </p>
-              </div>
-
-              <span className="text-xs text-slate-400 text-center">
-                {o._count.items}
-              </span>
-
-              <span className="text-xs font-semibold text-white tabular-nums whitespace-nowrap">
-                ₹{Number(o.total).toLocaleString("en-IN")}
-              </span>
-
-              <PaymentStatusBadge status={o.paymentStatus} />
-              <OrderStatusBadge status={o.status} />
-
-              <Link
-                href={`/admin/orders/${o.id}`}
-                className="text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-[#1fe0bb]/70 hover:text-[#1fe0bb] transition-colors whitespace-nowrap"
-              >
-                View →
-              </Link>
+        <div className="overflow-x-auto min-w-0">
+          <div className="min-w-[720px]">
+            <div className="grid grid-cols-[auto_1fr_auto_auto_auto_auto_auto] gap-4 px-5 py-3 border-b border-emerald-900/30">
+              {["#", "Customer", "Items", "Total", "Payment", "Status", ""].map((h) => (
+                <span
+                  key={h}
+                  className="text-[0.6rem] font-bold uppercase tracking-[0.18em] text-slate-500"
+                >
+                  {h}
+                </span>
+              ))}
             </div>
-          ))}
+
+            {orders.length === 0 && (
+              <p className="py-12 text-center text-xs text-slate-500">
+                No orders match the current filter.
+              </p>
+            )}
+
+            <div className="divide-y divide-emerald-900/20">
+              {orders.map((o) => (
+                <div
+                  key={o.id}
+                  className="grid grid-cols-[auto_1fr_auto_auto_auto_auto_auto] gap-4 items-center px-5 py-3.5 hover:bg-white/[0.02] transition-colors"
+                >
+                  <span className="text-[0.65rem] font-mono text-slate-400">
+                    {o.orderNumber}
+                  </span>
+
+                  <div className="min-w-0">
+                    <p className="text-xs font-semibold text-white truncate">
+                      {o.customerFullName}
+                    </p>
+                    <p className="text-[0.62rem] text-slate-500 truncate">
+                      {o.customerEmail}
+                    </p>
+                  </div>
+
+                  <span className="text-xs text-slate-400 text-center">
+                    {o._count.items}
+                  </span>
+
+                  <span className="text-xs font-semibold text-white tabular-nums whitespace-nowrap">
+                    ₹{Number(o.total).toLocaleString("en-IN")}
+                  </span>
+
+                  <PaymentStatusBadge status={o.paymentStatus} />
+                  <OrderStatusBadge status={o.status} />
+
+                  <Link
+                    href={`/admin/orders/${o.id}`}
+                    className="text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-[#1fe0bb]/70 hover:text-[#1fe0bb] transition-colors whitespace-nowrap"
+                  >
+                    View →
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 

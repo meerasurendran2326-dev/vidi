@@ -124,9 +124,9 @@ export function FooterColumn() {
         className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-radial from-[#1fe0bb]/10 to-transparent blur-[100px] pointer-events-none z-0" 
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-16 pb-10 sm:px-8 lg:px-12 lg:pt-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 pt-12 pb-8 sm:px-8 lg:px-12 lg:pt-20">
         {/* Main 4-Column Grid */}
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+        <div className="grid grid-cols-1 gap-10 sm:gap-12 lg:grid-cols-12">
           
           {/* Brand & Mission Column */}
           <div className="lg:col-span-4 flex flex-col items-start">
@@ -263,12 +263,12 @@ export function FooterColumn() {
         </div>
 
         {/* Bottom Credits & Legal Links */}
-        <div className="mt-14 pt-8 border-t border-[#E6F2EA]/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-[0.68rem] tracking-[0.15em] uppercase text-[#E6F2EA]/75">
+        <div className="mt-12 sm:mt-14 pt-6 sm:pt-8 border-t border-[#E6F2EA]/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-[0.65rem] sm:text-[0.68rem] tracking-[0.12em] sm:tracking-[0.15em] uppercase text-[#E6F2EA]/75 text-center sm:text-left">
           <p>
             &copy; {new Date().getFullYear()} {data.company.name} MAISON. ALL RIGHTS RESERVED.
           </p>
 
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-6">
             <a href="#privacy" className="hover:text-white transition-colors">
               Privacy Policy
             </a>

@@ -20,7 +20,7 @@ export default function CheckoutPage() {
       </div>
       <div className="relative z-10 flex min-h-screen flex-col">
         <SiteHeader />
-        <main className="mx-auto w-full max-w-7xl flex-1 px-5 py-8 sm:px-8 sm:py-12 lg:px-12">
+        <main className="mx-auto w-full max-w-7xl flex-1 px-3.5 py-6 sm:px-8 sm:py-12 lg:px-12">
           <Link
             href="/cart"
             className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-200/80 transition-colors hover:text-white"

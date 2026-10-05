@@ -39,7 +39,7 @@ function StatCard({
             {label}
           </p>
           <p
-            className={`mt-2 text-3xl font-light ${accent ? "text-[#1fe0bb]" : "text-white"}`}
+            className={`mt-2 text-2xl sm:text-3xl font-light truncate ${accent ? "text-[#1fe0bb]" : "text-white"}`}
             style={{ fontFamily: "var(--font-editorial), serif" }}
           >
             {value}

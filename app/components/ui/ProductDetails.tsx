@@ -57,10 +57,10 @@ export function ProductDetails({ product }: ProductDetailsProps) {
       <div className="relative z-10 flex min-h-screen flex-col">
         <SiteHeader />
 
-        <main className="mx-auto w-full max-w-7xl flex-1 px-5 py-8 sm:px-8 sm:py-12 lg:px-12">
+        <main className="mx-auto w-full max-w-7xl flex-1 px-3.5 py-6 sm:px-8 sm:py-12 lg:px-12">
           <Link
             href={`/${product.category}`}
-            className="mb-7 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-200/80 transition-colors hover:text-white"
+            className="mb-5 sm:mb-7 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-200/80 transition-colors hover:text-white"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to{" "}
@@ -69,7 +69,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
               : product.category}
           </Link>
 
-          <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)] lg:gap-14">
+          <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)] lg:gap-14">
             <section aria-label="Product images" className="min-w-0">
               <div className="relative aspect-square overflow-hidden rounded-2xl border border-emerald-300/20 bg-gradient-to-br from-emerald-950/80 via-emerald-900/45 to-black shadow-2xl shadow-black/40">
                 <Image
@@ -82,19 +82,19 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                   className="object-cover"
                 />
                 {product.badge && (
-                  <span className="absolute left-4 top-4 rounded-full border border-emerald-300/30 bg-emerald-700/90 px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-white shadow-lg backdrop-blur">
+                  <span className="absolute left-3 top-3 sm:left-4 sm:top-4 rounded-full border border-emerald-300/30 bg-emerald-700/90 px-2.5 py-1 sm:px-3 sm:py-1.5 text-[0.55rem] sm:text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-white shadow-lg backdrop-blur">
                     {product.badge}
                   </span>
                 )}
                 {product.isNew && (
-                  <span className="absolute right-4 top-4 rounded-full bg-white/90 px-3 py-1.5 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-emerald-950">
+                  <span className="absolute right-3 top-3 sm:right-4 sm:top-4 rounded-full bg-white/90 px-2.5 py-1 sm:px-3 sm:py-1.5 text-[0.55rem] sm:text-[0.62rem] font-bold uppercase tracking-[0.14em] text-emerald-950">
                     New
                   </span>
                 )}
               </div>
 
               {images.length > 1 && (
-                <div className="mt-3 grid grid-cols-4 gap-3 sm:grid-cols-5">
+                <div className="mt-3 grid grid-cols-4 gap-2.5 sm:grid-cols-5 sm:gap-3">
                   {images.map((image, index) => (
                     <button
                       key={`${image}-${index}`}
@@ -121,24 +121,24 @@ export function ProductDetails({ product }: ProductDetailsProps) {
               )}
             </section>
 
-            <section className="rounded-2xl border border-emerald-300/20 bg-[#06130e]/80 p-5 shadow-2xl shadow-black/35 backdrop-blur-xl sm:p-8">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-300">
+            <section className="rounded-2xl border border-emerald-300/20 bg-[#06130e]/80 p-4 shadow-2xl shadow-black/35 backdrop-blur-xl sm:p-8">
+              <p className="text-[0.68rem] sm:text-xs font-semibold uppercase tracking-[0.24em] text-emerald-300">
                 {product.category === "pendent-set"
                   ? "Pendent Set"
                   : product.category}
               </p>
               <h1
-                className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl"
+                className="mt-2 sm:mt-3 text-2xl xs:text-3xl sm:text-4xl font-semibold leading-tight text-white"
                 style={{ fontFamily: "var(--font-editorial), serif" }}
               >
                 {product.name}
               </h1>
-              <p className="mt-3 text-sm leading-relaxed text-emerald-100/75">
+              <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm leading-relaxed text-emerald-100/75">
                 {description}
               </p>
 
               <p
-                className="mt-6 text-2xl font-bold text-emerald-200"
+                className="mt-4 sm:mt-6 text-xl sm:text-2xl font-bold text-emerald-200"
                 aria-label={`Price ${product.price}`}
               >
                 {product.price}
