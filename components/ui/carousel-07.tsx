@@ -238,15 +238,26 @@ interface CarouselConfig {
 }
 
 const getCarouselConfig = (width: number): CarouselConfig => {
+  if (width < 380) {
+    return {
+      distanceDivisor: 100,
+      velocityDivisor: 400,
+      sensitivity: 150,
+      xMultiplier: 65,
+      yMultiplier: 12,
+      rotationMultiplier: 6,
+      scaleReduction: 0.08,
+    };
+  }
   if (width < 640) {
     return {
       distanceDivisor: 120,
       velocityDivisor: 500,
       sensitivity: 180,
-      xMultiplier: 90,
-      yMultiplier: 20,
-      rotationMultiplier: 8,
-      scaleReduction: 0.06,
+      xMultiplier: 78,
+      yMultiplier: 16,
+      rotationMultiplier: 7,
+      scaleReduction: 0.07,
     };
   }
   if (width < 1024) {
@@ -432,21 +443,21 @@ export const CarouselStacked = ({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center w-full py-16 bg-transparent overflow-hidden select-none",
+        "flex flex-col items-center justify-center w-full py-10 sm:py-16 bg-transparent overflow-hidden select-none",
         className,
       )}
     >
       {/* Header section above carousel */}
-      <div className="carousel-header flex flex-col items-center text-center max-w-xl px-4 mb-8">
-        <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#0B4A3B]/80 text-[#1fe0bb] text-[0.65rem] tracking-[0.25em] uppercase font-bold mb-3 border border-[#1fe0bb]/30 backdrop-blur-md shadow-[0_0_15px_rgba(31,224,187,0.15)]">
+      <div className="carousel-header flex flex-col items-center text-center max-w-xl px-4 mb-6 sm:mb-8">
+        <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-[#0B4A3B]/80 text-[#1fe0bb] text-[0.58rem] sm:text-[0.65rem] tracking-[0.2em] sm:tracking-[0.25em] uppercase font-bold mb-2.5 sm:mb-3 border border-[#1fe0bb]/30 backdrop-blur-md shadow-[0_0_15px_rgba(31,224,187,0.15)]">
           <Sparkles className="w-3 h-3 text-[#1fe0bb]" />
           <span>Atelier Showcase</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold uppercase tracking-tight text-white bg-gradient-to-b from-white via-[#E6F2EA] to-[#94A3B8] bg-clip-text text-transparent drop-shadow-md">
+        <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold uppercase tracking-tight text-white bg-gradient-to-b from-white via-[#E6F2EA] to-[#94A3B8] bg-clip-text text-transparent drop-shadow-md">
           Curated Silver Creations
         </h2>
-        <p className="text-xs sm:text-sm text-[#A7F3D0]/80 mt-2 font-serif italic">
-          Hover over any card or move your cursor across the showcase to browse smoothly.
+        <p className="text-[0.72rem] sm:text-sm text-[#A7F3D0]/80 mt-1.5 sm:mt-2 font-serif italic max-w-xs sm:max-w-none">
+          Swipe or browse smoothly across the atelier showcase.
         </p>
       </div>
 
@@ -470,7 +481,7 @@ export const CarouselStacked = ({
           lastHoverIndex.current = null;
         }}
         onMouseMove={handleContainerMouseMove}
-        className="relative w-full max-w-7xl h-80 sm:h-112 lg:h-128 flex items-center justify-center cursor-grab active:cursor-grabbing"
+        className="relative w-full max-w-7xl h-72 xs:h-80 sm:h-[420px] lg:h-[480px] flex items-center justify-center cursor-grab active:cursor-grabbing touch-pan-y"
       >
         {slides.map((slide, i) => (
           <Card
@@ -486,19 +497,31 @@ export const CarouselStacked = ({
         ))}
       </motion.div>
 
-      {/* Navigation Controls & Dot Indicators (Responsive to Click AND Hover) */}
-      <div className="relative z-30 flex items-center gap-6 mt-8">
+      {/* Navigation Controls & Indicators (Responsive: Counter on Mobile, Dots on Desktop) */}
+      <div className="relative z-30 flex items-center gap-3 sm:gap-6 mt-6 sm:mt-8">
         <button
           type="button"
           onClick={handlePrev}
           onMouseEnter={handlePrev}
           aria-label="Previous slide"
-          className="p-3 rounded-full bg-[#0B4A3B]/80 border border-[#1fe0bb]/30 text-[#E6F2EA] hover:bg-[#1F7A5C] hover:text-white transition-all duration-300 shadow-lg shadow-[#021811]/60 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md"
+          className="p-2 sm:p-3 rounded-full bg-[#0B4A3B]/80 border border-[#1fe0bb]/30 text-[#E6F2EA] hover:bg-[#1F7A5C] hover:text-white transition-all duration-300 shadow-lg shadow-[#021811]/60 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md"
         >
-          <ChevronLeft className="w-5 h-5" />
+          <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
 
-        <div className="flex items-center gap-2">
+        {/* Mobile Luxury Atelier Counter */}
+        <div className="sm:hidden flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0B4A3B]/80 border border-[#1fe0bb]/25 backdrop-blur-sm shadow-md">
+          <span className="font-mono text-xs font-bold text-[#1fe0bb] tracking-wider">
+            {String(currentIndex + 1).padStart(2, "0")}
+          </span>
+          <span className="text-[0.65rem] text-white/40">/</span>
+          <span className="font-mono text-[0.65rem] text-white/60 tracking-wider">
+            {String(total).padStart(2, "0")}
+          </span>
+        </div>
+
+        {/* Desktop Dot Indicators */}
+        <div className="hidden sm:flex items-center gap-1.5 lg:gap-2 max-w-[60vw] overflow-x-auto py-1 scrollbar-none">
           {slides.map((_, i) => (
             <button
               key={i}
@@ -507,7 +530,7 @@ export const CarouselStacked = ({
               onMouseEnter={() => handleCardFocus(i)}
               aria-label={`Go to slide ${i + 1}`}
               className={cn(
-                "h-2 transition-all duration-300 rounded-full cursor-pointer",
+                "h-2 transition-all duration-300 rounded-full cursor-pointer shrink-0",
                 currentIndex === i
                   ? "w-8 bg-[#1fe0bb] shadow-[0_0_10px_#1fe0bb]"
                   : "w-2 bg-white/25 hover:bg-white/50 hover:w-4",
@@ -521,9 +544,9 @@ export const CarouselStacked = ({
           onClick={handleNext}
           onMouseEnter={handleNext}
           aria-label="Next slide"
-          className="p-3 rounded-full bg-[#0B4A3B]/80 border border-[#1fe0bb]/30 text-[#E6F2EA] hover:bg-[#1F7A5C] hover:text-white transition-all duration-300 shadow-lg shadow-[#021811]/60 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md"
+          className="p-2 sm:p-3 rounded-full bg-[#0B4A3B]/80 border border-[#1fe0bb]/30 text-[#E6F2EA] hover:bg-[#1F7A5C] hover:text-white transition-all duration-300 shadow-lg shadow-[#021811]/60 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md"
         >
-          <ChevronRight className="w-5 h-5" />
+          <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
       </div>
     </div>
@@ -592,7 +615,7 @@ const Card = ({
       }}
       className={cn(
         "absolute rounded-2xl pointer-events-auto",
-        "w-44 h-56 sm:w-56 sm:h-80 lg:w-64 lg:h-96",
+        "w-36 h-52 xs:w-44 xs:h-60 sm:w-56 sm:h-80 lg:w-64 lg:h-96",
       )}
     >
       {/* Inner card container: hover enlargement and hover focus trigger */}
@@ -623,15 +646,15 @@ const Card = ({
           className="absolute inset-0 bg-black pointer-events-none group-hover:opacity-10 transition-opacity duration-300"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
 
-        <Badge className="absolute top-3 right-3 sm:top-5 sm:right-5 lg:top-6 lg:right-6 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-white/95 backdrop-blur-md text-[0.62rem] sm:text-xs font-bold uppercase tracking-widest text-[#0B4A3B] shadow-md border border-white/40 pointer-events-none">
+        <Badge className="absolute top-2.5 right-2.5 sm:top-5 sm:right-5 lg:top-6 lg:right-6 px-1.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-white/95 backdrop-blur-md text-[0.55rem] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest text-[#0B4A3B] shadow-md border border-white/40 pointer-events-none">
           {slide.badge}
         </Badge>
 
-        <div className="absolute bottom-5 left-3 right-3 sm:bottom-8 sm:left-5 sm:right-5 lg:bottom-10 lg:left-6 lg:right-6 text-white text-center sm:text-left pointer-events-none">
+        <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-8 sm:left-5 sm:right-5 lg:bottom-10 lg:left-6 lg:right-6 text-white text-left pointer-events-none">
           {slide.price && (
-            <span className="inline-block text-[0.68rem] tracking-[0.2em] font-semibold text-[#1F7A5C] bg-white/90 px-2 py-0.5 rounded mb-1">
+            <span className="inline-block text-[0.58rem] sm:text-[0.68rem] tracking-[0.14em] sm:tracking-[0.2em] font-semibold text-[#1F7A5C] bg-white/95 px-1.5 py-0.5 rounded mb-1 shadow-sm">
               {slide.price}
             </span>
           )}
@@ -639,7 +662,7 @@ const Card = ({
             style={{
               opacity: useTransform(offset, [-0.5, 0, 0.5], [0, 1, 0]),
             }}
-            className="text-sm sm:text-lg lg:text-xl font-bold leading-tight mb-0.5 sm:mb-1 drop-shadow-md text-white font-display"
+            className="text-xs sm:text-lg lg:text-xl font-bold leading-tight mb-0.5 sm:mb-1 drop-shadow-md text-white font-display truncate"
           >
             {slide.title}
           </motion.p>

@@ -14,6 +14,7 @@ export default function VideoEntryIntro({
 }: VideoEntryIntroProps) {
   const [isExiting, setIsExiting] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const ambientVideoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   // Smooth cinematic exit transition
@@ -48,12 +49,12 @@ export default function VideoEntryIntro({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleExit]);
 
-  // Autoplay video immediately on mount
+  // Autoplay video immediately on mount (both main and ambient backdrop)
   useEffect(() => {
     if (!isOpen) return;
 
-    const video = videoRef.current;
-    if (video) {
+    const playVideo = (video: HTMLVideoElement | null) => {
+      if (!video) return;
       video.muted = true;
       video.defaultMuted = true;
       video.playsInline = true;
@@ -67,7 +68,10 @@ export default function VideoEntryIntro({
           console.warn("Autoplay attempt:", err);
         });
       }
-    }
+    };
+
+    playVideo(videoRef.current);
+    playVideo(ambientVideoRef.current);
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -76,9 +80,21 @@ export default function VideoEntryIntro({
     <div
       ref={containerRef}
       onClick={handleExit}
-      className="fixed inset-0 z-[120] w-full h-full bg-black overflow-hidden flex items-center justify-center cursor-pointer select-none"
+      className="fixed inset-0 z-[120] w-full h-full bg-[#01140E] overflow-hidden flex items-center justify-center cursor-pointer select-none"
     >
-      {/* 100% Fullscreen Video - No icons, pure video filling screen */}
+      {/* Ambient background video that dynamically mirrors the video colors and lighting to fill outer bars on mobile */}
+      <video
+        ref={ambientVideoRef}
+        src="/vvv-logo-reveal.mp4"
+        playsInline
+        autoPlay
+        muted
+        preload="auto"
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover scale-125 blur-3xl opacity-80 pointer-events-none sm:hidden"
+      />
+
+      {/* Crisp foreground video */}
       <video
         ref={videoRef}
         src="/vvv-logo-reveal.mp4"
@@ -87,12 +103,12 @@ export default function VideoEntryIntro({
         muted
         preload="auto"
         onEnded={handleExit}
-        className="w-full h-full object-contain sm:object-cover bg-black pointer-events-none"
+        className="relative z-10 w-full h-full object-contain sm:object-cover pointer-events-none"
       />
 
       {/* Discrete subtle skip hint in the corner */}
-      <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-8 pointer-events-none opacity-40 hover:opacity-100 transition-opacity">
-        <span className="text-[0.58rem] sm:text-[0.62rem] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-white/60 font-light">
+      <div className="absolute z-20 bottom-4 right-4 sm:bottom-6 sm:right-8 pointer-events-none opacity-50 hover:opacity-100 transition-opacity">
+        <span className="text-[0.58rem] sm:text-[0.62rem] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-white/80 font-light drop-shadow-md">
           Click anywhere to skip
         </span>
       </div>
