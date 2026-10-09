@@ -13,36 +13,9 @@ import { FlickeringGrid } from "@/components/ui/flickering-grid";
 import ShaderBackground from "@/components/ui/shader-background";
 
 import CarouselStacked from "@/components/ui/carousel-07";
-const InfiniteGallery = dynamic(
-  () => import("@/components/ui/3d-gallery-photography"),
-  { ssr: false },
-);
 import { setupLenis } from "@/app/animations/scroll/lenis";
 import { gsap } from "gsap";
-import { ArrowRight, Sparkles } from "lucide-react";
-
-const galleryImages = [
-  { src: "/images/custom/img1.jpeg", alt: "Vici Obsidian Signet Ring" },
-  { src: "/images/custom/img2.jpeg", alt: "Celestial Emerald Pendant" },
-  { src: "/images/custom/img3.jpeg", alt: "Aura Silver Choker" },
-  { src: "/images/custom/img4.jpeg", alt: "Lumina Eternity Band" },
-  { src: "/images/custom/img5.jpeg", alt: "Verdant Royal Solitaire" },
-  { src: "/images/custom/img6.jpeg", alt: "Sovereign Sculpted Cuff" },
-  { src: "/images/custom/img7.jpeg", alt: "Imperial Drop Earrings" },
-  { src: "/images/custom/img8.jpeg", alt: "Midnight Filigree Stud" },
-  { src: "/images/custom/img9.jpeg", alt: "Dew Droplet Aquamarine" },
-  { src: "/images/custom/img10.jpeg", alt: "Lumina Tennis Bracelet" },
-  { src: "/images/custom/img11.jpeg", alt: "Helio Noir Ring" },
-  { src: "/images/custom/img12.jpeg", alt: "Stella Link Choker" },
-  { src: "/images/custom/img13.jpeg", alt: "Astral Emerald Pendant" },
-  { src: "/images/custom/img14.jpeg", alt: "Solstice Geometric Drops" },
-  { src: "/images/custom/img15.jpeg", alt: "Bespoke Sculpted Band" },
-  { src: "/images/custom/img16.jpeg", alt: "Vici Signature Signet" },
-  { src: "/images/custom/img17.jpeg", alt: "Chrono Geometric Signet" },
-  { src: "/images/custom/img18.jpeg", alt: "Solstice Radiant Studs" },
-  { src: "/images/custom/img19.jpeg", alt: "Nova Eternity Band" },
-  { src: "/images/custom/img20.jpeg", alt: "Zenith Statement Pendant" },
-];
+import { ArrowRight, Sparkles, ShoppingBag } from "lucide-react";
 
 export default function HomePage() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -58,6 +31,7 @@ export default function HomePage() {
       ({ scroll, limit }: { scroll: number; limit: number }) => {
         const scrollY = scroll;
         const windowHeight = window.innerHeight;
+        const windowWidth = window.innerWidth;
 
         // 1. Update Scroll Progress bar
         if (limit > 0) {
@@ -66,7 +40,10 @@ export default function HomePage() {
           );
         }
 
-        // 2. Multi-depth Parallax on Hero elements
+        // 2. Multi-depth Parallax on Hero elements (calibrated for mobile screens)
+        const isMobile = windowWidth < 640;
+        const pFactor = isMobile ? 0.35 : 1;
+
         const vini = document.querySelector(".brand-group-vini");
         const vici = document.querySelector(".brand-group-vici");
         const vidi = document.querySelector(".brand-group-vidi");
@@ -77,8 +54,8 @@ export default function HomePage() {
 
         if (vini) {
           gsap.to(vini, {
-            y: scrollY * 0.28,
-            x: -scrollY * 0.08,
+            y: scrollY * 0.28 * pFactor,
+            x: -scrollY * 0.08 * pFactor,
             opacity: Math.max(0, 1 - scrollY / (windowHeight * 0.65)),
             duration: 0.15,
             ease: "none",
@@ -88,8 +65,8 @@ export default function HomePage() {
 
         if (vici) {
           gsap.to(vici, {
-            scale: Math.max(0.82, 1 - (scrollY / windowHeight) * 0.2),
-            y: scrollY * 0.12,
+            scale: Math.max(0.82, 1 - (scrollY / windowHeight) * 0.2 * pFactor),
+            y: scrollY * 0.12 * pFactor,
             opacity: Math.max(0, 1 - scrollY / (windowHeight * 0.55)),
             duration: 0.15,
             ease: "none",
@@ -99,8 +76,8 @@ export default function HomePage() {
 
         if (vidi) {
           gsap.to(vidi, {
-            y: -scrollY * 0.18,
-            x: scrollY * 0.08,
+            y: -scrollY * 0.18 * pFactor,
+            x: scrollY * 0.08 * pFactor,
             opacity: Math.max(0, 1 - scrollY / (windowHeight * 0.65)),
             duration: 0.15,
             ease: "none",
@@ -110,8 +87,8 @@ export default function HomePage() {
 
         if (heroVisual) {
           gsap.to(heroVisual, {
-            y: scrollY * 0.16,
-            scale: Math.max(0.88, 1 - (scrollY / windowHeight) * 0.14),
+            y: scrollY * 0.16 * pFactor,
+            scale: Math.max(0.88, 1 - (scrollY / windowHeight) * 0.14 * pFactor),
             duration: 0.18,
             ease: "none",
             overwrite: "auto",
@@ -121,7 +98,7 @@ export default function HomePage() {
         if (heroCta) {
           gsap.to(heroCta, {
             opacity: Math.max(0, 1 - scrollY / (windowHeight * 0.38)),
-            y: scrollY * 0.22,
+            y: scrollY * 0.22 * pFactor,
             duration: 0.15,
             overwrite: "auto",
           });
@@ -191,32 +168,44 @@ export default function HomePage() {
             {/* Pure VINI VICI VIDI Branding - 925 Sterling Silver Gradient Finish with Motion Shimmer */}
             <div className="absolute inset-0 z-2 w-full h-full uppercase pointer-events-none font-display">
               {/* VINI (Top Left) */}
-              <div className="brand-group-vini animate-float-slow absolute top-[13%] sm:top-[4%] left-[4%] flex items-center z-1 text-[clamp(3.5rem,11vw,20rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E2E8F0] to-[#94A3B8] bg-clip-text text-transparent drop-shadow-[0_12px_28px_rgba(0,0,0,0.65)] select-none">
+              <div className="brand-group-vini animate-float-slow absolute top-[8%] xs:top-[9%] sm:top-[4%] left-[4%] flex items-center z-1 text-[clamp(2.5rem,10.5vw,20rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E2E8F0] to-[#94A3B8] bg-clip-text text-transparent drop-shadow-[0_12px_28px_rgba(0,0,0,0.65)] select-none">
                 <span className="animate-silver-shimmer">VINI</span>
               </div>
 
               {/* VICI (Centerpiece with Radiant Pulsing Aura) */}
-              <div className="brand-group-vici absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-1 text-[clamp(5.5rem,18vw,36rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E6F2EA] to-[#8FA69B] bg-clip-text text-transparent drop-shadow-[0_15px_38px_rgba(0,0,0,0.75)] select-none">
+              <div className="brand-group-vici absolute top-[48%] sm:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-1 text-[clamp(4rem,16.5vw,36rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E6F2EA] to-[#8FA69B] bg-clip-text text-transparent drop-shadow-[0_15px_38px_rgba(0,0,0,0.75)] select-none">
                 <span className="animate-silver-shimmer">VICI</span>
-                <div className="absolute w-[160%] h-[160%] rounded-full bg-radial from-[#2FE4B6]/25 via-[#0B4A3B]/15 to-transparent blur-[85px] pointer-events-none -z-1 animate-pulse-glow" />
+                <div className="absolute w-[130%] sm:w-[160%] h-[130%] sm:h-[160%] rounded-full bg-radial from-[#2FE4B6]/25 via-[#0B4A3B]/15 to-transparent blur-[45px] sm:blur-[85px] pointer-events-none -z-1 animate-pulse-glow" />
               </div>
 
               {/* VIDI (Bottom Right) */}
-              <div className="brand-group-vidi animate-float-reverse absolute bottom-[14%] sm:bottom-[6%] right-[4%] flex items-center z-1 text-[clamp(3.5rem,11vw,20rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E2E8F0] to-[#94A3B8] bg-clip-text text-transparent drop-shadow-[0_12px_28px_rgba(0,0,0,0.65)] select-none">
+              <div className="brand-group-vidi animate-float-reverse absolute bottom-[18%] xs:bottom-[16%] sm:bottom-[6%] right-[4%] flex items-center z-1 text-[clamp(2.5rem,10.5vw,20rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E2E8F0] to-[#94A3B8] bg-clip-text text-transparent drop-shadow-[0_12px_28px_rgba(0,0,0,0.65)] select-none">
                 <span className="animate-silver-shimmer">VIDI</span>
               </div>
             </div>
 
             {/* High Jewellery Center Motion Visual */}
-            <div className="hero-motion-visual-container absolute top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[850px] h-[280px] sm:h-[480px] lg:h-[580px] flex items-center justify-center z-20 pointer-events-none will-change-transform">
+            <div className="hero-motion-visual-container absolute top-[49%] sm:top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[850px] h-[220px] xs:h-[280px] sm:h-[480px] lg:h-[580px] flex items-center justify-center z-20 pointer-events-none will-change-transform">
               <HeroMotionVisual />
             </div>
 
             {/* Deep Emerald Dual CTA Button Group in Hero */}
-            <div className="hero-cta-container absolute bottom-4 sm:bottom-10 left-1/2 -translate-x-1/2 z-30 pointer-events-auto flex items-center gap-4 flex-wrap justify-center w-full px-4">
+            <div className="hero-cta-container absolute bottom-3 xs:bottom-4 sm:bottom-10 left-1/2 -translate-x-1/2 z-30 pointer-events-auto flex items-center gap-3 sm:gap-4 flex-wrap justify-center w-full max-w-[94vw] px-2 sm:px-4">
+              <button
+                type="button"
+                onClick={() => {
+                  window.dispatchEvent(new CustomEvent("open-shop-menu"));
+                }}
+                className="group relative inline-flex items-center gap-2 sm:gap-3 px-5 py-2.5 xs:px-6 xs:py-3 sm:px-8 sm:py-3.5 rounded-full bg-gradient-to-r from-[#1fe0bb] via-[#2fe4b6] to-[#E6F2EA] text-[#011811] font-bold text-[0.66rem] xs:text-[0.7rem] sm:text-xs tracking-[0.16em] sm:tracking-[0.22em] uppercase shadow-2xl shadow-[#1fe0bb]/35 hover:scale-105 active:scale-95 transition-all duration-300 border border-white/40 max-w-[90vw] whitespace-nowrap cursor-pointer"
+              >
+                <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#011811] shrink-0" />
+                <span>Start Shopping</span>
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#011811] group-hover:translate-x-1 transition-transform shrink-0" />
+              </button>
+
               <a
                 href="#showcase"
-                className="group relative inline-flex items-center gap-2.5 sm:gap-3 px-6 py-3 sm:px-8 sm:py-3.5 rounded-full bg-[#0B4A3B] text-white font-semibold text-[0.68rem] sm:text-xs tracking-[0.16em] sm:tracking-[0.22em] uppercase shadow-2xl shadow-[#0B4A3B]/45 hover:bg-[#1F7A5C] hover:scale-105 transition-all duration-300 border border-[#E6F2EA]/30 max-w-[90vw]"
+                className="group relative inline-flex items-center gap-2 sm:gap-3 px-5 py-2.5 xs:px-6 xs:py-3 sm:px-8 sm:py-3.5 rounded-full bg-[#0B4A3B] text-white font-semibold text-[0.66rem] xs:text-[0.7rem] sm:text-xs tracking-[0.16em] sm:tracking-[0.22em] uppercase shadow-2xl shadow-[#0B4A3B]/45 hover:bg-[#1F7A5C] hover:scale-105 active:scale-95 transition-all duration-300 border border-[#E6F2EA]/30 max-w-[90vw] whitespace-nowrap"
               >
                 <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#1fe0bb] animate-pulse shrink-0" />
                 <span>Explore Showcase</span>
@@ -234,6 +223,7 @@ export default function HomePage() {
           id="showcase"
           className="relative isolate w-full overflow-hidden bg-gradient-to-b from-[#021F17]/90 via-[#053729]/80 to-[#021E16]/90 border-t border-b border-[#1fe0bb]/20"
         >
+          <div id="collection" className="sr-only" />
           <div
             aria-hidden="true"
             className="absolute inset-0 z-0 pointer-events-none"
@@ -252,67 +242,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 3D Infinite Photography Gallery */}
-        <section
-          id="collection"
-          className="relative isolate w-full bg-gradient-to-b from-[#021E16]/90 via-[#01160F] to-[#01120D] border-b border-[#1fe0bb]/20 overflow-hidden"
-        >
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 z-0 pointer-events-none"
-          >
-            <FlickeringGrid
-              color="#f7f3ee"
-              squareSize={4}
-              gridGap={9}
-              maxOpacity={0.22}
-              flickerChance={0.16}
-              className="h-full w-full"
-            />
-          </div>
 
-          {/* Ambient emerald glow */}
-          <div
-            aria-hidden="true"
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] max-w-[1100px] h-[500px] bg-gradient-to-r from-[#00ffc4]/15 via-[#00c9a7]/25 to-[#008e76]/15 blur-[110px] rounded-full pointer-events-none z-0"
-          />
-
-          {/* Full-screen 3D Gallery Canvas */}
-          <div className="relative z-10">
-            <InfiniteGallery
-              images={galleryImages}
-              speed={1.2}
-              visibleCount={12}
-              className="h-screen w-full"
-            />
-          </div>
-
-          {/* Overlay Text */}
-          <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center text-center px-4 z-20 mix-blend-exclusion">
-            <span className="text-[0.65rem] tracking-[0.3em] font-bold text-[#1fe0bb] uppercase mb-3 drop-shadow-[0_0_12px_rgba(31,224,187,0.4)]">
-              Atelier Creations
-            </span>
-            <h2
-              className="text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              The Collection
-            </h2>
-            <p
-              className="text-xs sm:text-sm text-white/60 mt-3 italic"
-              style={{ fontFamily: "var(--font-editorial), serif" }}
-            >
-              Scroll or drag to explore the atelier in infinite 3D depth
-            </p>
-          </div>
-
-          {/* Navigation hint */}
-          <div className="absolute bottom-8 left-0 right-0 text-center z-20 pointer-events-none">
-            <p className="text-[0.6rem] tracking-[0.15em] uppercase text-white/40 font-medium">
-              Use mouse wheel, arrow keys, or touch to navigate
-            </p>
-          </div>
-        </section>
 
         {/* 4-Column Footer in Green-White Combo */}
         <FooterColumn />

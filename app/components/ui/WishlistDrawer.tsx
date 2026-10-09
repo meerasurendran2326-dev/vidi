@@ -138,20 +138,22 @@ export function WishlistDrawer() {
                             {product.price}
                           </span>
 
-                          <div className="flex items-center gap-1.5">
+                          <div className="flex items-center gap-1.5 shrink-0">
                             <button
                               onClick={() => handleWhatsAppOrder(product)}
-                              className="p-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white transition-colors"
+                              className="w-8 h-8 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center transition-transform active:scale-90"
                               title="Order via WhatsApp"
+                              aria-label={`Enquire about ${product.name} on WhatsApp`}
                             >
-                              <MessageCircle className="w-3.5 h-3.5" />
+                              <MessageCircle className="w-4 h-4" />
                             </button>
                             <button
                               onClick={() => removeFromWishlist(product.id)}
-                              className="p-1.5 rounded-full bg-white/10 hover:bg-rose-500/80 text-white/70 hover:text-white transition-colors"
+                              className="w-8 h-8 rounded-full bg-white/10 hover:bg-rose-500/80 text-white/70 hover:text-white flex items-center justify-center transition-transform active:scale-90"
                               title="Remove from favorites"
+                              aria-label={`Remove ${product.name} from favorites`}
                             >
-                              <Trash2 className="w-3.5 h-3.5" />
+                              <Trash2 className="w-4 h-4" />
                             </button>
                           </div>
                         </div>
@@ -164,10 +166,10 @@ export function WishlistDrawer() {
 
             {/* Footer Actions */}
             {wishlist.length > 0 && (
-              <div className="p-5 border-t border-[#E6F2EA]/20 bg-black/20 backdrop-blur-md space-y-3">
+              <div className="p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] border-t border-[#E6F2EA]/20 bg-black/20 backdrop-blur-md space-y-3">
                 <button
                   onClick={() => handleWhatsAppOrder()}
-                  className="w-full flex items-center justify-center gap-2 text-xs tracking-widest uppercase font-bold text-[#0B4A3B] bg-[#1fe0bb] hover:bg-emerald-300 py-3.5 rounded-full transition-all shadow-xl"
+                  className="w-full flex items-center justify-center gap-2 text-xs tracking-widest uppercase font-bold text-[#0B4A3B] bg-[#1fe0bb] hover:bg-emerald-300 py-3.5 rounded-full transition-all shadow-xl active:scale-98"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>Order All Favorites via WhatsApp</span>

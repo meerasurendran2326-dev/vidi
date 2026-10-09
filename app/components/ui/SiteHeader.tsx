@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,6 +19,7 @@ import {
 import { useWishlist } from "@/app/context/WishlistContext";
 import { useCart } from "@/app/context/CartStore";
 import { CartDrawer } from "@/app/components/ui/CartDrawer";
+import { SearchModal } from "@/app/components/ui/SearchModal";
 
 function HeaderJewelryPattern({ patternId }: { patternId: string }) {
   return (
@@ -108,6 +109,7 @@ export function SiteHeader() {
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [shopDropdownOpen, setShopDropdownOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [hoveredTab, setHoveredTab] = useState<string | null>(null);
   const [position, setPosition] = useState({
     left: 0,
@@ -117,6 +119,36 @@ export function SiteHeader() {
 
   const { wishlistCount, setIsDrawerOpen } = useWishlist();
   const { itemCount } = useCart();
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const originalStyle = window.getComputedStyle(document.body).overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = originalStyle;
+      };
+    }
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    const handleOpenShopMenu = () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) {
+        setMobileShopOpen(true);
+        setMobileMenuOpen(false);
+        setAccountMenuOpen(false);
+      } else {
+        setShopDropdownOpen(true);
+        setAccountMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("open-shop-menu", handleOpenShopMenu);
+    return () => {
+      window.removeEventListener("open-shop-menu", handleOpenShopMenu);
+    };
+  }, []);
 
   return (
     <header className="site-header sticky top-0 z-40 px-2 xs:px-3 sm:px-[3.2vw] pt-2.5 sm:pt-5">
@@ -202,23 +234,30 @@ export function SiteHeader() {
               </span>
             </button>
             {shopDropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 w-52 bg-[#0B4A3B] border border-[#E6F2EA]/20 shadow-2xl rounded-xl py-2 flex flex-col gap-1 z-50 overflow-hidden">
-                <HeaderJewelryPattern patternId="header-shop-jewelry-pattern" />
-                {[
-                  { name: "Ring", href: "/rings" },
-                  { name: "Pendent Set", href: "/pendent-set" },
-                  { name: "Bracelet", href: "/bracelet" },
-                  { name: "Stud", href: "/stud" },
-                ].map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="relative z-10 px-4 py-2 hover:text-white hover:translate-x-1 transition-all duration-150 text-left text-xs tracking-wider text-[#E6F2EA]/80 font-medium"
-                  >
-                    {item.name}
-                  </a>
-                ))}
-              </div>
+              <>
+                <div
+                  className="fixed inset-0 z-40"
+                  onClick={() => setShopDropdownOpen(false)}
+                />
+                <div className="absolute top-full left-0 mt-2 w-52 bg-[#0B4A3B] border border-[#E6F2EA]/20 shadow-2xl rounded-xl py-2 flex flex-col gap-1 z-50 overflow-hidden">
+                  <HeaderJewelryPattern patternId="header-shop-jewelry-pattern" />
+                  {[
+                    { name: "Ring", href: "/rings" },
+                    { name: "Pendent Set", href: "/pendent-set" },
+                    { name: "Bracelet", href: "/bracelet" },
+                    { name: "Stud", href: "/stud" },
+                  ].map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => setShopDropdownOpen(false)}
+                      className="relative z-10 px-4 py-2 hover:text-white hover:translate-x-1 transition-all duration-150 text-left text-xs tracking-wider text-[#E6F2EA]/80 font-medium"
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+              </>
             )}
           </div>
 
@@ -271,6 +310,8 @@ export function SiteHeader() {
           <div className="hidden sm:flex items-center gap-2 mr-1">
             <button
               aria-label="Search"
+              onClick={() => setSearchOpen(true)}
+              type="button"
               className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] hover:scale-110 shadow-md transition-all duration-200"
             >
               <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -338,7 +379,16 @@ export function SiteHeader() {
               )}
             </div>
             <button
+              type="button"
+              aria-label="Search"
+              onClick={() => setSearchOpen(true)}
+              className="sm:hidden w-8 h-8 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] hover:scale-110 shadow-md transition-all duration-200"
+            >
+              <Search className="w-3.5 h-3.5" />
+            </button>
+            <button
               aria-label="Wishlist"
+
               onClick={() => setIsDrawerOpen(true)}
               className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] hover:scale-110 shadow-md transition-all duration-200"
             >
@@ -481,15 +531,38 @@ export function SiteHeader() {
             )}
           </div>
 
+          {/* Mobile Wishlist (Favorites) Button */}
+          <button
+            type="button"
+            aria-label={`Wishlist, ${wishlistCount} saved items`}
+            onClick={() => setIsDrawerOpen(true)}
+            className="sm:hidden relative w-8 h-8 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center shadow-md active:scale-95 transition-all shrink-0"
+          >
+            <Heart
+              className={`w-3.5 h-3.5 ${wishlistCount > 0 ? "fill-rose-500 stroke-rose-500" : ""}`}
+            />
+            {wishlistCount > 0 ? (
+              <span className="absolute -top-1 -right-1 min-w-4 h-4 rounded-full bg-rose-500 text-white px-1 text-[0.55rem] font-bold flex items-center justify-center shadow-sm">
+                {wishlistCount}
+              </span>
+            ) : (
+              <span className="absolute top-1 right-1 flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1fe0bb] opacity-75" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#1fe0bb]" />
+              </span>
+            )}
+          </button>
+
+          {/* Mobile Cart Bag Button */}
           <button
             type="button"
             aria-label={`Shopping bag, ${itemCount} items`}
             onClick={() => setCartOpen(true)}
-            className="sm:hidden relative w-8 h-8 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center shadow-md shrink-0"
+            className="sm:hidden relative w-8 h-8 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center shadow-md active:scale-95 transition-all shrink-0"
           >
             <ShoppingBag className="w-3.5 h-3.5" />
             {itemCount > 0 && (
-              <span className="absolute -top-1 -right-1 min-w-4 h-4 rounded-full bg-[#1fe0bb] px-1 text-[0.55rem] font-bold text-[#03251c] flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 min-w-4 h-4 rounded-full bg-[#1fe0bb] px-1 text-[0.55rem] font-bold text-[#03251c] flex items-center justify-center shadow-sm">
                 {itemCount}
               </span>
             )}
@@ -525,88 +598,88 @@ export function SiteHeader() {
       </nav>
 
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-2 right-2 xs:left-3 xs:right-3 sm:left-[3.2vw] sm:right-[3.2vw] mt-2 bg-[#0B4A3B] border border-[#E6F2EA]/20 rounded-2xl shadow-2xl overflow-hidden flex flex-col uppercase text-[0.7rem] text-[#FFFFFF] z-50">
-          <HeaderJewelryPattern patternId="header-mobile-jewelry-pattern" />
-          <div className="relative z-10 p-6 flex flex-col gap-6">
-            <div className="flex flex-col gap-3 pb-6 border-b border-[#E6F2EA]/20">
+        <>
+          <div
+            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+          <div className="md:hidden absolute top-full left-2 right-2 xs:left-3 xs:right-3 sm:left-[3.2vw] sm:right-[3.2vw] mt-2 max-h-[82dvh] overflow-y-auto overscroll-contain bg-[#0B4A3B] border border-[#E6F2EA]/20 rounded-2xl shadow-2xl flex flex-col uppercase text-[0.7rem] text-[#FFFFFF] z-50 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+            <HeaderJewelryPattern patternId="header-mobile-jewelry-pattern" />
+          <div className="relative z-10 p-5 xs:p-6 flex flex-col gap-5">
+            <div className="flex flex-col gap-2.5 pb-4 border-b border-[#E6F2EA]/20">
               <span className="text-[#FFFFFF] font-bold tracking-[0.25em] text-[0.65rem]">
-                SHOP
+                ATELIER COLLECTIONS
               </span>
-              <div className="grid grid-cols-2 gap-4 pl-2">
+              <div className="grid grid-cols-2 gap-2.5 pl-1 pt-1">
                 {[
-                  { name: "Ring", href: "/rings" },
+                  { name: "Rings", href: "/rings" },
                   { name: "Pendent Set", href: "/pendent-set" },
-                  { name: "Bracelet", href: "/bracelet" },
-                  { name: "Stud", href: "/stud" },
+                  { name: "Bracelets", href: "/bracelet" },
+                  { name: "Studs", href: "/stud" },
                 ].map((item) => (
-                  <a
+                  <Link
                     key={item.name}
                     href={item.href}
-                    className="hover:text-white text-[#E6F2EA]/80 transition-colors font-medium"
+                    className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/15 hover:border-emerald-300/40 text-[#E6F2EA] transition-all font-medium text-xs tracking-wider flex items-center justify-between"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    {item.name}
-                  </a>
+                    <span>{item.name}</span>
+                    <span className="text-[#1fe0bb] text-[0.65rem]">→</span>
+                  </Link>
                 ))}
               </div>
             </div>
             <a
               href="#story"
-              className="hover:text-white text-[#E6F2EA] transition-colors"
+              className="hover:text-white text-[#E6F2EA] transition-colors py-1 flex items-center justify-between"
               onClick={() => setMobileMenuOpen(false)}
             >
-              OUR STORY
+              <span>OUR STORY</span>
+              <span className="text-white/40 text-[0.65rem]">925 SILVER</span>
             </a>
             <a
               href="#contact"
-              className="hover:text-white text-[#E6F2EA] transition-colors flex items-center gap-2"
+              className="hover:text-white text-[#E6F2EA] transition-colors py-1 flex items-center justify-between"
               onClick={() => setMobileMenuOpen(false)}
             >
-              CONTACT
-              <MessageCircle className="w-4 h-4 text-[#1fe0bb]" />
+              <span className="flex items-center gap-2">
+                <span>CONCIERGE & CONTACT</span>
+                <MessageCircle className="w-3.5 h-3.5 text-[#1fe0bb]" />
+              </span>
+              <span className="text-[#1fe0bb] text-[0.65rem]">ONLINE</span>
             </a>
             <Link
               href="/account"
-              className="hover:text-white text-[#E6F2EA] transition-colors flex items-center gap-2"
+              className="hover:text-white text-[#E6F2EA] transition-colors py-1 flex items-center justify-between"
               onClick={() => setMobileMenuOpen(false)}
             >
-              CLIENT ACCOUNT
-              <User className="w-4 h-4 text-[#1fe0bb]" />
+              <span className="flex items-center gap-2">
+                <span>CLIENT ACCOUNT</span>
+                <User className="w-3.5 h-3.5 text-[#1fe0bb]" />
+              </span>
+              <span className="text-white/40 text-[0.65rem]">ORDERS & PROFILE</span>
             </Link>
 
-            <div className="flex items-center justify-between pt-6 border-t border-[#E6F2EA]/20">
-              <div className="flex items-center gap-3">
-                <button
-                  aria-label="Wishlist"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    setIsDrawerOpen(true);
-                  }}
-                  className="w-10 h-10 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] shadow-md transition-all relative"
-                >
-                  <Heart
-                    className={`w-4 h-4 ${wishlistCount > 0 ? "fill-rose-500 stroke-rose-500" : ""}`}
-                  />
-                </button>
-              </div>
+            <div className="flex items-center justify-between pt-4 border-t border-[#E6F2EA]/20">
               <button
                 type="button"
                 onClick={() => {
                   setMobileMenuOpen(false);
                   setIsDrawerOpen(true);
                 }}
-                className="px-5 py-2.5 rounded-full bg-white text-[#0B4A3B] font-semibold hover:bg-[#E6F2EA] hover:text-[#1F7A5C] transition-all tracking-[0.2em] shadow-md flex items-center justify-center gap-2 text-xs"
+                className="w-full py-2.5 rounded-full bg-white text-[#0B4A3B] font-semibold hover:bg-[#E6F2EA] hover:text-[#1F7A5C] transition-all tracking-[0.2em] shadow-md flex items-center justify-center gap-2 text-xs"
               >
-                <span>Favorites</span>
-                <span className="bg-[#0B4A3B] text-[#E6F2EA] px-1.5 py-0.5 rounded-full text-[0.6rem] font-bold">
-                  {wishlistCount}
-                </span>
+                <Heart className={`w-3.5 h-3.5 ${wishlistCount > 0 ? "fill-rose-500 stroke-rose-500" : ""}`} />
+                <span>SAVED FAVORITES ({wishlistCount})</span>
               </button>
             </div>
           </div>
         </div>
+        </>
       )}
       <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
   );
 }

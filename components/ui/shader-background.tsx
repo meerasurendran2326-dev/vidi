@@ -63,10 +63,23 @@ const fragmentShaderSource = `
   void main() {
     vec2 fragCoord = gl_FragCoord.xy;
     vec2 uv = fragCoord / iResolution;
-    vec2 space = (fragCoord - iResolution / 2.0) / iResolution.x * 2.0 * scale;
+
+    float aspect = iResolution.y / iResolution.x;
+    float isPortrait = smoothstep(1.0, 1.6, aspect);
+    float effScale = mix(scale, 2.7, isPortrait);
+
+    vec2 desktopSpace = (fragCoord - iResolution * 0.5) / iResolution.x * 2.0 * scale;
+    vec2 mobileSpace = vec2(
+      (fragCoord.x - iResolution.x * 0.5) / iResolution.x * 2.0 * effScale,
+      (fragCoord.y - iResolution.y * 0.5) / iResolution.y * 2.0 * (effScale * 1.4)
+    );
+    vec2 space = mix(desktopSpace, mobileSpace, isPortrait);
 
     float horizontalFade = 1.0 - (cos(uv.x * 6.28) * 0.5 + 0.5);
     float verticalFade = 1.0 - (cos(uv.y * 6.28) * 0.5 + 0.5);
+
+    // On mobile portrait, expand the horizontal visibility so the waves stay lush and present
+    horizontalFade = mix(horizontalFade, pow(max(horizontalFade, 0.0001), 0.55), isPortrait);
 
     space.y += random(space.x * warpFrequency + iTime * warpSpeed) * warpAmplitude * (0.5 + horizontalFade);
     space.x += random(space.y * warpFrequency + iTime * warpSpeed + 2.0) * warpAmplitude * horizontalFade;
@@ -75,12 +88,14 @@ const fragmentShaderSource = `
     vec3 backgroundStart = vec3(0.003, 0.075, 0.045);
     vec3 backgroundEnd = vec3(0.003, 0.075, 0.045);
 
+    float mobileLineWidthBoost = mix(1.0, 1.35, isPortrait);
+
     for (int l = 0; l < linesPerGroup; l++) {
       float normalizedLineIndex = float(l) / float(linesPerGroup);
       float offsetTime = iTime * offsetSpeed;
       float offsetPosition = float(l) + space.x * offsetFrequency;
       float rand = random(offsetPosition + offsetTime) * 0.5 + 0.5;
-      float halfWidth = mix(minLineWidth, maxLineWidth, rand * horizontalFade) / 2.0;
+      float halfWidth = (mix(minLineWidth, maxLineWidth, rand * horizontalFade) / 2.0) * mobileLineWidthBoost;
       float offset = random(offsetPosition + offsetTime * (1.0 + normalizedLineIndex)) * mix(minOffsetSpread, maxOffsetSpread, horizontalFade);
       float linePosition = getPlasmaY(space.x, horizontalFade, offset);
       float line = drawSmoothLine(linePosition, halfWidth, space.y) / 2.0
@@ -94,7 +109,7 @@ const fragmentShaderSource = `
     }
 
     vec3 color = mix(backgroundStart, backgroundEnd, uv.x);
-    color += lines * 0.18;
+    color += lines * mix(0.18, 0.22, isPortrait);
     gl_FragColor = vec4(color, 0.88);
   }
 `;

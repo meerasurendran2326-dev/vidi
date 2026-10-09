@@ -54,6 +54,7 @@ export default async function AdminEditProductPage({
       price: true,
       stock: true,
       active: true,
+      images: true,
     },
   });
 

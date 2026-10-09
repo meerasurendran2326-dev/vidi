@@ -232,6 +232,9 @@ function GalleryScene({
 		});
 	}, [materials, textures]);
 
+	const touchStartY = useRef(0);
+	const touchStartX = useRef(0);
+
 	const handleWheel = useCallback(
 		(event: WheelEvent) => {
 			event.preventDefault();
@@ -257,18 +260,56 @@ function GalleryScene({
 		[speed]
 	);
 
+	const handleTouchStart = useCallback((e: TouchEvent) => {
+		if (e.touches.length === 1) {
+			touchStartY.current = e.touches[0].clientY;
+			touchStartX.current = e.touches[0].clientX;
+			autoPlay.current = false;
+			lastInteraction.current = Date.now();
+		}
+	}, []);
+
+	const handleTouchMove = useCallback(
+		(e: TouchEvent) => {
+			if (e.touches.length === 1) {
+				const deltaY = touchStartY.current - e.touches[0].clientY;
+				const deltaX = touchStartX.current - e.touches[0].clientX;
+
+				// Smooth responsive response on touch swipe
+				if (Math.abs(deltaX) > 4 || Math.abs(deltaY) > 4) {
+					scrollVelocity.current += (deltaY * 0.035 + deltaX * 0.035) * speed;
+					touchStartY.current = e.touches[0].clientY;
+					touchStartX.current = e.touches[0].clientX;
+					autoPlay.current = false;
+					lastInteraction.current = Date.now();
+				}
+			}
+		},
+		[speed]
+	);
+
+	const handleTouchEnd = useCallback(() => {
+		lastInteraction.current = Date.now();
+	}, []);
+
 	useEffect(() => {
 		const canvas = gl.domElement;
 		if (canvas) {
 			canvas.addEventListener('wheel', handleWheel, { passive: false });
+			canvas.addEventListener('touchstart', handleTouchStart, { passive: true });
+			canvas.addEventListener('touchmove', handleTouchMove, { passive: true });
+			canvas.addEventListener('touchend', handleTouchEnd, { passive: true });
 			window.addEventListener('keydown', handleKeyDown);
 
 			return () => {
 				canvas.removeEventListener('wheel', handleWheel);
+				canvas.removeEventListener('touchstart', handleTouchStart);
+				canvas.removeEventListener('touchmove', handleTouchMove);
+				canvas.removeEventListener('touchend', handleTouchEnd);
 				window.removeEventListener('keydown', handleKeyDown);
 			};
 		}
-	}, [gl.domElement, handleWheel, handleKeyDown]);
+	}, [gl.domElement, handleWheel, handleKeyDown, handleTouchStart, handleTouchMove, handleTouchEnd]);
 
 	useEffect(() => {
 		const interval = setInterval(() => {

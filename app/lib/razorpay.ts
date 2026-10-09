@@ -29,6 +29,19 @@ export function verifyRazorpaySignature(
   return provided.length === expected.length && timingSafeEqual(provided, expected);
 }
 
+export function verifyRazorpayWebhookSignature(
+  rawBody: string,
+  signature: string,
+): boolean {
+  if (!signature || !/^[a-f\d]{64}$/i.test(signature)) return false;
+  const secret = process.env.RAZORPAY_WEBHOOK_SECRET || process.env.RAZORPAY_KEY_SECRET;
+  if (!secret) return false;
+
+  const expected = createHmac("sha256", secret).update(rawBody).digest();
+  const provided = Buffer.from(signature, "hex");
+  return provided.length === expected.length && timingSafeEqual(provided, expected);
+}
+
 export function getAmountInPaise(amount: Prisma.Decimal): number {
   const paise = amount.mul(100);
   if (!paise.isInteger()) throw new Error("Order total has invalid paise precision.");

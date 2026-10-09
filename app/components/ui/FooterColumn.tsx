@@ -50,30 +50,30 @@ const data = {
     { icon: MessageCircle, label: "WhatsApp", href: "https://whatsapp.com" },
   ],
   collections: [
-    { text: "Rings & Signets", href: "#collection" },
-    { text: "Lune Pendants", href: "#collection" },
-    { text: "Aether Cuffs", href: "#collection" },
-    { text: "Solstice Earrings", href: "#collection" },
-    { text: "Bespoke Commissions", href: "#contact" },
+    { text: "Rings & Signets", href: "/rings" },
+    { text: "Pendants", href: "/pendent-set" },
+    { text: "Bracelets", href: "/bracelet" },
+    { text: "Studs", href: "/stud" },
+    { text: "All Jewellery", href: "/shop" },
   ],
   atelier: [
-    { text: "Our Story", href: "#story" },
-    { text: "925 Silver Hallmark", href: "#craft" },
-    { text: "Master Artisans", href: "#craft" },
-    { text: "Sustainability", href: "#story" },
-    { text: "Careers", href: "#" },
+    { text: "Our Story", href: "/about" },
+    { text: "Jewellery Care", href: "/jewellery-care" },
+    { text: "Size Guide", href: "/size-guide" },
+    { text: "FAQ", href: "/faq" },
+    { text: "Contact Us", href: "/contact" },
   ],
   clientCare: [
-    { text: "Ring Size Guide", href: "#" },
-    { text: "Complimentary Polishing", href: "#" },
-    { text: "Shipping & Returns", href: "#" },
-    { text: "Atelier Care Guide", href: "#" },
-    { text: "Live Concierge", href: "#contact", hasIndicator: true },
+    { text: "Track Order", href: "/track-order" },
+    { text: "Shipping Policy", href: "/shipping-policy" },
+    { text: "Returns & Exchange", href: "/returns-exchange" },
+    { text: "Size Guide", href: "/size-guide" },
+    { text: "Live Concierge", href: "/contact", hasIndicator: true },
   ],
   contact: [
-    { icon: Mail, text: "concierge@vinivicividi.com" },
-    { icon: Phone, text: "+33 (0)1 42 68 55 00" },
-    { icon: MapPin, text: "Place Vendôme, 75001 Paris, France", isAddress: true },
+    { icon: Mail, text: "[CLIENT TO PROVIDE EMAIL]" },
+    { icon: Phone, text: "[CLIENT TO PROVIDE PHONE]" },
+    { icon: MapPin, text: "[CLIENT TO PROVIDE ADDRESS]", isAddress: true },
   ],
 };
 
@@ -269,18 +269,18 @@ export function FooterColumn() {
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 sm:gap-6">
-            <a href="#privacy" className="hover:text-white transition-colors">
+            <Link href="/privacy-policy" className="hover:text-white transition-colors">
               Privacy Policy
-            </a>
+            </Link>
             <span className="text-[#E6F2EA]/40">•</span>
-            <a href="#terms" className="hover:text-white transition-colors">
+            <Link href="/terms-conditions" className="hover:text-white transition-colors">
               Terms of Service
-            </a>
+            </Link>
             <span className="text-[#E6F2EA]/40">•</span>
-            <a href="#hallmark" className="hover:text-white transition-colors flex items-center gap-1">
+            <Link href="/size-guide" className="hover:text-white transition-colors flex items-center gap-1">
               <Sparkles className="w-3 h-3 text-[#1fe0bb]" />
               Hallmark Guarantee
-            </a>
+            </Link>
           </div>
         </div>
       </div>

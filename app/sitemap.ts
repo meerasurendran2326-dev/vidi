@@ -10,6 +10,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/bracelet",
     "/pendent-set",
     "/stud",
+    "/shop",
+    "/about",
+    "/contact",
+    "/faq",
+    "/shipping-policy",
+    "/returns-exchange",
+    "/privacy-policy",
+    "/terms-conditions",
+    "/jewellery-care",
+    "/size-guide",
+    "/track-order",
     "/cart",
     "/login",
     "/register",
@@ -17,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: "daily" as const,
-    priority: route === "" ? 1.0 : 0.8,
+    priority: route === "" ? 1.0 : route === "/shop" ? 0.95 : 0.8,
   }));
 
   const productRoutes = jewelleryProducts.map((product) => ({

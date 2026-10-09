@@ -24,6 +24,7 @@ const patchSchema = z.object({
   price: z.number().positive().optional(),
   stock: z.number().int().min(0).optional(),
   active: z.boolean().optional(),
+  images: z.array(z.string()).optional(),
 });
 
 export async function GET(

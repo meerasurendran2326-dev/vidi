@@ -60,18 +60,33 @@ export async function POST(request: Request) {
       return Response.json({ error: "Razorpay has not confirmed a failed payment." }, { status: 409 });
     }
 
-    await prisma.order.updateMany({
-      where: {
-        id: order.id,
-        paymentStatus: { not: PaymentStatus.PAID },
-        status: { not: "CANCELLED" },
-      },
-      data: {
-        paymentStatus: PaymentStatus.FAILED,
-      },
+    if (order.paymentStatus === PaymentStatus.FAILED) {
+      return Response.json({ recorded: true, paymentStatus: "FAILED", note: "Already processed" });
+    }
+
+    const orderWithItems = await prisma.order.findUnique({
+      where: { id: order.id },
+      include: { items: true },
     });
 
-    return Response.json({ recorded: true, paymentStatus: "FAILED" });
+    if (orderWithItems) {
+      await prisma.$transaction(async (tx) => {
+        for (const item of orderWithItems.items) {
+          if (item.productId) {
+            await tx.product.update({
+              where: { id: item.productId },
+              data: { stock: { increment: item.quantity } },
+            });
+          }
+        }
+        await tx.order.update({
+          where: { id: order.id },
+          data: { paymentStatus: PaymentStatus.FAILED },
+        });
+      });
+    }
+
+    return Response.json({ recorded: true, paymentStatus: "FAILED", stockRestored: true });
   } catch {
     return Response.json({ error: "Unable to confirm payment failure." }, { status: 502 });
   }

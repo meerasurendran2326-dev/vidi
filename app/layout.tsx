@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import {
   Inter,
   Cormorant_Garamond,
@@ -32,6 +32,13 @@ const bebasNeue = Bebas_Neue({
   weight: ["400"],
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#011811",
+};
+
 export const metadata: Metadata = {
   title: "VINI VICI VIDI | Pure 925 Silver Atelier",
   description: "Cinematic silver jewellery showroom for VINI VICI VIDI.",
@@ -43,6 +50,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${inter.variable} ${cormorant.variable} ${montserrat.variable} ${bebasNeue.variable} h-full antialiased`}
     >
+      <head>
+        <link
+          rel="preload"
+          href="/vini-vici-vidi-mobile-logo-reveal.mp4"
+          as="video"
+          type="video/mp4"
+          media="(max-width: 767px)"
+        />
+        <link
+          rel="preload"
+          href="/vvv-logo-reveal.mp4"
+          as="video"
+          type="video/mp4"
+          media="(min-width: 768px)"
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-[#011811] text-[#f2f2f2]">
         <WishlistProvider>
           {children}

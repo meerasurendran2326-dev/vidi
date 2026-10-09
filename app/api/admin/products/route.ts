@@ -19,6 +19,7 @@ const productSchema = z.object({
   price: z.number().positive(),
   stock: z.number().int().min(0),
   active: z.boolean().optional().default(true),
+  images: z.array(z.string()).optional().default([]),
 });
 
 export async function GET() {
@@ -66,7 +67,7 @@ export async function POST(request: NextRequest) {
   const product = await prisma.product.create({
     data: {
       ...parsed.data,
-      images: [],
+      images: parsed.data.images ?? [],
     },
   });
 

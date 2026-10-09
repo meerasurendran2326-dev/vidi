@@ -200,18 +200,18 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                           <span className="text-sm font-bold text-emerald-100">
                             {item.price}
                           </span>
-                          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 px-2 py-1">
+                          <div className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-1.5 py-0.5">
                             <button
                               type="button"
                               onClick={() =>
                                 setCartItemQuantity(lineKey, item.quantity - 1)
                               }
                               aria-label={`Decrease ${item.name} quantity`}
-                              className="text-white/65 hover:text-white"
+                              className="grid h-7 w-7 place-items-center rounded-full text-white/75 transition-colors hover:bg-white/10 hover:text-white active:scale-95"
                             >
                               <Minus className="h-3 w-3" />
                             </button>
-                            <span className="min-w-4 text-center text-[0.68rem]">
+                            <span className="min-w-5 text-center text-xs font-semibold">
                               {item.quantity}
                             </span>
                             <button
@@ -220,7 +220,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                                 setCartItemQuantity(lineKey, item.quantity + 1)
                               }
                               aria-label={`Increase ${item.name} quantity`}
-                              className="text-white/65 hover:text-white"
+                              className="grid h-7 w-7 place-items-center rounded-full text-white/75 transition-colors hover:bg-white/10 hover:text-white active:scale-95"
                             >
                               <Plus className="h-3 w-3" />
                             </button>
@@ -234,19 +234,19 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
             </div>
 
             {items.length > 0 && (
-              <div className="border-t border-white/15 bg-black/15 p-4 sm:p-5">
+              <div className="border-t border-white/15 bg-black/20 p-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:p-5">
                 <div className="mb-3 grid grid-cols-2 gap-2">
                   <Link
                     href="/cart"
                     onClick={onClose}
-                    className="flex min-h-10 items-center justify-center rounded-full border border-white/25 px-3 text-[0.62rem] font-semibold uppercase tracking-wider transition-colors hover:bg-white/10"
+                    className="flex min-h-11 items-center justify-center rounded-full border border-white/25 px-3 text-xs font-semibold uppercase tracking-wider transition-colors hover:bg-white/10 active:scale-98"
                   >
                     View full cart
                   </Link>
                   <Link
                     href="/checkout"
                     onClick={onClose}
-                    className="flex min-h-10 items-center justify-center rounded-full border border-emerald-300/40 bg-emerald-700 px-3 text-[0.62rem] font-semibold uppercase tracking-wider transition-colors hover:bg-emerald-600"
+                    className="flex min-h-11 items-center justify-center rounded-full border border-emerald-300/40 bg-emerald-700 px-3 text-xs font-semibold uppercase tracking-wider transition-colors hover:bg-emerald-600 active:scale-98"
                   >
                     Checkout
                   </Link>
@@ -254,7 +254,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                 <button
                   type="button"
                   onClick={contactAboutCart}
-                  className="min-h-12 w-full rounded-full bg-[#1fe0bb] px-5 text-xs font-bold uppercase tracking-[0.14em] text-[#03251c] transition-colors hover:bg-emerald-200"
+                  className="flex min-h-12 w-full items-center justify-center rounded-full bg-[#1fe0bb] px-5 text-xs font-bold uppercase tracking-[0.14em] text-[#03251c] transition-colors hover:bg-emerald-200 active:scale-98"
                 >
                   Enquire about bag via WhatsApp
                 </button>

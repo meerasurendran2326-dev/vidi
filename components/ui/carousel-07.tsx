@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useRouter } from "next/navigation";
 import {
   motion,
   useMotionValue,
@@ -19,211 +20,242 @@ export interface Slide {
   description: string;
   badge: string;
   price?: string;
+  slug?: string;
+  href?: string;
 }
 
 export const defaultSlides: Slide[] = [
   {
     image: "/images/custom/img1.jpeg",
-    title: "Helio Noir Ring",
+    title: "Vici Obsidian Signet Ring",
     description: "Solid 925 Sterling Silver with faceted black onyx & pavé brilliant diamond.",
-    badge: "Masterpiece",
+    badge: "Bestseller",
     price: "₹14,200",
+    slug: "vici-obsidian-signet-ring",
   },
   {
     image: "/images/custom/img2.jpeg",
-    title: "Lune Astral Pendant",
-    description: "Hand-sculpted lunar silver talisman reflecting Parisian atelier heritage.",
-    badge: "Haute Joaillerie",
-    price: "₹9,800",
+    title: "Mariposa Butterfly Station Bracelet",
+    description: "Articulated 925 Sterling Silver with delicate sculpted butterfly charms.",
+    badge: "Bestseller",
+    price: "₹6,800",
+    slug: "mariposa-butterfly-station-bracelet",
   },
   {
     image: "/images/custom/img3.jpeg",
-    title: "Aether Fluid Cuff",
-    description: "Ergonomic sterling cuff sculpted to flow seamlessly around the wrist.",
-    badge: "Bespoke",
-    price: "₹18,600",
+    title: "Ruby Solitaire Crown Ring",
+    description: "Ergonomic sterling cuff & brilliant ruby crown setting in 925 silver.",
+    badge: "New Arrival",
+    price: "₹8,800",
+    slug: "ruby-solitaire-crown-ring",
   },
   {
     image: "/images/custom/img4.jpeg",
-    title: "Solstice Drop Earrings",
-    description: "Architectural geometric earrings finished in mirror-polished silver.",
-    badge: "Édition Limitée",
-    price: "₹12,200",
+    title: "Papillon Heart Ribbon Studs",
+    description: "Architectural geometric earrings with pavé diamond ribbon wings.",
+    badge: "Bestseller",
+    price: "₹4,200",
+    slug: "papillon-heart-ribbon-studs",
   },
   {
     image: "/images/custom/img5.jpeg",
-    title: "Vortex Pavé Band",
-    description: "Interlocking dual bands set with scintillating pavé lab diamonds.",
-    badge: "Signature",
-    price: "₹13,450",
+    title: "Serpentine Infinity Studs",
+    description: "Sculpted silver curves with scintillating micro-pavé lab diamonds.",
+    badge: "New Arrival",
+    price: "₹3,900",
+    slug: "serpentine-infinity-studs",
   },
   {
     image: "/images/custom/img6.jpeg",
-    title: "Sovereign Signet",
-    description: "Substantial 925 signet bearing the deep emerald atelier seal.",
-    badge: "Prestige",
-    price: "₹21,000",
+    title: "Florelle Clover Diamond Studs",
+    description: "Four-petal floral clover studs bearing precision pavé settings.",
+    badge: "Signature",
+    price: "₹5,400",
+    slug: "florelle-clover-diamond-studs",
   },
   {
     image: "/images/custom/img7.jpeg",
-    title: "Stella Link Choker",
-    description: "Chunky tactile silver link necklace with custom hand-carved clasp.",
-    badge: "Atelier Drop",
-    price: "₹16,500",
+    title: "Marquise & Cushion Drop Set",
+    description: "Chunky tactile silver link necklace with custom hand-carved clasp & earrings.",
+    badge: "Haute Joaillerie",
+    price: "₹18,500",
+    slug: "marquise-cushion-drop-set",
   },
   {
     image: "/images/custom/img8.jpeg",
-    title: "Midnight Filigree Studs",
-    description: "Intricately pierced scrollwork studs crafted in fine sterling silver.",
+    title: "Amour Heart Solitaire Bracelet",
+    description: "Bezel diamond accents paired with a romantic pavé heart centerpiece.",
     badge: "New Arrival",
     price: "₹8,400",
+    slug: "amour-heart-solitaire-bracelet",
   },
   {
     image: "/images/custom/img9.jpeg",
-    title: "Verdant Royal Solitaire",
-    description: "Cushion-cut emerald centerpiece encased in four micro-prongs.",
-    badge: "Exclusive",
-    price: "₹24,500",
+    title: "Dual Phoenix Carved Signet",
+    description: "Substantial 925 signet bearing hand-carved phoenix motifs & faceted noir gem.",
+    badge: "Masterpiece",
+    price: "₹18,500",
+    slug: "dual-phoenix-carved-signet",
   },
   {
     image: "/images/custom/img10.jpeg",
-    title: "Lumina Tennis Bracelet",
-    description: "Continuous articulated links set with sparkling brilliant stones.",
-    badge: "Bestseller",
-    price: "₹19,800",
+    title: "Nacré Disc & Clover Bracelet",
+    description: "Continuous articulated links with iridescent mother-of-pearl disc & clover.",
+    badge: "Signature",
+    price: "₹7,900",
+    slug: "nacre-disc-clover-bracelet",
   },
   {
     image: "/images/custom/img11.jpeg",
-    title: "Celestial Emerald Pendant",
-    description: "Radiant gemstone pendant framed by sculptural sterling filigree.",
+    title: "Royal Sapphire Solitaire",
+    description: "Radiant cobalt sapphire centerpiece encased in sculptural sterling filigree.",
     badge: "Rare Edition",
-    price: "₹11,500",
+    price: "₹9,200",
+    slug: "royal-sapphire-solitaire",
   },
   {
     image: "/images/custom/img12.jpeg",
-    title: "Imperial Crest Band",
-    description: "Hand-engraved archival patterns inspired by Parisian neoclassical art.",
+    title: "Aura Infinity Loop Band",
+    description: "Fluid sculpted 925 silver loop band contouring the finger with ergonomic grace.",
     badge: "Masterpiece",
-    price: "₹15,200",
+    price: "₹4,900",
+    slug: "aura-infinity-loop-band",
   },
   {
     image: "/images/custom/img13.jpeg",
-    title: "Aura Open Sculpted Ring",
-    description: "Sleek split-shank silhouette contouring the finger with ergonomic grace.",
+    title: "Scalloped Petal Diamond Bracelet",
+    description: "Hand-textured sterling silver petals accented by delicate pavé lab diamonds.",
     badge: "Signature",
     price: "₹9,200",
+    slug: "scalloped-petal-diamond-bracelet",
   },
   {
     image: "/images/custom/img14.jpeg",
-    title: "Dewdrop Gemstone Drops",
-    description: "Graceful tear-drop stones suspended from polished silver earwires.",
-    badge: "Bespoke",
-    price: "₹10,800",
+    title: "Alhambra Quatrefoil Station Bracelet",
+    description: "Milgrain-edged silver quatrefoils aligned on an architectural box chain.",
+    badge: "Exclusive",
+    price: "₹11,500",
+    slug: "alhambra-quatrefoil-station-bracelet",
   },
   {
     image: "/images/custom/img15.jpeg",
-    title: "Serpent Sovereign Bangle",
-    description: "Coiled sterling silver bangle with embossed serpentine textures.",
+    title: "Crossed Heart Ribbon Studs",
+    description: "Solid 925 sterling silver ribbons forming an interlocking heart motif.",
     badge: "Haute Joaillerie",
-    price: "₹22,400",
+    price: "₹3,600",
+    slug: "crossed-heart-ribbon-studs",
   },
   {
     image: "/images/custom/img16.jpeg",
-    title: "Elysian Pearl Choker",
-    description: "Lustrous baroque pearl accent on an architectural sterling torque.",
+    title: "Foliage Pavé Leaf Studs",
+    description: "Sculptural sterling leaf studs with intricate pavé diamond vein detailing.",
     badge: "Atelier Drop",
-    price: "₹17,600",
+    price: "₹4,800",
+    slug: "foliage-pave-leaf-studs",
   },
   {
     image: "/images/custom/img17.jpeg",
-    title: "Chrono Geometric Signet",
-    description: "Angular octagonal signet featuring micro-brushed satin facets.",
-    badge: "Prestige",
-    price: "₹14,900",
+    title: "Lotus Bloom Diamond Studs",
+    description: "Handcrafted 925 silver sacred lotus studs sparkling with central stones.",
+    badge: "New Arrival",
+    price: "₹5,100",
+    slug: "lotus-bloom-diamond-studs",
   },
   {
     image: "/images/custom/img18.jpeg",
-    title: "Solstice Radiant Studs",
-    description: "Sunburst motif studs radiating intense artisanal brilliance.",
-    badge: "New Arrival",
-    price: "₹7,900",
+    title: "Grecian Meander Signet",
+    description: "Archival Greek key border surrounding an obsidian tablet in solid silver.",
+    badge: "Atelier Drop",
+    price: "₹16,400",
+    slug: "grecian-meander-signet",
   },
   {
     image: "/images/custom/img19.jpeg",
-    title: "Nova Eternity Band",
-    description: "A continuous loop of precision-faceted gems set in sterling silver.",
-    badge: "Édition Limitée",
-    price: "₹13,800",
+    title: "Baroque Scroll Signet Ring",
+    description: "Hand-carved baroque filigree flourishes encasing a faceted center stone.",
+    badge: "Prestige",
+    price: "₹15,800",
+    slug: "baroque-scroll-signet-ring",
   },
   {
     image: "/images/custom/img20.jpeg",
-    title: "Zenith Statement Pendant",
+    title: "Crown Filigree Onyx Solitaire",
     description: "Dramatic focal medallion showcasing high-relief sculptural metalwork.",
-    badge: "Masterpiece",
-    price: "₹18,200",
+    badge: "Exclusive",
+    price: "₹17,200",
+    slug: "crown-filigree-onyx-solitaire",
   },
   {
     image: "/images/custom/img21.jpeg",
-    title: "Cascade Pavé Cuff",
-    description: "Graduated sterling bracelet adorned with micro-pavé brilliance.",
-    badge: "Bespoke",
-    price: "₹20,500",
+    title: "Double Floret Layering Set",
+    description: "Dual graduated blossom necklace with matching floral cluster earrings.",
+    badge: "Bestseller",
+    price: "₹14,800",
+    slug: "double-floret-layering-set",
   },
   {
     image: "/images/custom/img22.jpeg",
-    title: "Orion Halo Solitaire",
-    description: "Raised central setting surrounded by a glittering orbital halo.",
-    badge: "Signature",
-    price: "₹16,400",
+    title: "Celestial Kurma Turtle Ring",
+    description: "Raised central setting surrounded by a glittering orbital pavé shell.",
+    badge: "Haute Joaillerie",
+    price: "₹19,800",
+    slug: "celestial-kurma-turtle-ring",
   },
   {
     image: "/images/custom/img23.jpeg",
-    title: "Mirage Chain Collar",
-    description: "Subtle fluid links forming a contemporary draped silver collar.",
-    badge: "Exclusive",
-    price: "₹15,900",
+    title: "Quatrefoil Quadrant Studs",
+    description: "Geometric four-square diamond symmetry rendered in bright polished silver.",
+    badge: "Signature",
+    price: "₹4,600",
+    slug: "quatrefoil-quadrant-studs",
   },
   {
     image: "/images/custom/img24.jpeg",
-    title: "Artisan Hammered Ring",
-    description: "Organic hand-hammered textures catching light from every perspective.",
+    title: "Sovereign Sacred Turtle Ring",
+    description: "Sacred geometry and talismanic pavé shell hand-finished in 925 silver.",
     badge: "Atelier Drop",
-    price: "₹8,900",
+    price: "₹18,900",
+    slug: "sovereign-sacred-turtle-ring",
   },
   {
     image: "/images/custom/img25.jpeg",
-    title: "Eclipse Noir Studs",
-    description: "Deep black onyx cabochons encircled by bright polished sterling bezels.",
-    badge: "Classic",
-    price: "₹7,500",
+    title: "Imperial Tiara Crown Studs",
+    description: "Regal crown prongs elevating brilliant pavilion-cut gems in sterling silver.",
+    badge: "Exclusive",
+    price: "₹6,200",
+    slug: "imperial-tiara-crown-studs",
   },
   {
     image: "/images/custom/img26.jpeg",
-    title: "Vesper Linear Earrings",
-    description: "Slender articulated bar earrings with fluid kinetic movement.",
-    badge: "Bespoke",
-    price: "₹11,200",
+    title: "Pink Blossom Petite Ring",
+    description: "Slender articulated silver band featuring a pink sapphire floral cluster.",
+    badge: "New Arrival",
+    price: "₹6,800",
+    slug: "pink-blossom-petite-ring",
   },
   {
     image: "/images/custom/img27.jpeg",
-    title: "Crown Solitaire Ring",
-    description: "Regal crown prongs elevating an exceptional brilliant gemstone.",
-    badge: "Haute Joaillerie",
-    price: "₹23,000",
+    title: "Cascade Droplet Multi-Station Set",
+    description: "Two-tier cable chain with pavé droplets & matching teardrop studs.",
+    badge: "Exclusive",
+    price: "₹16,200",
+    slug: "cascade-droplet-multi-station-set",
   },
   {
     image: "/images/custom/img28.jpeg",
-    title: "Astra Link Bracelet",
-    description: "Interlocking solid oval links joined with an invisible locking clasp.",
-    badge: "Prestige",
-    price: "₹17,800",
+    title: "Amour Pavé Heart Ring",
+    description: "Romantic micro-pavé silver heart ring with an invisible mirror finish.",
+    badge: "Classic",
+    price: "₹5,400",
+    slug: "amour-pave-heart-ring",
   },
   {
     image: "/images/custom/img29.jpeg",
-    title: "Vici Sovereign Medallion",
-    description: "The definitive atelier talisman hand-finished in 925 sterling silver.",
-    badge: "Masterpiece",
-    price: "₹25,000",
+    title: "Industrial Screwed Signet",
+    description: "Architectonic 925 silver signet with precision-engineered bolt accents.",
+    badge: "Signature",
+    price: "₹22,000",
+    slug: "industrial-screwed-signet",
   },
 ];
 
@@ -491,6 +523,7 @@ export const CarouselStacked = ({
             total={total}
             progress={scrollProgress}
             config={config}
+            isDraggingRef={isDragging}
             onSelect={() => handleCardFocus(i)}
             onHover={() => handleCardFocus(i)}
           />
@@ -559,6 +592,7 @@ interface CardProps {
   total: number;
   progress: MotionValue<number>;
   config: CarouselConfig;
+  isDraggingRef?: React.MutableRefObject<boolean>;
   onSelect?: () => void;
   onHover?: () => void;
 }
@@ -569,9 +603,23 @@ const Card = ({
   total,
   progress,
   config,
+  isDraggingRef,
   onSelect,
   onHover,
 }: CardProps) => {
+  const router = useRouter();
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    if (isDraggingRef?.current) {
+      return;
+    }
+    onSelect?.();
+    const targetUrl = slide.href || (slide.slug ? `/product/${slide.slug}` : undefined);
+    if (targetUrl) {
+      router.push(targetUrl);
+    }
+  };
+
   const offset = useTransform(progress, (p) => {
     let diff = (index - p) % total;
     if (diff > total / 2) diff -= total;
@@ -618,10 +666,11 @@ const Card = ({
         "w-36 h-52 xs:w-44 xs:h-60 sm:w-56 sm:h-80 lg:w-64 lg:h-96",
       )}
     >
-      {/* Inner card container: hover enlargement and hover focus trigger */}
+      {/* Inner card container: hover enlargement, focus trigger and product navigation */}
       <div
-        onClick={onSelect}
+        onClick={handleCardClick}
         onMouseEnter={onHover}
+        title={`View ${slide.title}`}
         className={cn(
           "relative w-full h-full rounded-2xl overflow-hidden bg-muted group cursor-pointer",
           "transition-all duration-700 ease-out",

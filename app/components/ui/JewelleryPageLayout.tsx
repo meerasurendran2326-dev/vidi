@@ -158,7 +158,7 @@ export function JewelleryPageLayout({
                         e.stopPropagation();
                         toggleWishlist(product);
                       }}
-                      className="pointer-events-auto absolute top-2 right-2 sm:top-3 sm:right-3 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center shadow-md border border-emerald-500/30 transition-transform hover:scale-110 active:scale-95"
+                      className="pointer-events-auto absolute top-2 right-2 sm:top-3 sm:right-3 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center shadow-md border border-emerald-500/30 transition-transform hover:scale-110 active:scale-90"
                       aria-label="Add to wishlist"
                     >
                       <svg
@@ -180,9 +180,9 @@ export function JewelleryPageLayout({
                   </div>
 
                   {/* Info */}
-                  <div className="relative z-10 pointer-events-none p-2.5 xs:p-3 sm:p-4 flex flex-col gap-1 sm:gap-1.5 flex-1 justify-between">
+                  <div className="relative z-10 pointer-events-none p-2 xs:p-2.5 sm:p-4 flex flex-col gap-1 sm:gap-1.5 flex-1 justify-between">
                     <div>
-                      <p className="text-[0.52rem] sm:text-[0.62rem] tracking-[0.12em] sm:tracking-[0.18em] uppercase text-emerald-400 font-semibold truncate">
+                      <p className="text-[0.5rem] xs:text-[0.55rem] sm:text-[0.62rem] tracking-[0.12em] sm:tracking-[0.18em] uppercase text-emerald-400 font-semibold truncate">
                         {product.subtitle}
                       </p>
                       <h3
@@ -193,17 +193,17 @@ export function JewelleryPageLayout({
                       </h3>
                     </div>
 
-                    <div className="flex items-center justify-between mt-2 gap-1.5">
-                      <span className="text-xs sm:text-base font-bold text-emerald-300 whitespace-nowrap">
+                    <div className="flex items-center justify-between mt-1.5 sm:mt-2 gap-1 xs:gap-1.5">
+                      <span className="text-xs xs:text-sm sm:text-base font-bold text-emerald-300 whitespace-nowrap">
                         {product.price}
                       </span>
                       <motion.button
-                        whileTap={{ scale: 0.94 }}
+                        whileTap={{ scale: 0.92 }}
                         onClick={(e) => {
                           e.stopPropagation();
                           toggleWishlist(product);
                         }}
-                        className={`pointer-events-auto text-[0.55rem] sm:text-[0.62rem] tracking-wider uppercase font-semibold px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full transition-colors shadow-md border shrink-0 ${
+                        className={`pointer-events-auto text-[0.5rem] xs:text-[0.58rem] sm:text-[0.62rem] tracking-wider uppercase font-semibold px-2 py-0.5 xs:px-2.5 xs:py-1 sm:px-3.5 sm:py-1.5 rounded-full transition-colors shadow-md border shrink-0 ${
                           isLiked
                             ? "bg-emerald-500 text-black border-emerald-300 font-bold"
                             : "bg-emerald-600 hover:bg-emerald-500 text-white border-emerald-400/30"
