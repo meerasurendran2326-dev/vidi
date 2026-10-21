@@ -196,3 +196,12 @@ button {
   animation: pulseGlow 4s ease-in-out infinite;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow,
+  .animate-float-reverse,
+  .animate-pulse-glow,
+  .animate-silver-shimmer {
+    animation: none !important;
+  }
+}
+

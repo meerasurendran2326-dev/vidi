@@ -151,8 +151,8 @@ export function SiteHeader() {
   }, []);
 
   return (
-    <header className="site-header sticky top-0 z-40 px-2 xs:px-3 sm:px-[3.2vw] pt-2.5 sm:pt-5">
-      <nav className="relative flex items-center justify-between gap-2 sm:gap-4 lg:gap-6 px-3 sm:px-7 py-2 sm:py-3.5 border border-[#E6F2EA]/20 bg-[#0B4A3B] text-[#FFFFFF] uppercase text-[0.68rem] shadow-xl shadow-[#0B4A3B]/25 rounded-2xl">
+    <header className="site-header sticky top-0 z-40 px-1.5 xs:px-2.5 sm:px-[3.2vw] pt-2 sm:pt-5">
+      <nav className="relative flex items-center justify-between gap-1 xs:gap-2 sm:gap-4 lg:gap-6 px-2 xs:px-3 sm:px-7 py-1.5 xs:py-2 sm:py-3.5 border border-[#E6F2EA]/20 bg-[#0B4A3B] text-[#FFFFFF] uppercase text-[0.68rem] shadow-xl shadow-[#0B4A3B]/25 rounded-2xl">
         <HeaderJewelryPattern patternId="header-white-jewelry-pattern" />
         <div
           aria-hidden="true"
@@ -166,7 +166,7 @@ export function SiteHeader() {
         {/* Logo (left) */}
         <Link
           href="/"
-          className="relative z-10 flex items-center gap-2 sm:gap-3.5 group shrink min-w-0"
+          className="relative z-10 flex items-center gap-1.5 xs:gap-2 sm:gap-3.5 group shrink min-w-0"
         >
           <div className="relative group-hover:scale-105 transition-transform shrink-0">
             <Image
@@ -175,17 +175,16 @@ export function SiteHeader() {
               width={36}
               height={36}
               sizes="36px"
-              className="h-7 w-7 sm:h-9 sm:w-9 object-contain rounded-md"
+              className="h-6 w-6 xs:h-7 xs:w-7 sm:h-9 sm:w-9 object-contain rounded-md"
             />
           </div>
           <div className="flex flex-col items-start min-w-0">
             <div
-              className="font-bold tracking-[0.08em] sm:tracking-[0.14em] text-xs sm:text-base text-[#FFFFFF] truncate"
-              style={{ wordSpacing: "0.2em" }}
+              className="font-bold tracking-[0.04em] xs:tracking-[0.08em] sm:tracking-[0.14em] text-[0.68rem] xs:text-[0.75rem] sm:text-base text-[#FFFFFF] whitespace-nowrap"
             >
               VINI VICI VIDI
             </div>
-            <div className="hidden xs:block text-[0.48rem] sm:text-[0.56rem] tracking-[0.12em] sm:tracking-[0.14em] text-[#E6F2EA]/80 uppercase font-medium truncate">
+            <div className="hidden min-[420px]:block text-[0.45rem] xs:text-[0.48rem] sm:text-[0.56rem] tracking-[0.08em] sm:tracking-[0.14em] text-[#E6F2EA]/80 uppercase font-medium truncate">
               Pure 925 Silver Jewellery
             </div>
           </div>
@@ -306,7 +305,7 @@ export function SiteHeader() {
         </div>
 
         {/* Right side actions */}
-        <div className="relative z-10 flex items-center gap-1.5 xs:gap-2 sm:gap-4 shrink-0">
+        <div className="relative z-10 flex items-center gap-1 xs:gap-1.5 sm:gap-4 shrink-0">
           <div className="hidden sm:flex items-center gap-2 mr-1">
             <button
               aria-label="Search"
@@ -429,11 +428,11 @@ export function SiteHeader() {
                 setMobileShopOpen(!mobileShopOpen);
                 if (mobileMenuOpen) setMobileMenuOpen(false);
               }}
-              className="px-2.5 py-1.5 rounded-full bg-white text-[#0B4A3B] font-bold text-[0.62rem] tracking-wider uppercase shadow-md flex items-center gap-1 hover:bg-[#E6F2EA] active:scale-95 transition-all"
+              className="px-1.5 xs:px-2.5 py-1 xs:py-1.5 rounded-full bg-white text-[#0B4A3B] font-bold text-[0.56rem] xs:text-[0.62rem] tracking-tight xs:tracking-wider uppercase shadow-md flex items-center gap-0.5 xs:gap-1 hover:bg-[#E6F2EA] active:scale-95 transition-all"
               aria-label="Shop Menu"
             >
               <span>SHOP</span>
-              <span className={`text-[0.45rem] text-[#1fe0bb] transition-transform duration-200 ${mobileShopOpen ? "rotate-180" : ""}`}>
+              <span className={`text-[0.4rem] xs:text-[0.45rem] text-[#1fe0bb] transition-transform duration-200 ${mobileShopOpen ? "rotate-180" : ""}`}>
                 ▼
               </span>
             </button>
@@ -444,7 +443,7 @@ export function SiteHeader() {
                   className="fixed inset-0 z-40"
                   onClick={() => setMobileShopOpen(false)}
                 />
-                <div className="absolute top-full right-0 mt-2 w-48 bg-[#0B4A3B] border border-[#E6F2EA]/20 shadow-2xl rounded-xl py-2 flex flex-col gap-1 z-50 overflow-hidden">
+                <div className="absolute top-full right-0 mt-2 w-44 xs:w-48 bg-[#0B4A3B] border border-[#E6F2EA]/20 shadow-2xl rounded-xl py-2 flex flex-col gap-1 z-50 overflow-hidden">
                   <HeaderJewelryPattern patternId="header-mobile-shop-pattern" />
                   {[
                     { name: "Ring", href: "/rings" },
@@ -477,9 +476,9 @@ export function SiteHeader() {
                 setMobileMenuOpen(false);
               }}
               aria-label="Client Account"
-              className="relative w-8 h-8 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center shadow-md active:scale-95 transition-all"
+              className="relative w-7 h-7 xs:w-8 xs:h-8 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center shadow-md active:scale-95 transition-all"
             >
-              <User className="w-3.5 h-3.5" />
+              <User className="w-3 h-3 xs:w-3.5 xs:h-3.5" />
             </button>
 
             {accountMenuOpen && (
@@ -488,7 +487,7 @@ export function SiteHeader() {
                   className="fixed inset-0 z-40"
                   onClick={() => setAccountMenuOpen(false)}
                 />
-                <div className="absolute top-full right-0 mt-2 w-48 bg-[#0B4A3B] border border-[#E6F2EA]/20 shadow-2xl rounded-xl py-2 flex flex-col gap-1 z-50 overflow-hidden">
+                <div className="absolute top-full right-0 mt-2 w-44 xs:w-48 bg-[#0B4A3B] border border-[#E6F2EA]/20 shadow-2xl rounded-xl py-2 flex flex-col gap-1 z-50 overflow-hidden">
                   <HeaderJewelryPattern patternId="header-mobile-account-pattern" />
                   <div className="relative z-10 px-4 py-1.5 border-b border-[#E6F2EA]/15 text-[0.58rem] tracking-widest uppercase text-[#E6F2EA]/60 font-bold">
                     Client Account
@@ -536,13 +535,13 @@ export function SiteHeader() {
             type="button"
             aria-label={`Wishlist, ${wishlistCount} saved items`}
             onClick={() => setIsDrawerOpen(true)}
-            className="sm:hidden relative w-8 h-8 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center shadow-md active:scale-95 transition-all shrink-0"
+            className="sm:hidden relative w-7 h-7 xs:w-8 xs:h-8 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center shadow-md active:scale-95 transition-all shrink-0"
           >
             <Heart
-              className={`w-3.5 h-3.5 ${wishlistCount > 0 ? "fill-rose-500 stroke-rose-500" : ""}`}
+              className={`w-3 h-3 xs:w-3.5 xs:h-3.5 ${wishlistCount > 0 ? "fill-rose-500 stroke-rose-500" : ""}`}
             />
             {wishlistCount > 0 ? (
-              <span className="absolute -top-1 -right-1 min-w-4 h-4 rounded-full bg-rose-500 text-white px-1 text-[0.55rem] font-bold flex items-center justify-center shadow-sm">
+              <span className="absolute -top-1 -right-1 min-w-3.5 h-3.5 xs:min-w-4 xs:h-4 rounded-full bg-rose-500 text-white px-0.5 xs:px-1 text-[0.5rem] xs:text-[0.55rem] font-bold flex items-center justify-center shadow-sm">
                 {wishlistCount}
               </span>
             ) : (
@@ -558,29 +557,18 @@ export function SiteHeader() {
             type="button"
             aria-label={`Shopping bag, ${itemCount} items`}
             onClick={() => setCartOpen(true)}
-            className="sm:hidden relative w-8 h-8 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center shadow-md active:scale-95 transition-all shrink-0"
+            className="sm:hidden relative w-7 h-7 xs:w-8 xs:h-8 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center shadow-md active:scale-95 transition-all shrink-0"
           >
-            <ShoppingBag className="w-3.5 h-3.5" />
+            <ShoppingBag className="w-3 h-3 xs:w-3.5 xs:h-3.5" />
             {itemCount > 0 && (
-              <span className="absolute -top-1 -right-1 min-w-4 h-4 rounded-full bg-[#1fe0bb] px-1 text-[0.55rem] font-bold text-[#03251c] flex items-center justify-center shadow-sm">
+              <span className="absolute -top-1 -right-1 min-w-3.5 h-3.5 xs:min-w-4 xs:h-4 rounded-full bg-[#1fe0bb] px-0.5 xs:px-1 text-[0.5rem] xs:text-[0.55rem] font-bold text-[#03251c] flex items-center justify-center shadow-sm">
                 {itemCount}
               </span>
             )}
           </button>
 
           <button
-            type="button"
-            onClick={() => setIsDrawerOpen(true)}
-            className="hidden sm:inline-flex px-4 py-2 rounded-full bg-white text-[#0B4A3B] font-semibold hover:bg-[#E6F2EA] hover:text-[#1F7A5C] transition-all tracking-[0.2em] shadow-md items-center justify-center gap-2 text-xs"
-          >
-            <span>FAVORITES</span>
-            <span className="bg-[#0B4A3B] text-[#E6F2EA] px-1.5 py-0.5 rounded-full text-[0.6rem] font-bold">
-              {wishlistCount}
-            </span>
-          </button>
-
-          <button
-            className="md:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] shadow-md transition-all shrink-0"
+            className="md:hidden w-7 h-7 xs:w-8 xs:h-8 sm:w-10 sm:h-10 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] shadow-md transition-all shrink-0"
             onClick={() => {
               setMobileMenuOpen(!mobileMenuOpen);
               setMobileShopOpen(false);
@@ -589,9 +577,9 @@ export function SiteHeader() {
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? (
-              <X className="w-4 h-4 sm:w-5 sm:h-5" />
+              <X className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
             ) : (
-              <Menu className="w-4 h-4 sm:w-5 sm:h-5" />
+              <Menu className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
             )}
           </button>
         </div>
@@ -604,7 +592,7 @@ export function SiteHeader() {
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />
-          <div className="md:hidden absolute top-full left-2 right-2 xs:left-3 xs:right-3 sm:left-[3.2vw] sm:right-[3.2vw] mt-2 max-h-[82dvh] overflow-y-auto overscroll-contain bg-[#0B4A3B] border border-[#E6F2EA]/20 rounded-2xl shadow-2xl flex flex-col uppercase text-[0.7rem] text-[#FFFFFF] z-50 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+          <div className="md:hidden absolute top-full left-1.5 right-1.5 xs:left-3 xs:right-3 sm:left-[3.2vw] sm:right-[3.2vw] mt-2 max-h-[82dvh] overflow-y-auto overscroll-contain bg-[#0B4A3B] border border-[#E6F2EA]/20 rounded-2xl shadow-2xl flex flex-col uppercase text-[0.7rem] text-[#FFFFFF] z-50 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
             <HeaderJewelryPattern patternId="header-mobile-jewelry-pattern" />
           <div className="relative z-10 p-5 xs:p-6 flex flex-col gap-5">
             <div className="flex flex-col gap-2.5 pb-4 border-b border-[#E6F2EA]/20">

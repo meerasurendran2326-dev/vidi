@@ -258,21 +258,21 @@ export function ProductDetails({ product }: ProductDetailsProps) {
               </div>
 
               {/* Cart Buttons */}
-              <div className="mt-6 sm:mt-7 grid grid-cols-2 gap-2.5 sm:grid-cols-[1fr_1fr_auto] sm:gap-3">
+              <div className="mt-6 sm:mt-7 grid grid-cols-2 gap-2 xs:gap-2.5 sm:grid-cols-[1fr_1fr_auto] sm:gap-3">
                 <button
                   type="button"
                   onClick={addToCart}
                   disabled={unavailable}
-                  className="col-span-1 inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-emerald-300/35 bg-emerald-700 px-3 xs:px-5 text-[0.68rem] xs:text-xs font-bold uppercase tracking-[0.12em] xs:tracking-[0.14em] text-white shadow-lg transition-colors hover:bg-emerald-600 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="col-span-1 inline-flex min-h-12 items-center justify-center gap-1.5 xs:gap-2 rounded-full border border-emerald-300/35 bg-emerald-700 px-2.5 xs:px-5 text-[0.62rem] xs:text-xs font-bold uppercase tracking-[0.1em] xs:tracking-[0.14em] text-white shadow-lg transition-colors hover:bg-emerald-600 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 whitespace-nowrap"
                 >
-                  <ShoppingBag className="h-4 w-4 shrink-0" />
+                  <ShoppingBag className="h-3.5 w-3.5 xs:h-4 xs:w-4 shrink-0" />
                   <span>Add to Bag</span>
                 </button>
                 <button
                   type="button"
                   onClick={buyNow}
                   disabled={unavailable}
-                  className="col-span-1 min-h-12 rounded-full bg-[#1fe0bb] px-3 xs:px-5 text-[0.68rem] xs:text-xs font-bold uppercase tracking-[0.12em] xs:tracking-[0.14em] text-[#03251c] shadow-lg transition-colors hover:bg-emerald-200 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="col-span-1 min-h-12 rounded-full bg-[#1fe0bb] px-2.5 xs:px-5 text-[0.62rem] xs:text-xs font-bold uppercase tracking-[0.1em] xs:tracking-[0.14em] text-[#03251c] shadow-lg transition-colors hover:bg-emerald-200 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 whitespace-nowrap flex items-center justify-center"
                 >
                   Buy Now
                 </button>
@@ -323,26 +323,26 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                   </button>
                   {openSection === "specs" && (
                     <div className="pt-3 text-xs text-emerald-100/70 space-y-2">
-                      <div className="grid grid-cols-2 gap-2 border-b border-emerald-900/30 pb-2">
-                        <span className="text-white/50">Material</span>
-                        <span className="text-white font-medium">Pure 925 Sterling Silver</span>
+                      <div className="flex items-start justify-between gap-3 border-b border-emerald-900/30 pb-2">
+                        <span className="text-white/50 shrink-0">Material</span>
+                        <span className="text-white font-medium text-right">Pure 925 Sterling Silver</span>
                       </div>
-                      <div className="grid grid-cols-2 gap-2 border-b border-emerald-900/30 pb-2">
-                        <span className="text-white/50">Purity</span>
-                        <span className="text-white font-medium">92.5% Certified Silver</span>
+                      <div className="flex items-start justify-between gap-3 border-b border-emerald-900/30 pb-2">
+                        <span className="text-white/50 shrink-0">Purity</span>
+                        <span className="text-white font-medium text-right">92.5% Certified Silver</span>
                       </div>
-                      <div className="grid grid-cols-2 gap-2 border-b border-emerald-900/30 pb-2">
-                        <span className="text-white/50">Finish</span>
-                        <span className="text-white font-medium">High Luster Anti-Tarnish Rhodium</span>
+                      <div className="flex items-start justify-between gap-3 border-b border-emerald-900/30 pb-2">
+                        <span className="text-white/50 shrink-0">Finish</span>
+                        <span className="text-white font-medium text-right">High Luster Anti-Tarnish Rhodium</span>
                       </div>
-                      <div className="grid grid-cols-2 gap-2 border-b border-emerald-900/30 pb-2">
-                        <span className="text-white/50">Atelier SKU</span>
-                        <span className="font-mono text-white/80">VVV-{product.id.toUpperCase()}</span>
+                      <div className="flex items-start justify-between gap-3 border-b border-emerald-900/30 pb-2">
+                        <span className="text-white/50 shrink-0">Atelier SKU</span>
+                        <span className="font-mono text-white/80 text-right">VVV-{product.id.toUpperCase()}</span>
                       </div>
                       {product.subtitle && (
-                        <div className="grid grid-cols-2 gap-2">
-                          <span className="text-white/50">Stone / Details</span>
-                          <span className="text-white font-medium">{product.subtitle}</span>
+                        <div className="flex items-start justify-between gap-3">
+                          <span className="text-white/50 shrink-0">Stone / Details</span>
+                          <span className="text-white font-medium text-right">{product.subtitle}</span>
                         </div>
                       )}
                     </div>

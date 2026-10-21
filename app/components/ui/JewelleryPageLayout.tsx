@@ -56,13 +56,13 @@ export function JewelleryPageLayout({
               Vini Vici Vidi · Silver Atelier
             </p>
             <h1
-              className="text-3xl xs:text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]"
+              className="text-2xl xs:text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]"
               style={{ fontFamily: "var(--font-editorial), serif" }}
             >
               {category}
             </h1>
             <p
-              className="mt-2 sm:mt-3 text-base sm:text-xl text-emerald-200/90 italic drop-shadow-sm"
+              className="mt-2 sm:mt-3 text-sm xs:text-base sm:text-xl text-emerald-200/90 italic drop-shadow-sm"
               style={{ fontFamily: "var(--font-editorial), serif" }}
             >
               {tagline}
@@ -81,8 +81,8 @@ export function JewelleryPageLayout({
         </section>
 
         {/* ── Product Grid ── */}
-        <section className="flex-1 px-3 xs:px-4 sm:px-8 md:px-12 pb-16 sm:pb-24">
-          <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2.5 xs:gap-3.5 sm:gap-6">
+        <section className="flex-1 px-2.5 xs:px-4 sm:px-8 md:px-12 pb-16 sm:pb-24">
+          <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 xs:gap-3.5 sm:gap-6">
             {products.map((product, i) => {
               const isLiked = isInWishlist(product.id);
               return (
@@ -158,7 +158,7 @@ export function JewelleryPageLayout({
                         e.stopPropagation();
                         toggleWishlist(product);
                       }}
-                      className="pointer-events-auto absolute top-2 right-2 sm:top-3 sm:right-3 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center shadow-md border border-emerald-500/30 transition-transform hover:scale-110 active:scale-90"
+                      className="pointer-events-auto absolute top-2 right-2 sm:top-3 sm:right-3 w-8 h-8 xs:w-9 xs:h-9 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center shadow-md border border-emerald-500/30 transition-transform hover:scale-110 active:scale-90"
                       aria-label="Add to wishlist"
                     >
                       <svg
@@ -193,8 +193,8 @@ export function JewelleryPageLayout({
                       </h3>
                     </div>
 
-                    <div className="flex items-center justify-between mt-1.5 sm:mt-2 gap-1 xs:gap-1.5">
-                      <span className="text-xs xs:text-sm sm:text-base font-bold text-emerald-300 whitespace-nowrap">
+                    <div className="flex items-center justify-between mt-1.5 sm:mt-2 gap-1 xs:gap-1.5 flex-wrap xs:flex-nowrap">
+                      <span className="text-[0.72rem] xs:text-sm sm:text-base font-bold text-emerald-300 whitespace-nowrap">
                         {product.price}
                       </span>
                       <motion.button
@@ -203,7 +203,7 @@ export function JewelleryPageLayout({
                           e.stopPropagation();
                           toggleWishlist(product);
                         }}
-                        className={`pointer-events-auto text-[0.5rem] xs:text-[0.58rem] sm:text-[0.62rem] tracking-wider uppercase font-semibold px-2 py-0.5 xs:px-2.5 xs:py-1 sm:px-3.5 sm:py-1.5 rounded-full transition-colors shadow-md border shrink-0 ${
+                        className={`pointer-events-auto text-[0.52rem] xs:text-[0.58rem] sm:text-[0.62rem] tracking-wider uppercase font-semibold px-2 py-0.5 xs:px-2.5 xs:py-1 sm:px-3.5 sm:py-1.5 rounded-full transition-colors shadow-md border shrink-0 flex items-center justify-center ${
                           isLiked
                             ? "bg-emerald-500 text-black border-emerald-300 font-bold"
                             : "bg-emerald-600 hover:bg-emerald-500 text-white border-emerald-400/30"

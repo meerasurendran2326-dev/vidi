@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Sparkles, Diamond } from "lucide-react";
 
 interface MotionMarqueeProps {
@@ -21,30 +21,36 @@ const marqueeItems = [
 ];
 
 export default function MotionMarquee({ speed = 25, reverse = false }: MotionMarqueeProps) {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <div className="relative w-full overflow-hidden py-4 border-y border-[#1fe0bb]/20 bg-gradient-to-r from-[#01140E] via-[#04281D] to-[#01140E] select-none">
-      {/* Edge gradient masks for seamless fade */}
-      <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-[#01140E] to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-[#01140E] to-transparent z-10 pointer-events-none" />
+    <div className="relative w-full overflow-hidden py-3.5 sm:py-4 border-y border-[#1fe0bb]/20 bg-gradient-to-r from-[#01140E] via-[#04281D] to-[#01140E] select-none">
+      {/* Edge gradient masks for seamless fade - narrow on mobile to prevent blocking text */}
+      <div className="absolute left-0 top-0 bottom-0 w-8 xs:w-14 sm:w-40 bg-gradient-to-r from-[#01140E] to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-8 xs:w-14 sm:w-40 bg-gradient-to-l from-[#01140E] to-transparent z-10 pointer-events-none" />
 
       {/* Floating Animated Track */}
       <div className="flex w-max">
         <motion.div
-          animate={{
-            x: reverse ? ["-50%", "0%"] : ["0%", "-50%"],
-          }}
+          animate={
+            shouldReduceMotion
+              ? undefined
+              : {
+                  x: reverse ? ["-50%", "0%"] : ["0%", "-50%"],
+                }
+          }
           transition={{
             duration: speed,
             repeat: Infinity,
             ease: "linear",
           }}
-          className="flex items-center gap-10 sm:gap-14 whitespace-nowrap will-change-transform"
+          className="flex items-center gap-7 sm:gap-14 whitespace-nowrap will-change-transform"
         >
           {/* Double list for infinite loop */}
           {[...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, idx) => (
-            <div key={idx} className="flex items-center gap-6 sm:gap-8 group">
+            <div key={idx} className="flex items-center gap-4 sm:gap-8 group">
               <span
-                className="text-[0.68rem] sm:text-xs tracking-[0.28em] uppercase font-bold text-white/80 group-hover:text-[#1fe0bb] transition-colors"
+                className="text-[0.62rem] xs:text-[0.68rem] sm:text-xs tracking-[0.24em] sm:tracking-[0.28em] uppercase font-bold text-white/80 group-hover:text-[#1fe0bb] transition-colors"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 {item}

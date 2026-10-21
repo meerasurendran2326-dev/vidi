@@ -124,25 +124,25 @@ export function FooterColumn() {
         className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-radial from-[#1fe0bb]/10 to-transparent blur-[100px] pointer-events-none z-0" 
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 pt-10 pb-8 sm:px-8 lg:px-12 lg:pt-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-3.5 xs:px-4 sm:px-8 lg:px-12 pt-8 sm:pt-14 pb-8 lg:pt-20">
         {/* Main 4-Column Grid */}
         <div className="grid grid-cols-1 gap-8 sm:gap-12 lg:grid-cols-12">
           
           {/* Brand & Mission Column */}
           <div className="lg:col-span-4 flex flex-col items-start">
-            <Link href="/" className="flex items-center gap-3 sm:gap-3.5 group">
+            <Link href="/" className="flex items-center gap-2.5 xs:gap-3 sm:gap-3.5 group">
               <div className="relative group-hover:scale-105 transition-transform shrink-0">
                 <img
                   src={data.company.logo}
                   alt={data.company.name}
-                  className="h-9 w-9 sm:h-10 sm:w-10 object-contain rounded-md"
+                  className="h-8 w-8 xs:h-9 xs:w-9 sm:h-10 sm:w-10 object-contain rounded-md"
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-lg sm:text-xl font-bold tracking-[0.12em] sm:tracking-[0.14em] text-[#FFFFFF]" style={{ wordSpacing: "0.25em" }}>
+                <span className="text-base xs:text-lg sm:text-xl font-bold tracking-[0.08em] xs:tracking-[0.12em] sm:tracking-[0.14em] text-[#FFFFFF] whitespace-nowrap">
                   {data.company.name}
                 </span>
-                <span className="text-[0.55rem] sm:text-[0.62rem] tracking-[0.16em] sm:tracking-[0.18em] text-[#E6F2EA]/80 uppercase font-medium">
+                <span className="text-[0.52rem] xs:text-[0.58rem] sm:text-[0.62rem] tracking-[0.14em] xs:tracking-[0.16em] sm:tracking-[0.18em] text-[#E6F2EA]/80 uppercase font-medium">
                   {data.company.tagline}
                 </span>
               </div>
@@ -152,8 +152,8 @@ export function FooterColumn() {
               {data.company.description}
             </p>
 
-            {/* Social Icons */}
-            <div className="mt-6 sm:mt-8 flex items-center gap-2.5 sm:gap-3">
+            {/* Social Icons with accessible touch targets */}
+            <div className="mt-5 sm:mt-8 flex items-center gap-2.5 sm:gap-3">
               {data.socials.map(({ icon: Icon, label, href }) => (
                 <a
                   key={label}
@@ -161,27 +161,27 @@ export function FooterColumn() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] hover:scale-110 shadow-md transition-all duration-200"
+                  className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-full bg-white text-[#0B4A3B] flex items-center justify-center hover:bg-[#E6F2EA] hover:text-[#1F7A5C] hover:scale-105 active:scale-95 shadow-md transition-all duration-200"
                 >
-                  <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <Icon className="w-4 h-4" />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Nav Columns: 2-column grid on mobile, 4-column on desktop */}
-          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-x-4 sm:gap-x-6 gap-y-7 sm:gap-y-8">
+          {/* Nav Columns: 2x2 grid on mobile, 4-column on desktop */}
+          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-x-3.5 xs:gap-x-5 sm:gap-x-6 gap-y-7 sm:gap-y-8">
             {/* Column 1: Collections */}
             <div>
               <p className="text-[0.68rem] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#FFFFFF] border-b border-[#E6F2EA]/20 pb-2.5 sm:pb-3">
                 Collections
               </p>
-              <ul className="mt-3.5 sm:mt-5 space-y-2.5 sm:space-y-3.5 text-xs text-[#E6F2EA]/80 font-medium">
+              <ul className="mt-3 sm:mt-5 space-y-2.5 sm:space-y-3.5 text-xs text-[#E6F2EA]/80 font-medium">
                 {data.collections.map(({ text, href }) => (
                   <li key={text}>
                     <a
                       href={href}
-                      className="hover:text-white hover:translate-x-1 inline-block transition-transform duration-150 text-[0.72rem] sm:text-xs"
+                      className="hover:text-white hover:translate-x-1 inline-block py-0.5 transition-transform duration-150 text-[0.72rem] sm:text-xs"
                     >
                       {text}
                     </a>
@@ -195,12 +195,12 @@ export function FooterColumn() {
               <p className="text-[0.68rem] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#FFFFFF] border-b border-[#E6F2EA]/20 pb-2.5 sm:pb-3">
                 Atelier
               </p>
-              <ul className="mt-3.5 sm:mt-5 space-y-2.5 sm:space-y-3.5 text-xs text-[#E6F2EA]/80 font-medium">
+              <ul className="mt-3 sm:mt-5 space-y-2.5 sm:space-y-3.5 text-xs text-[#E6F2EA]/80 font-medium">
                 {data.atelier.map(({ text, href }) => (
                   <li key={text}>
                     <a
                       href={href}
-                      className="hover:text-white hover:translate-x-1 inline-block transition-transform duration-150 text-[0.72rem] sm:text-xs"
+                      className="hover:text-white hover:translate-x-1 inline-block py-0.5 transition-transform duration-150 text-[0.72rem] sm:text-xs"
                     >
                       {text}
                     </a>
@@ -214,12 +214,12 @@ export function FooterColumn() {
               <p className="text-[0.68rem] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#FFFFFF] border-b border-[#E6F2EA]/20 pb-2.5 sm:pb-3">
                 Client Care
               </p>
-              <ul className="mt-3.5 sm:mt-5 space-y-2.5 sm:space-y-3.5 text-xs text-[#E6F2EA]/80 font-medium">
+              <ul className="mt-3 sm:mt-5 space-y-2.5 sm:space-y-3.5 text-xs text-[#E6F2EA]/80 font-medium">
                 {data.clientCare.map(({ text, href, hasIndicator }) => (
                   <li key={text}>
                     <a
                       href={href}
-                      className={`inline-flex items-center gap-1.5 sm:gap-2 hover:text-white hover:translate-x-1 transition-all duration-150 text-[0.72rem] sm:text-xs ${
+                      className={`inline-flex items-center gap-1.5 sm:gap-2 hover:text-white hover:translate-x-1 py-0.5 transition-all duration-150 text-[0.72rem] sm:text-xs ${
                         hasIndicator ? "text-white font-semibold" : ""
                       }`}
                     >
@@ -236,19 +236,19 @@ export function FooterColumn() {
               </ul>
             </div>
 
-            {/* Column 4: Contact & Concierge (Full width on mobile across the 2 cols for clean address & email formatting) */}
-            <div className="col-span-2 sm:col-span-1 border-t sm:border-t-0 border-[#E6F2EA]/15 pt-5 sm:pt-0">
+            {/* Column 4: Contact & Concierge */}
+            <div>
               <p className="text-[0.68rem] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#FFFFFF] border-b border-[#E6F2EA]/20 pb-2.5 sm:pb-3">
                 Contact
               </p>
-              <ul className="mt-3.5 sm:mt-5 space-y-3 sm:space-y-4 text-xs text-[#E6F2EA]/85">
+              <ul className="mt-3 sm:mt-5 space-y-3 sm:space-y-4 text-xs text-[#E6F2EA]/85">
                 {data.contact.map(({ icon: Icon, text, isAddress }) => (
                   <li key={text} className="flex items-start gap-2.5">
                     <div className="p-1.5 rounded-md bg-white/10 text-white shrink-0 mt-0.5">
                       <Icon className="w-3.5 h-3.5" />
                     </div>
                     {isAddress ? (
-                      <address className="not-italic leading-relaxed font-light text-[0.72rem] sm:text-xs">
+                      <address className="not-italic leading-relaxed font-light text-[0.72rem] sm:text-xs break-words">
                         {text}
                       </address>
                     ) : (
@@ -263,21 +263,21 @@ export function FooterColumn() {
         </div>
 
         {/* Bottom Credits & Legal Links */}
-        <div className="mt-10 sm:mt-14 pt-6 sm:pt-8 border-t border-[#E6F2EA]/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-[0.62rem] sm:text-[0.68rem] tracking-[0.1em] sm:tracking-[0.15em] uppercase text-[#E6F2EA]/75 text-center sm:text-left">
+        <div className="mt-8 sm:mt-14 pt-6 sm:pt-8 border-t border-[#E6F2EA]/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-[0.62rem] sm:text-[0.68rem] tracking-[0.08em] xs:tracking-[0.1em] sm:tracking-[0.15em] uppercase text-[#E6F2EA]/75 text-center sm:text-left">
           <p className="max-w-xs sm:max-w-none">
             &copy; {new Date().getFullYear()} {data.company.name} MAISON. ALL RIGHTS RESERVED.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 sm:gap-6">
-            <Link href="/privacy-policy" className="hover:text-white transition-colors">
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 sm:gap-6">
+            <Link href="/privacy-policy" className="hover:text-white transition-colors py-1 px-1">
               Privacy Policy
             </Link>
             <span className="text-[#E6F2EA]/40">•</span>
-            <Link href="/terms-conditions" className="hover:text-white transition-colors">
+            <Link href="/terms-conditions" className="hover:text-white transition-colors py-1 px-1">
               Terms of Service
             </Link>
             <span className="text-[#E6F2EA]/40">•</span>
-            <Link href="/size-guide" className="hover:text-white transition-colors flex items-center gap-1">
+            <Link href="/size-guide" className="hover:text-white transition-colors flex items-center gap-1 py-1 px-1">
               <Sparkles className="w-3 h-3 text-[#1fe0bb]" />
               Hallmark Guarantee
             </Link>

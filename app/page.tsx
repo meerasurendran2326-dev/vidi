@@ -42,7 +42,10 @@ export default function HomePage() {
 
         // 2. Multi-depth Parallax on Hero elements (calibrated for mobile screens)
         const isMobile = windowWidth < 640;
-        const pFactor = isMobile ? 0.35 : 1;
+        const prefersReducedMotion =
+          typeof window !== "undefined" &&
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const pFactor = prefersReducedMotion ? 0 : isMobile ? 0.35 : 1;
 
         const vini = document.querySelector(".brand-group-vini");
         const vici = document.querySelector(".brand-group-vici");
@@ -153,50 +156,50 @@ export default function HomePage() {
         {/* Hero Section */}
         <section
           ref={heroSectionRef}
-          className="relative isolate flex items-start justify-center min-h-[85dvh] sm:min-h-[96vh] px-2 sm:px-[3vw] pt-2 overflow-hidden bg-[#0B6B4D]"
+          className="relative isolate flex items-start justify-center min-h-[calc(100dvh-4.25rem)] sm:min-h-[96vh] px-2 sm:px-[3vw] pt-1 sm:pt-2 overflow-hidden bg-[#0B6B4D]"
         >
           <div
             aria-hidden="true"
             className="absolute inset-0 z-0 overflow-hidden"
           >
-            <ShaderBackground />
+            {!showEntryVideo && <ShaderBackground />}
           </div>
 
-          <div className="relative z-10 w-full max-w-[1700px] min-h-[80vh] sm:min-h-[90vh] flex items-start justify-center pt-4 pointer-events-none">
+          <div className="relative z-10 w-full max-w-[1700px] min-h-[calc(100dvh-5.5rem)] sm:min-h-[90vh] flex items-start justify-center pt-2 sm:pt-4 pointer-events-none">
 
 
             {/* Pure VINI VICI VIDI Branding - 925 Sterling Silver Gradient Finish with Motion Shimmer */}
             <div className="absolute inset-0 z-2 w-full h-full uppercase pointer-events-none font-display">
               {/* VINI (Top Left) */}
-              <div className="brand-group-vini animate-float-slow absolute top-[8%] xs:top-[9%] sm:top-[4%] left-[4%] flex items-center z-1 text-[clamp(2.5rem,10.5vw,20rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E2E8F0] to-[#94A3B8] bg-clip-text text-transparent drop-shadow-[0_12px_28px_rgba(0,0,0,0.65)] select-none">
+              <div className="brand-group-vini animate-float-slow absolute top-[4%] xs:top-[5%] sm:top-[4%] left-[4%] flex items-center z-1 text-[clamp(2.4rem,9.5vw,20rem)] sm:text-[clamp(2.5rem,10.5vw,20rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E2E8F0] to-[#94A3B8] bg-clip-text text-transparent drop-shadow-[0_12px_28px_rgba(0,0,0,0.65)] select-none">
                 <span className="animate-silver-shimmer">VINI</span>
               </div>
 
               {/* VICI (Centerpiece with Radiant Pulsing Aura) */}
-              <div className="brand-group-vici absolute top-[48%] sm:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-1 text-[clamp(4rem,16.5vw,36rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E6F2EA] to-[#8FA69B] bg-clip-text text-transparent drop-shadow-[0_15px_38px_rgba(0,0,0,0.75)] select-none">
+              <div className="brand-group-vici absolute top-[34%] xs:top-[35%] sm:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-1 text-[clamp(3.8rem,15vw,36rem)] sm:text-[clamp(4rem,16.5vw,36rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E6F2EA] to-[#8FA69B] bg-clip-text text-transparent drop-shadow-[0_15px_38px_rgba(0,0,0,0.75)] select-none">
                 <span className="animate-silver-shimmer">VICI</span>
                 <div className="absolute w-[130%] sm:w-[160%] h-[130%] sm:h-[160%] rounded-full bg-radial from-[#2FE4B6]/25 via-[#0B4A3B]/15 to-transparent blur-[45px] sm:blur-[85px] pointer-events-none -z-1 animate-pulse-glow" />
               </div>
 
               {/* VIDI (Bottom Right) */}
-              <div className="brand-group-vidi animate-float-reverse absolute bottom-[18%] xs:bottom-[16%] sm:bottom-[6%] right-[4%] flex items-center z-1 text-[clamp(2.5rem,10.5vw,20rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E2E8F0] to-[#94A3B8] bg-clip-text text-transparent drop-shadow-[0_12px_28px_rgba(0,0,0,0.65)] select-none">
+              <div className="brand-group-vidi animate-float-reverse absolute top-[52%] xs:top-[53%] sm:top-auto sm:bottom-[6%] right-[4%] flex items-center z-1 text-[clamp(2.4rem,9.5vw,20rem)] sm:text-[clamp(2.5rem,10.5vw,20rem)] font-black leading-[0.88] tracking-tight bg-gradient-to-b from-[#FFFFFF] via-[#E2E8F0] to-[#94A3B8] bg-clip-text text-transparent drop-shadow-[0_12px_28px_rgba(0,0,0,0.65)] select-none">
                 <span className="animate-silver-shimmer">VIDI</span>
               </div>
             </div>
 
             {/* High Jewellery Center Motion Visual */}
-            <div className="hero-motion-visual-container absolute top-[49%] sm:top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[850px] h-[220px] xs:h-[280px] sm:h-[480px] lg:h-[580px] flex items-center justify-center z-20 pointer-events-none will-change-transform">
+            <div className="hero-motion-visual-container absolute top-[34%] xs:top-[35%] sm:top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[850px] h-[180px] xs:h-[220px] sm:h-[480px] lg:h-[580px] flex items-center justify-center z-20 pointer-events-none will-change-transform">
               <HeroMotionVisual />
             </div>
 
             {/* Deep Emerald Dual CTA Button Group in Hero */}
-            <div className="hero-cta-container absolute bottom-3 xs:bottom-4 sm:bottom-10 left-1/2 -translate-x-1/2 z-30 pointer-events-auto flex items-center gap-3 sm:gap-4 flex-wrap justify-center w-full max-w-[94vw] px-2 sm:px-4">
+            <div className="hero-cta-container absolute bottom-4 xs:bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-30 pointer-events-auto flex items-center gap-2.5 xs:gap-3 sm:gap-4 flex-wrap justify-center w-full max-w-[94vw] px-2 sm:px-4">
               <button
                 type="button"
                 onClick={() => {
                   window.dispatchEvent(new CustomEvent("open-shop-menu"));
                 }}
-                className="group relative inline-flex items-center gap-2 sm:gap-3 px-5 py-2.5 xs:px-6 xs:py-3 sm:px-8 sm:py-3.5 rounded-full bg-gradient-to-r from-[#1fe0bb] via-[#2fe4b6] to-[#E6F2EA] text-[#011811] font-bold text-[0.66rem] xs:text-[0.7rem] sm:text-xs tracking-[0.16em] sm:tracking-[0.22em] uppercase shadow-2xl shadow-[#1fe0bb]/35 hover:scale-105 active:scale-95 transition-all duration-300 border border-white/40 max-w-[90vw] whitespace-nowrap cursor-pointer"
+                className="group relative inline-flex items-center justify-center gap-2 sm:gap-3 px-4.5 py-2.5 xs:px-6 xs:py-3 sm:px-8 sm:py-3.5 rounded-full bg-gradient-to-r from-[#1fe0bb] via-[#2fe4b6] to-[#E6F2EA] text-[#011811] font-bold text-[0.66rem] xs:text-[0.7rem] sm:text-xs tracking-[0.14em] xs:tracking-[0.16em] sm:tracking-[0.22em] uppercase shadow-2xl shadow-[#1fe0bb]/35 hover:scale-105 active:scale-95 transition-all duration-300 border border-white/40 max-w-[92vw] whitespace-nowrap cursor-pointer min-h-[42px]"
               >
                 <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#011811] shrink-0" />
                 <span>Start Shopping</span>
@@ -205,7 +208,7 @@ export default function HomePage() {
 
               <a
                 href="#showcase"
-                className="group relative inline-flex items-center gap-2 sm:gap-3 px-5 py-2.5 xs:px-6 xs:py-3 sm:px-8 sm:py-3.5 rounded-full bg-[#0B4A3B] text-white font-semibold text-[0.66rem] xs:text-[0.7rem] sm:text-xs tracking-[0.16em] sm:tracking-[0.22em] uppercase shadow-2xl shadow-[#0B4A3B]/45 hover:bg-[#1F7A5C] hover:scale-105 active:scale-95 transition-all duration-300 border border-[#E6F2EA]/30 max-w-[90vw] whitespace-nowrap"
+                className="group relative inline-flex items-center justify-center gap-2 sm:gap-3 px-4.5 py-2.5 xs:px-6 xs:py-3 sm:px-8 sm:py-3.5 rounded-full bg-[#0B4A3B] text-white font-semibold text-[0.66rem] xs:text-[0.7rem] sm:text-xs tracking-[0.14em] xs:tracking-[0.16em] sm:tracking-[0.22em] uppercase shadow-2xl shadow-[#0B4A3B]/45 hover:bg-[#1F7A5C] hover:scale-105 active:scale-95 transition-all duration-300 border border-[#E6F2EA]/30 max-w-[92vw] whitespace-nowrap min-h-[42px]"
               >
                 <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#1fe0bb] animate-pulse shrink-0" />
                 <span>Explore Showcase</span>

@@ -353,9 +353,14 @@ export const CarouselStacked = ({
     return () => unsubscribe();
   }, [scrollProgress, total]);
 
-  // Gentle ambient drift when idle (pauses on hover or drag)
+  // Gentle ambient drift when idle (pauses on hover, drag, or prefers-reduced-motion)
   React.useEffect(() => {
     if (!autoPlay) return;
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
     const interval = setInterval(() => {
       if (!isHovered.current && !isDragging.current) {
         const current = Math.round(scrollProgress.get());
@@ -537,7 +542,7 @@ export const CarouselStacked = ({
           onClick={handlePrev}
           onMouseEnter={handlePrev}
           aria-label="Previous slide"
-          className="p-2 sm:p-3 rounded-full bg-[#0B4A3B]/80 border border-[#1fe0bb]/30 text-[#E6F2EA] hover:bg-[#1F7A5C] hover:text-white transition-all duration-300 shadow-lg shadow-[#021811]/60 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md"
+          className="min-w-[42px] min-h-[42px] p-2 sm:p-3 rounded-full bg-[#0B4A3B]/80 border border-[#1fe0bb]/30 text-[#E6F2EA] hover:bg-[#1F7A5C] hover:text-white transition-all duration-300 shadow-lg shadow-[#021811]/60 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md flex items-center justify-center shrink-0"
         >
           <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
@@ -577,7 +582,7 @@ export const CarouselStacked = ({
           onClick={handleNext}
           onMouseEnter={handleNext}
           aria-label="Next slide"
-          className="p-2 sm:p-3 rounded-full bg-[#0B4A3B]/80 border border-[#1fe0bb]/30 text-[#E6F2EA] hover:bg-[#1F7A5C] hover:text-white transition-all duration-300 shadow-lg shadow-[#021811]/60 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md"
+          className="min-w-[42px] min-h-[42px] p-2 sm:p-3 rounded-full bg-[#0B4A3B]/80 border border-[#1fe0bb]/30 text-[#E6F2EA] hover:bg-[#1F7A5C] hover:text-white transition-all duration-300 shadow-lg shadow-[#021811]/60 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md flex items-center justify-center shrink-0"
         >
           <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
@@ -711,7 +716,7 @@ const Card = ({
             style={{
               opacity: useTransform(offset, [-0.5, 0, 0.5], [0, 1, 0]),
             }}
-            className="text-xs sm:text-lg lg:text-xl font-bold leading-tight mb-0.5 sm:mb-1 drop-shadow-md text-white font-display truncate"
+            className="text-xs sm:text-lg lg:text-xl font-bold leading-tight mb-0.5 sm:mb-1 drop-shadow-md text-white font-display line-clamp-2"
           >
             {slide.title}
           </motion.p>

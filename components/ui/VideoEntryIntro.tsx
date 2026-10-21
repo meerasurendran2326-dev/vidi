@@ -13,15 +13,6 @@ export default function VideoEntryIntro({
   isOpen = true,
 }: VideoEntryIntroProps) {
   const [isExiting, setIsExiting] = useState(false);
-  const [isMobile, setIsMobile] = useState<boolean>(() => {
-    if (typeof window !== "undefined") {
-      return (
-        window.innerWidth < 768 ||
-        /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
-      );
-    }
-    return false;
-  });
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -33,9 +24,9 @@ export default function VideoEntryIntro({
     if (containerRef.current) {
       gsap.to(containerRef.current, {
         opacity: 0,
-        scale: 1.02,
-        duration: 0.55,
-        ease: "power2.inOut",
+        scale: 1.01,
+        duration: 0.4,
+        ease: "power2.out",
         onComplete: () => {
           onComplete();
         },
@@ -45,20 +36,7 @@ export default function VideoEntryIntro({
     }
   }, [isExiting, onComplete]);
 
-  // Track window resizing / device orientation changes
-  useEffect(() => {
-    const checkMobile = () => {
-      const mobile =
-        window.innerWidth < 768 ||
-        /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-      setIsMobile(mobile);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  // Handle ESC or Space keys or click to skip
+  // Handle ESC or Space keys or Enter to skip
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" || e.key === "Enter" || e.key === " ") {
@@ -70,7 +48,7 @@ export default function VideoEntryIntro({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleExit]);
 
-  // Prevent background scrolling and ensure background remains pure during intro
+  // Prevent background scrolling while intro is active
   useEffect(() => {
     if (!isOpen) return;
     const prevBg = document.body.style.backgroundColor;
@@ -84,7 +62,7 @@ export default function VideoEntryIntro({
     };
   }, [isOpen]);
 
-  // Autoplay video immediately with zero lag - avoid currentTime=0 seek stall
+  // Instant zero-lag playback with fallback safety timer
   useEffect(() => {
     if (!isOpen) return;
 
@@ -94,7 +72,7 @@ export default function VideoEntryIntro({
     video.muted = true;
     video.defaultMuted = true;
     video.playsInline = true;
-    video.playbackRate = isMobile ? 1.5 : 2.0;
+    video.playbackRate = 1.15;
 
     const initiatePlayback = () => {
       if (video.paused) {
@@ -111,11 +89,17 @@ export default function VideoEntryIntro({
     video.addEventListener("loadeddata", initiatePlayback, { once: true });
     video.addEventListener("canplay", initiatePlayback, { once: true });
 
+    // Fallback timer: ensure intro never hangs even on slow networks
+    const safetyTimeout = setTimeout(() => {
+      handleExit();
+    }, 7500);
+
     return () => {
+      clearTimeout(safetyTimeout);
       video.removeEventListener("loadeddata", initiatePlayback);
       video.removeEventListener("canplay", initiatePlayback);
     };
-  }, [isOpen, isMobile]);
+  }, [isOpen, handleExit]);
 
   if (!isOpen) return null;
 
@@ -132,35 +116,38 @@ export default function VideoEntryIntro({
       className="fixed inset-0 w-screen h-[100dvh] overflow-hidden flex items-center justify-center cursor-pointer select-none"
     >
       {/* 
-        Full-viewport Seamless Luxury Intro Video:
-        1. Radial gradient background matches the video's inner emerald ambient light.
-        2. Subtle edge mask eliminates any sharp rectangular borders between the video frame and screen letterbox.
-        3. Preloaded with zero seek stall for instant mobile playback.
+        High-Performance Hardware Accelerated Logo Reveal Video:
+        1. Both desktop and mobile use FastStart MP4s (moov atom at beginning)
+        2. Responsive <source> eliminates React re-mounting / buffering aborts
+        3. Static overlay instead of heavy CSS mask-image avoids GPU composite lag
       */}
       <video
         ref={videoRef}
-        key={isMobile ? "mobile-reveal" : "desktop-reveal"}
-        src={
-          isMobile
-            ? "/vini-vici-vidi-mobile-logo-reveal.mp4"
-            : "/vvv-logo-reveal.mp4"
-        }
         playsInline
         autoPlay
         muted
         preload="auto"
         onEnded={handleExit}
-        style={{
-          backgroundColor: "transparent",
-          maskImage:
-            "radial-gradient(ellipse 98% 94% at 50% 50%, black 82%, transparent 100%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 98% 94% at 50% 50%, black 82%, transparent 100%)",
-        }}
-        className="w-full h-full object-contain sm:object-cover pointer-events-none"
+        className="w-full h-full object-contain sm:object-cover pointer-events-none will-change-transform"
+      >
+        <source
+          src="/vini-vici-vidi-mobile-logo-reveal.mp4"
+          media="(max-width: 767px)"
+          type="video/mp4"
+        />
+        <source
+          src="/vvv-logo-reveal.mp4"
+          type="video/mp4"
+        />
+      </video>
+
+      {/* Lightweight GPU-accelerated vignette blend - zero performance cost */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-radial from-transparent via-transparent to-black/70"
       />
 
-      {/* Discrete subtle skip hint in the corner */}
+      {/* Discrete skip hint */}
       <div className="absolute z-20 bottom-4 right-4 sm:bottom-6 sm:right-8 pointer-events-none opacity-40 hover:opacity-100 transition-opacity">
         <span className="text-[0.58rem] sm:text-[0.62rem] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-white/70 font-light drop-shadow-md">
           Tap anywhere to skip
