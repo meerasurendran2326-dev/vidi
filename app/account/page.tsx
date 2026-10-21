@@ -16,6 +16,10 @@ import {
 export const metadata = {
   title: "My Account | VINI VICI VIDI Silver Atelier",
   description: "View and manage your VINI VICI VIDI atelier account and order history.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default async function AccountPage() {

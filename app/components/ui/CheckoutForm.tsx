@@ -337,7 +337,7 @@ export function CheckoutForm({ items }: CheckoutFormProps) {
             Customer Information
           </h2>
         </div>
-        <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-4">
           <CheckoutField
             name="fullName"
             label="Full name"
@@ -391,7 +391,7 @@ export function CheckoutForm({ items }: CheckoutFormProps) {
             Shipping Address
           </h2>
         </div>
-        <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-4">
           <div className="sm:col-span-2">
             <CheckoutField
               name="addressLine1"

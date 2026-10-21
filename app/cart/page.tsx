@@ -110,27 +110,27 @@ export default function CartPage() {
                         />
                       </Link>
 
-                      <div className="flex min-w-0 flex-1 flex-col justify-between gap-3 py-0.5 sm:flex-row sm:items-center">
+                      <div className="flex min-w-0 flex-1 flex-col justify-between gap-2 py-0.5 sm:flex-row sm:items-center">
                         <div className="min-w-0">
                           <Link
                             href={`/product/${item.slug}`}
-                            className="text-sm font-semibold leading-snug text-white transition-colors hover:text-emerald-200 sm:text-base line-clamp-2"
+                            className="text-xs xs:text-sm font-semibold leading-snug text-white transition-colors hover:text-emerald-200 sm:text-base line-clamp-2"
                           >
                             {item.name}
                           </Link>
                           {Object.entries(item.selectedOptions).length > 0 && (
-                            <p className="mt-1 text-[0.7rem] text-emerald-100/60 truncate">
+                            <p className="mt-1 text-[0.68rem] text-emerald-100/60 truncate">
                               {Object.entries(item.selectedOptions)
                                 .map(([option, value]) => `${option}: ${value}`)
                                 .join(" · ")}
                             </p>
                           )}
-                          <p className="mt-1.5 text-xs sm:text-sm font-bold text-emerald-200">
+                          <p className="mt-1 text-xs xs:text-sm font-bold text-emerald-200">
                             {item.price}
                           </p>
                         </div>
 
-                        <div className="flex flex-wrap items-center justify-between gap-2 sm:justify-end">
+                        <div className="flex items-center justify-between gap-2 pt-2 border-t border-white/10 sm:border-t-0 sm:pt-0 sm:justify-end">
                           <div className="inline-flex items-center rounded-full border border-white/20 bg-black/20">
                             <button
                               type="button"
@@ -138,7 +138,7 @@ export default function CartPage() {
                                 setCartItemQuantity(lineKey, item.quantity - 1)
                               }
                               aria-label={`Decrease ${item.name} quantity`}
-                              className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center text-white/75 transition-colors hover:text-emerald-200"
+                              className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center text-white/75 transition-colors hover:text-emerald-200 active:scale-95"
                             >
                               <Minus className="h-3.5 w-3.5" />
                             </button>
@@ -155,19 +155,19 @@ export default function CartPage() {
                               }
                               disabled={maximumReached}
                               aria-label={`Increase ${item.name} quantity`}
-                              className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center text-white/75 transition-colors hover:text-emerald-200 disabled:opacity-40"
+                              className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center text-white/75 transition-colors hover:text-emerald-200 disabled:opacity-40 active:scale-95"
                             >
                               <Plus className="h-3.5 w-3.5" />
                             </button>
                           </div>
-                          <span className="text-right text-xs sm:text-sm font-semibold text-white">
+                          <span className="text-right text-xs sm:text-sm font-semibold text-white whitespace-nowrap">
                             {formatPrice(getLineAmount(item))}
                           </span>
                           <button
                             type="button"
                             onClick={() => removeCartItem(lineKey)}
                             aria-label={`Remove ${item.name} from cart`}
-                            className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-full text-white/55 transition-colors hover:bg-rose-500/10 hover:text-rose-300"
+                            className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-full text-white/55 transition-colors hover:bg-rose-500/10 hover:text-rose-300 active:scale-95 shrink-0"
                           >
                             <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                           </button>
@@ -182,12 +182,12 @@ export default function CartPage() {
                 <CartOrderSummary items={items} />
                 <Link
                   href="/checkout"
-                  className="mt-4 flex min-h-12 w-full items-center justify-center rounded-full bg-[#1fe0bb] px-5 text-xs font-bold uppercase tracking-[0.14em] text-[#03251c] shadow-lg transition-colors hover:bg-emerald-200"
+                  className="mt-4 flex min-h-12 w-full items-center justify-center rounded-full bg-[#1fe0bb] px-5 text-xs font-bold uppercase tracking-[0.14em] text-[#03251c] shadow-lg shadow-[#1fe0bb]/20 transition-all hover:bg-emerald-200 active:scale-98"
                 >
                   Proceed to Checkout
                 </Link>
-                <p className="mt-3 text-center text-xs text-white/45">
-                  Checkout is a frontend order review; payment is not connected.
+                <p className="mt-3 text-center text-[0.72rem] text-emerald-200/70 flex items-center justify-center gap-1.5">
+                  <span>Guaranteed 925 Hallmark &amp; Insured Express Delivery</span>
                 </p>
               </aside>
             </div>

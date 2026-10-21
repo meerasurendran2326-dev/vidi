@@ -10,6 +10,10 @@ import { Sparkles } from "lucide-react";
 export const metadata = {
   title: "Create Atelier Account | VINI VICI VIDI Silver Atelier",
   description: "Register for an exclusive client account with VINI VICI VIDI Pure 925 Silver Jewellery.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default async function RegisterPage() {

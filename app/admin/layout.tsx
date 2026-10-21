@@ -5,6 +5,14 @@ import { AdminSidebar } from "@/app/components/admin/AdminSidebar";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Admin Console | VINI VICI VIDI",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
 export default async function AdminLayout({ children }: { children: ReactNode }) {
   const admin = await requireAdmin();
 

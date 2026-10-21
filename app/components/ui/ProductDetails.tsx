@@ -85,7 +85,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
       <div className="relative z-10 flex min-h-screen flex-col">
         <SiteHeader />
 
-        <main className="mx-auto w-full max-w-7xl flex-1 px-3.5 py-6 sm:px-8 sm:py-12 lg:px-12">
+        <main className="mx-auto w-full max-w-7xl flex-1 px-3.5 py-6 pb-28 sm:pb-12 lg:pb-12 sm:px-8 sm:py-12 lg:px-12">
           <Link
             href={`/${product.category}`}
             className="mb-5 sm:mb-7 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-200/80 transition-colors hover:text-white"
@@ -201,7 +201,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                         key={sz}
                         type="button"
                         onClick={() => setSelectedRingSize(sz)}
-                        className={`h-9 w-10 sm:h-10 sm:w-11 rounded-xl text-xs font-semibold transition-all ${
+                        className={`min-h-[42px] min-w-[42px] px-2 rounded-xl text-xs font-semibold transition-all flex items-center justify-center ${
                           selectedRingSize === sz
                             ? "bg-[#1fe0bb] text-[#03251c] font-bold shadow-md shadow-[#1fe0bb]/20 scale-105"
                             : "border border-white/20 bg-white/5 text-white/80 hover:border-white/40 hover:text-white"
@@ -486,6 +486,49 @@ export function ProductDetails({ product }: ProductDetailsProps) {
         </main>
 
         <FooterColumn />
+
+        {/* Mobile Sticky Add to Bag Bar */}
+        <aside
+          aria-label="Quick order action"
+          className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#06130e]/95 border-t border-emerald-400/25 backdrop-blur-xl px-3.5 py-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-10px_25px_rgba(0,0,0,0.5)] transition-all"
+        >
+          <div className="flex items-center justify-between gap-3 max-w-lg mx-auto">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-lg border border-emerald-300/25 bg-emerald-950/60">
+                <Image
+                  src={images[0]}
+                  alt={product.name}
+                  fill
+                  sizes="40px"
+                  className="object-cover"
+                />
+              </div>
+              <div className="min-w-0">
+                <p className="text-xs font-bold text-white truncate" style={{ fontFamily: "var(--font-editorial)" }}>
+                  {product.name}
+                </p>
+                <div className="flex items-center gap-2 text-[0.68rem]">
+                  <span className="font-bold text-emerald-300">{product.price}</span>
+                  {isRing && selectedRingSize && (
+                    <span className="text-white/60">• Size {selectedRingSize}</span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                type="button"
+                onClick={addToCart}
+                disabled={unavailable}
+                className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full bg-[#1fe0bb] px-4.5 text-xs font-bold uppercase tracking-wider text-[#03251c] shadow-lg shadow-[#1fe0bb]/20 transition-all hover:bg-emerald-200 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 whitespace-nowrap"
+              >
+                <ShoppingBag className="h-3.5 w-3.5 shrink-0" />
+                <span>Add to Bag</span>
+              </button>
+            </div>
+          </div>
+        </aside>
       </div>
     </div>
   );

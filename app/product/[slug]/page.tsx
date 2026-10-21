@@ -55,9 +55,15 @@ export async function generateMetadata({
   const product = await resolveProduct(slug);
   if (!product) return { title: "Product Not Found | VINI VICI VIDI" };
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://vinivicividi.com";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_APP_URL ||
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    "https://vinivicividi.com";
   const url = `${baseUrl}/product/${product.slug}`;
-  const description = product.description || product.subtitle;
+  const description =
+    product.description ||
+    product.subtitle ||
+    `Handcrafted ${product.name} in solid 925 sterling silver by VINI VICI VIDI.`;
   const image = product.image.startsWith("http")
     ? product.image
     : `${baseUrl}${product.image}`;
@@ -69,7 +75,7 @@ export async function generateMetadata({
       canonical: url,
     },
     openGraph: {
-      title: `${product.name} — VINI VICI VIDI`,
+      title: `${product.name} — VINI VICI VIDI Pure 925 Silver`,
       description,
       url,
       siteName: "VINI VICI VIDI Atelier",
@@ -85,7 +91,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: product.name,
+      title: `${product.name} | VINI VICI VIDI`,
       description,
       images: [image],
     },
@@ -97,19 +103,32 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const product = await resolveProduct(slug);
   if (!product) notFound();
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://vinivicividi.com";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_APP_URL ||
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    "https://vinivicividi.com";
   const numericPrice = product.price.replace(/[^\d.]/g, "");
+
+  const availability =
+    product.stock !== undefined && product.stock <= 0
+      ? "https://schema.org/OutOfStock"
+      : "https://schema.org/InStock";
+
+  const allImages = (
+    product.images && product.images.length > 0
+      ? product.images
+      : [product.image]
+  ).map((img) => (img.startsWith("http") ? img : `${baseUrl}${img}`));
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
     description: product.description || product.subtitle,
-    image: [
-      product.image.startsWith("http")
-        ? product.image
-        : `${baseUrl}${product.image}`,
-    ],
+    image: allImages,
+    sku: product.id,
+    material: "925 Sterling Silver",
+    category: product.category,
     brand: {
       "@type": "Brand",
       name: "VINI VICI VIDI",
@@ -119,8 +138,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
       url: `${baseUrl}/product/${product.slug}`,
       priceCurrency: "INR",
       price: numericPrice,
-      availability: "https://schema.org/InStock",
+      availability,
       itemCondition: "https://schema.org/NewCondition",
+      seller: {
+        "@type": "Organization",
+        name: "VINI VICI VIDI",
+      },
     },
   };
 

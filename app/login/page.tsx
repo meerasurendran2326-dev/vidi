@@ -10,6 +10,10 @@ import { ShieldCheck } from "lucide-react";
 export const metadata = {
   title: "Client Sign In | VINI VICI VIDI Silver Atelier",
   description: "Sign in to access your VINI VICI VIDI atelier account and order history.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default async function LoginPage() {

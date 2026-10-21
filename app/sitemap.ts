@@ -2,7 +2,10 @@ import type { MetadataRoute } from "next";
 import { jewelleryProducts } from "@/app/data/jewellery-products";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://vinivicividi.com";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_APP_URL ||
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    "https://vinivicividi.com";
 
   const staticRoutes = [
     "",
@@ -21,9 +24,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/jewellery-care",
     "/size-guide",
     "/track-order",
-    "/cart",
-    "/login",
-    "/register",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
