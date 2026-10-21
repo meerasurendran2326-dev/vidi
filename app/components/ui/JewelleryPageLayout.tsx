@@ -194,7 +194,7 @@ export function JewelleryPageLayout({
                     </div>
 
                     <div className="flex items-center justify-between mt-1.5 sm:mt-2 gap-1 xs:gap-1.5 flex-wrap xs:flex-nowrap">
-                      <span className="text-[0.72rem] xs:text-sm sm:text-base font-bold text-emerald-300 whitespace-nowrap">
+                      <span className="text-[0.72rem] xs:text-sm sm:text-base font-bold text-emerald-300 whitespace-nowrap font-price">
                         {product.price}
                       </span>
                       <motion.button

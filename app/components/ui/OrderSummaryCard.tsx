@@ -117,7 +117,7 @@ export function OrderSummaryCard({ order }: OrderSummaryCardProps) {
               </div>
 
               <div className="shrink-0 text-right">
-                <span className="text-xs sm:text-sm font-semibold text-emerald-100">
+                <span className="font-price text-xs sm:text-sm font-semibold text-emerald-100">
                   ₹{Number(item.priceAtPurchase).toLocaleString("en-IN")}
                 </span>
               </div>
@@ -138,7 +138,7 @@ export function OrderSummaryCard({ order }: OrderSummaryCardProps) {
           <span className="text-[0.68rem] uppercase tracking-wider text-white/50">
             Total ({itemCount} {itemCount === 1 ? "piece" : "pieces"})
           </span>
-          <p className="text-lg font-bold text-white sm:text-xl">
+          <p className="font-price text-lg font-bold text-white sm:text-xl">
             ₹{Number(order.total).toLocaleString("en-IN")}
           </p>
         </div>

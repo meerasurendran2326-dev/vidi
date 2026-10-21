@@ -25,11 +25,11 @@ export function CartOrderSummary({ items }: CartOrderSummaryProps) {
       <dl className="mt-6 space-y-4 text-sm">
         <div className="flex items-center justify-between gap-4 text-emerald-100/75">
           <dt>Subtotal</dt>
-          <dd className="font-semibold text-white">{formatPrice(subtotal)}</dd>
+          <dd className="font-semibold text-white font-price">{formatPrice(subtotal)}</dd>
         </div>
         <div className="flex items-center justify-between gap-4 text-emerald-100/75">
           <dt>Shipping estimate</dt>
-          <dd className="font-semibold text-white">
+          <dd className="font-semibold text-white font-price">
             {formatPrice(SHIPPING_PLACEHOLDER)}
           </dd>
         </div>
@@ -41,7 +41,7 @@ export function CartOrderSummary({ items }: CartOrderSummaryProps) {
         <span className="text-xs font-bold uppercase tracking-[0.16em] text-white">
           Grand total
         </span>
-        <span className="text-xl font-bold text-emerald-200">
+        <span className="text-xl font-bold text-emerald-200 font-price">
           {formatPrice(total)}
         </span>
       </div>

@@ -247,13 +247,13 @@ export function OrderSuccessClient({ orderId }: OrderSuccessClientProps) {
                           </p>
                         </div>
                         <div className="shrink-0 text-right">
-                          <p className="text-sm font-semibold text-emerald-100">
+                          <p className="font-price text-sm font-semibold text-emerald-100">
                             ₹
                             {Number(item.priceAtPurchase).toLocaleString(
                               "en-IN",
                             )}
                           </p>
-                          <p className="mt-1 text-xs text-white/50">
+                          <p className="font-price mt-1 text-xs text-white/50">
                             ₹
                             {(
                               Number(item.priceAtPurchase) * item.quantity
@@ -297,19 +297,19 @@ export function OrderSuccessClient({ orderId }: OrderSuccessClientProps) {
                   <dl className="mt-5 space-y-3 text-sm">
                     <div className="flex justify-between gap-4 text-white/65">
                       <dt>Subtotal</dt>
-                      <dd className="text-white">
+                      <dd className="font-price text-white">
                         ₹{Number(order.subtotal).toLocaleString("en-IN")}
                       </dd>
                     </div>
                     <div className="flex justify-between gap-4 text-white/65">
                       <dt>Shipping</dt>
-                      <dd className="text-white">
+                      <dd className="font-price text-white">
                         ₹{Number(order.shipping).toLocaleString("en-IN")}
                       </dd>
                     </div>
                     <div className="flex justify-between gap-4 border-t border-white/10 pt-4 font-bold text-white">
                       <dt>Total</dt>
-                      <dd className="text-lg text-emerald-200">
+                      <dd className="font-price text-lg text-emerald-200">
                         ₹{Number(order.total).toLocaleString("en-IN")}
                       </dd>
                     </div>

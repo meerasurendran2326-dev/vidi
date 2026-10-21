@@ -197,7 +197,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                           </p>
                         )}
                         <div className="flex items-center justify-between gap-2">
-                          <span className="text-sm font-bold text-emerald-100">
+                          <span className="text-sm font-bold text-emerald-100 font-price">
                             {item.price}
                           </span>
                           <div className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-1.5 py-0.5">

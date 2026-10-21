@@ -166,7 +166,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
               </p>
 
               <p
-                className="mt-4 sm:mt-6 text-xl sm:text-2xl font-bold text-emerald-200"
+                className="mt-4 sm:mt-6 text-xl sm:text-2xl font-bold text-emerald-200 font-price"
                 aria-label={`Price ${product.price}`}
               >
                 {product.price}
@@ -508,7 +508,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                   {product.name}
                 </p>
                 <div className="flex items-center gap-2 text-[0.68rem]">
-                  <span className="font-bold text-emerald-300">{product.price}</span>
+                  <span className="font-bold text-emerald-300 font-price">{product.price}</span>
                   {isRing && selectedRingSize && (
                     <span className="text-white/60">• Size {selectedRingSize}</span>
                   )}

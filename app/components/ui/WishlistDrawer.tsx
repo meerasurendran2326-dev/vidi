@@ -134,7 +134,7 @@ export function WishlistDrawer() {
                         </div>
 
                         <div className="flex items-center justify-between mt-2 pt-2 border-t border-white/10">
-                          <span className="text-sm font-bold text-[#E6F2EA]">
+                          <span className="text-sm font-bold text-[#E6F2EA] font-price">
                             {product.price}
                           </span>
 

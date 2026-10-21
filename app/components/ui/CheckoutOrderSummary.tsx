@@ -49,9 +49,9 @@ export function CheckoutOrderSummary({ items }: CheckoutOrderSummaryProps) {
                     .join(" · ")}
                 </p>
               )}
-              <p className="mt-1 text-xs text-emerald-100/70">{item.price}</p>
+              <p className="mt-1 text-xs text-emerald-100/70 font-price">{item.price}</p>
             </div>
-            <p className="self-center whitespace-nowrap text-xs font-semibold text-white">
+            <p className="self-center whitespace-nowrap text-xs font-semibold text-white font-price">
               {formatPrice(getLineAmount(item))}
             </p>
           </article>
@@ -61,11 +61,11 @@ export function CheckoutOrderSummary({ items }: CheckoutOrderSummaryProps) {
       <dl className="mt-4 space-y-3 border-t border-white/15 pt-4 text-sm">
         <div className="flex items-center justify-between gap-4 text-emerald-100/75">
           <dt>Subtotal</dt>
-          <dd className="font-semibold text-white">{formatPrice(subtotal)}</dd>
+          <dd className="font-semibold text-white font-price">{formatPrice(subtotal)}</dd>
         </div>
         <div className="flex items-center justify-between gap-4 text-emerald-100/75">
           <dt>Shipping</dt>
-          <dd className="font-semibold text-white">
+          <dd className="font-semibold text-white font-price">
             {SHIPPING_PLACEHOLDER === 0
               ? "Calculated later"
               : formatPrice(SHIPPING_PLACEHOLDER)}
@@ -79,7 +79,7 @@ export function CheckoutOrderSummary({ items }: CheckoutOrderSummaryProps) {
         <span className="text-xs font-bold uppercase tracking-[0.15em] text-white">
           Grand total
         </span>
-        <span className="text-lg font-bold text-emerald-200">
+        <span className="text-lg font-bold text-emerald-200 font-price">
           {formatPrice(subtotal + SHIPPING_PLACEHOLDER)}
         </span>
       </div>

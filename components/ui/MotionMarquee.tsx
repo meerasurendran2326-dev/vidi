@@ -10,19 +10,12 @@ interface MotionMarqueeProps {
 }
 
 const marqueeItems = [
-  "92.5 SILVER",
-  "PURE 92.5 STERLING SILVER",
+  "PURE 925 STERLING SILVER",
   "BESPOKE ATELIER CREATIONS",
-  "VINI VICI VIDI",
-  "HANDCRAFTED 92.5 SILVER",
-  "UNRIVALED BRILLIANCE",
-  "AUTHENTIC 92.5 SILVER",
-  "ETHICALLY SOURCED GEMS",
-  "HAUTE JOAILLERIE",
-  "TIMELESS MASTERPIECES",
+  "HANDCRAFTED PERFECTION",
 ];
 
-export default function MotionMarquee({ speed = 52, reverse = false }: MotionMarqueeProps) {
+export default function MotionMarquee({ speed = 36, reverse = false }: MotionMarqueeProps) {
   const shouldReduceMotion = useReducedMotion();
 
   return (
@@ -48,8 +41,8 @@ export default function MotionMarquee({ speed = 52, reverse = false }: MotionMar
           }}
           className="flex items-center gap-7 sm:gap-14 whitespace-nowrap will-change-transform"
         >
-          {/* Double list for infinite loop */}
-          {[...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, idx) => (
+          {/* Duplicate once for seamless infinite loop */}
+          {[...marqueeItems, ...marqueeItems].map((item, idx) => (
             <div key={idx} className="flex items-center gap-4 sm:gap-8 group">
               <span
                 className="text-[0.62rem] xs:text-[0.68rem] sm:text-xs tracking-[0.24em] sm:tracking-[0.28em] uppercase font-bold text-white/80 group-hover:text-[#1fe0bb] transition-colors"

@@ -125,7 +125,7 @@ export default function CartPage() {
                                 .join(" · ")}
                             </p>
                           )}
-                          <p className="mt-1 text-xs xs:text-sm font-bold text-emerald-200">
+                          <p className="mt-1 text-xs xs:text-sm font-bold text-emerald-200 font-price">
                             {item.price}
                           </p>
                         </div>
@@ -160,7 +160,7 @@ export default function CartPage() {
                               <Plus className="h-3.5 w-3.5" />
                             </button>
                           </div>
-                          <span className="text-right text-xs sm:text-sm font-semibold text-white whitespace-nowrap">
+                          <span className="text-right text-xs sm:text-sm font-semibold text-white whitespace-nowrap font-price">
                             {formatPrice(getLineAmount(item))}
                           </span>
                           <button

@@ -13,8 +13,23 @@ export default function VideoEntryIntro({
   isOpen = true,
 }: VideoEntryIntroProps) {
   const [isExiting, setIsExiting] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.innerWidth < 768;
+    }
+    return false;
+  });
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const updateMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    updateMobile();
+    window.addEventListener("resize", updateMobile);
+    return () => window.removeEventListener("resize", updateMobile);
+  }, []);
 
   // Smooth cinematic exit transition
   const handleExit = useCallback(() => {
@@ -110,48 +125,51 @@ export default function VideoEntryIntro({
       style={{
         backgroundColor: "#000000",
         backgroundImage:
-          "radial-gradient(circle at 50% 50%, #031e15 0%, #01110b 45%, #000000 85%)",
+          "radial-gradient(circle at 50% 50%, rgba(200, 215, 210, 0.12) 0%, rgba(15, 18, 17, 0.8) 45%, #000000 85%)",
         zIndex: 99999,
       }}
       className="fixed inset-0 w-screen h-[100dvh] overflow-hidden flex items-center justify-center cursor-pointer select-none"
     >
       {/* 
         High-Performance Hardware Accelerated Logo Reveal Video:
-        1. Both desktop and mobile use FastStart MP4s (moov atom at beginning)
-        2. Responsive <source> eliminates React re-mounting / buffering aborts
-        3. Static overlay instead of heavy CSS mask-image avoids GPU composite lag
+        1. Uses portrait 1080x1920 video for mobile and widescreen for desktop
+        2. object-cover + object-center ensures the logo asset is vertically and horizontally centered with zero empty space
+        3. Black/silver radial glow replaces any green palette
       */}
       <video
         ref={videoRef}
+        key={isMobile ? "mobile-intro" : "desktop-intro"}
+        src={
+          isMobile
+            ? "/vini-vici-vidi-mobile-logo-reveal.mp4"
+            : "/vvv-logo-reveal.mp4"
+        }
         playsInline
         autoPlay
         muted
         preload="auto"
         onEnded={handleExit}
-        className="w-full h-full object-contain sm:object-cover pointer-events-none will-change-transform"
-      >
-        <source
-          src="/vini-vici-vidi-mobile-logo-reveal.mp4"
-          media="(max-width: 767px)"
-          type="video/mp4"
-        />
-        <source
-          src="/vvv-logo-reveal.mp4"
-          type="video/mp4"
-        />
-      </video>
-
-      {/* Lightweight GPU-accelerated vignette blend - zero performance cost */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-radial from-transparent via-transparent to-black/70"
+        className="w-full h-full object-cover object-center pointer-events-none will-change-transform"
       />
 
-      {/* Discrete skip hint */}
-      <div className="absolute z-20 bottom-4 right-4 sm:bottom-6 sm:right-8 pointer-events-none opacity-40 hover:opacity-100 transition-opacity">
-        <span className="text-[0.58rem] sm:text-[0.62rem] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-white/70 font-light drop-shadow-md">
-          Tap anywhere to skip
-        </span>
+      {/* Lightweight GPU-accelerated vignette blend in monochrome/silver */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-radial from-transparent via-transparent to-black/80"
+      />
+
+      {/* Visible Tap to Skip affordance on mobile & desktop */}
+      <div className="absolute z-50 bottom-7 sm:bottom-8 left-1/2 -translate-x-1/2 sm:left-auto sm:right-8 sm:translate-x-0 pointer-events-auto">
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleExit();
+          }}
+          className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 border border-white/25 text-[0.62rem] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/90 font-medium backdrop-blur-md shadow-2xl transition-all cursor-pointer"
+        >
+          <span>Tap anywhere to skip</span>
+        </button>
       </div>
     </div>
   );

@@ -292,7 +292,7 @@ export default function ShopPage() {
                         <h3 className="text-sm font-medium text-[#0B4A3B] leading-tight line-clamp-2 mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
                           {product.name}
                         </h3>
-                        <p className="text-[#0B4A3B] font-semibold text-sm">{formatPrice(product.price)}</p>
+                        <p className="text-[#0B4A3B] font-semibold text-sm font-price">{formatPrice(product.price)}</p>
                       </div>
                     </div>
                   </Link>

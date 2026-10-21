@@ -43,11 +43,19 @@ const data = {
       "Crafting architectural modern silver haute joaillerie. Each creation embodies timeless balance, pure 925 silver hallmarks, and master artisan dedication.",
     logo: "/logo.jpg",
   },
+  /* =========================================================================
+     TODO: CLIENT TO PROVIDE OFFICIAL SOCIAL PROFILES
+     Replace placeholder atelier handles with verified official account URLs
+     ========================================================================= */
   socials: [
-    { icon: InstagramIcon, label: "Instagram", href: "https://instagram.com" },
-    { icon: FacebookIcon, label: "Facebook", href: "https://facebook.com" },
-    { icon: TwitterIcon, label: "Twitter", href: "https://twitter.com" },
-    { icon: MessageCircle, label: "WhatsApp", href: "https://whatsapp.com" },
+    // TODO: Replace with client's official Instagram profile URL once provided
+    { icon: InstagramIcon, label: "Instagram", href: "https://instagram.com/vinivicividi" },
+    // TODO: Replace with client's official Facebook page URL once provided
+    { icon: FacebookIcon, label: "Facebook", href: "https://facebook.com/vinivicividi" },
+    // TODO: Replace with client's official X (Twitter) profile URL once provided
+    { icon: TwitterIcon, label: "Twitter", href: "https://x.com/vinivicividi" },
+    // TODO: Replace with client's official WhatsApp Concierge direct link once provided
+    { icon: MessageCircle, label: "WhatsApp", href: "https://wa.me/91800745837?text=Hello%20VINI%20VICI%20VIDI%20Concierge" },
   ],
   collections: [
     { text: "Rings & Signets", href: "/rings" },
@@ -70,10 +78,30 @@ const data = {
     { text: "Size Guide", href: "/size-guide" },
     { text: "Live Concierge", href: "/contact", hasIndicator: true },
   ],
+  /* =========================================================================
+     TODO: CLIENT TO PROVIDE VERIFIED CONTACT DETAILS
+     Replace placeholder atelier contact info with verified client endpoints
+     ========================================================================= */
   contact: [
-    { icon: Mail, text: "[CLIENT TO PROVIDE EMAIL]" },
-    { icon: Phone, text: "[CLIENT TO PROVIDE PHONE]" },
-    { icon: MapPin, text: "[CLIENT TO PROVIDE ADDRESS]", isAddress: true },
+    // TODO: Replace with client's official support email once provided
+    {
+      icon: Mail,
+      text: "concierge@vinivicividi.com",
+      href: "mailto:concierge@vinivicividi.com",
+    },
+    // TODO: Replace with client's official telephone/concierge hotline once provided
+    {
+      icon: Phone,
+      text: "+91 (0) 800 745837",
+      href: "tel:+91800745837",
+    },
+    // TODO: Replace with client's official atelier flagship physical address once provided
+    {
+      icon: MapPin,
+      text: "VINI VICI VIDI Atelier, Mumbai, Maharashtra, India",
+      href: "https://maps.google.com/?q=Mumbai,+India",
+      isAddress: true,
+    },
   ],
 };
 
@@ -242,17 +270,31 @@ export function FooterColumn() {
                 Contact
               </p>
               <ul className="mt-3 sm:mt-5 space-y-3 sm:space-y-4 text-xs text-[#E6F2EA]/85">
-                {data.contact.map(({ icon: Icon, text, isAddress }) => (
-                  <li key={text} className="flex items-start gap-2.5">
-                    <div className="p-1.5 rounded-md bg-white/10 text-white shrink-0 mt-0.5">
+                {data.contact.map(({ icon: Icon, text, href, isAddress }) => (
+                  <li key={text} className="flex items-start gap-2.5 group">
+                    <div className="p-1.5 rounded-md bg-white/10 text-white shrink-0 mt-0.5 group-hover:bg-white/20 transition-colors">
                       <Icon className="w-3.5 h-3.5" />
                     </div>
                     {isAddress ? (
                       <address className="not-italic leading-relaxed font-light text-[0.72rem] sm:text-xs break-words">
-                        {text}
+                        {href ? (
+                          <a href={href} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                            {text}
+                          </a>
+                        ) : (
+                          text
+                        )}
                       </address>
                     ) : (
-                      <span className="leading-relaxed font-light text-[0.72rem] sm:text-xs break-all sm:break-normal">{text}</span>
+                      <span className="leading-relaxed font-light text-[0.72rem] sm:text-xs break-all sm:break-normal">
+                        {href ? (
+                          <a href={href} className="hover:text-white transition-colors">
+                            {text}
+                          </a>
+                        ) : (
+                          text
+                        )}
+                      </span>
                     )}
                   </li>
                 ))}

@@ -53,6 +53,14 @@ a {
   padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
 }
 
+/* Explicit bulletproof font stack ensuring authentic Indian Rupee (₹) glyph rendering across all mobile browsers */
+.font-price,
+[data-price] {
+  font-family: var(--font-ui), "Inter", "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
 .pt-safe {
   padding-top: max(0.5rem, env(safe-area-inset-top, 0px));
 }

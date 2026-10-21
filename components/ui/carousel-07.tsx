@@ -708,7 +708,7 @@ const Card = ({
 
         <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-8 sm:left-5 sm:right-5 lg:bottom-10 lg:left-6 lg:right-6 text-white text-left pointer-events-none">
           {slide.price && (
-            <span className="inline-block text-[0.58rem] sm:text-[0.68rem] tracking-[0.14em] sm:tracking-[0.2em] font-semibold text-[#1F7A5C] bg-white/95 px-1.5 py-0.5 rounded mb-1 shadow-sm">
+            <span className="inline-block font-price text-[0.58rem] sm:text-[0.68rem] tracking-[0.14em] sm:tracking-[0.2em] font-semibold text-[#1F7A5C] bg-white/95 px-1.5 py-0.5 rounded mb-1 shadow-sm">
               {slide.price}
             </span>
           )}
