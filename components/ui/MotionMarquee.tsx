@@ -10,17 +10,19 @@ interface MotionMarqueeProps {
 }
 
 const marqueeItems = [
-  "PURE 925 STERLING SILVER",
+  "92.5 SILVER",
+  "PURE 92.5 STERLING SILVER",
   "BESPOKE ATELIER CREATIONS",
   "VINI VICI VIDI",
-  "HANDCRAFTED PERFECTION",
+  "HANDCRAFTED 92.5 SILVER",
   "UNRIVALED BRILLIANCE",
+  "AUTHENTIC 92.5 SILVER",
   "ETHICALLY SOURCED GEMS",
   "HAUTE JOAILLERIE",
   "TIMELESS MASTERPIECES",
 ];
 
-export default function MotionMarquee({ speed = 25, reverse = false }: MotionMarqueeProps) {
+export default function MotionMarquee({ speed = 52, reverse = false }: MotionMarqueeProps) {
   const shouldReduceMotion = useReducedMotion();
 
   return (

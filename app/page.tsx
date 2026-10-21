@@ -219,7 +219,7 @@ export default function HomePage() {
         </section>
 
         {/* Continuous Kinetic Motion Marquee Animation */}
-        <MotionMarquee speed={28} />
+        <MotionMarquee speed={52} />
 
         {/* 3D Stacked Card Carousel Section */}
         <section
